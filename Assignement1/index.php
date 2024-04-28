@@ -73,7 +73,10 @@
                 </div>
                 <div class="col">
                     <p class="mb-2">Grafico a barre delle frequenze delle lettere della lingua Italiana, in ordine decrescente.</p>
-                    <script>var italianGraphData = <?php arsort($italianFrequency); echo json_encode($italianFrequency); ?>;</script>
+                    <script>
+                        var italianGraphDataUnordered = <?php echo json_encode($italianFrequency); ?>;
+                        var italianGraphData = <?php arsort($italianFrequency); echo json_encode($italianFrequency); ?>;
+                    </script>
                     <div id="italian_graph"></div>
                 </div>
             </div>
@@ -88,7 +91,6 @@
                 </div>
                 <div class="col">
                     <p class="mb-2">Grafico a barre delle frequenze delle lettere della lingua Italiana</p>
-                    <script>var italianGraphDataUnordered = <?php echo json_encode($italianFrequency); ?>;</script>
                     <div id="italian_graph_unordered"></div>
                 </div>
             </div>

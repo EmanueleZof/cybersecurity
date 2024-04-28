@@ -1,8 +1,8 @@
 window.onload = function () {
 	drawCypherGraph();
 	drawItalianGraph();
+	drawItalianGraphUnordered();
 	highlightLetters();
-	
 }
 
 function drawCypherGraph() {
@@ -33,6 +33,26 @@ function drawItalianGraph() {
 			x: Object.keys(window.italianGraphData),
 			y: Object.values(window.italianGraphData),
     		type: 'bar',
+		}
+	];
+	var layout = {
+		title: 'Frequenze delle lettere del testo italiano', 
+		xaxis: {title: 'Lettera'}, 
+		yaxis: {title: 'Percentuale di occorrenze'}
+	  };
+	Plotly.newPlot(target, data, layout);
+}
+
+function drawItalianGraphUnordered() {
+	var target = document.getElementById('italian_graph_unordered');
+	var data = [
+		{
+			x: Object.keys(window.italianGraphDataUnordered),
+			y: Object.values(window.italianGraphDataUnordered),
+    		type: 'bar',
+			marker: {
+				color: 'rgba(58,200,225,.5)'
+			}
 		}
 	];
 	var layout = {
