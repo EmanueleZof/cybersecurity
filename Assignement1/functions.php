@@ -127,4 +127,27 @@ function decode($text, $alphabet) {
     }
     return $text;
 }
+
+/**
+ * 
+ */
+function findPattern($text, $length){
+    $letters = str_split($text);
+    $textLength = count($letters);
+    $counter = array();
+
+    for ($i = 0; $i < $textLength - ($length - 1); ++$i) {
+        $pattern = $letters[$i];
+        for ($j = 1; $j < $length; ++$j) {
+            $pattern = $pattern.$letters[$i + $j];
+        }
+        preg_match_all('/'.$pattern.'/', $text, $matches);
+        $tot = count($matches[0]);
+        if ($tot > 1) {
+            $counter[$pattern] = $tot;
+        }
+    }
+
+    return $counter;
+}
 ?>

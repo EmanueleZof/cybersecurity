@@ -23,7 +23,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Esercizio 1</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Esercizio 2</a>
+                            <a class="nav-link" href="esercizio2.php">Esercizio 2</a>
                         </li>
                     </ul>
                 </div>
