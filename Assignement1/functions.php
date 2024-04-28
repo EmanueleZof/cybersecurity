@@ -47,6 +47,16 @@ $italianDoppieFrequency = array(
 );
 
 /**
+ * 
+ */
+$kpItaliano = 0.075;
+
+/**
+ * 
+ */
+$krItaliano = 0.0385;
+
+/**
  * Esegue il preprocessing del testo, rimuovendo caratteri specifici.
  *
  * @param string $text Il testo da elaborare.
@@ -190,5 +200,17 @@ function primeFactors($n) {
     }
 
     return $factors;
+}
+
+function indexOfCoincidence($c, $n, $frequencies) {
+    $numerator = 0;
+    $denominator = $n*($n - 1);
+
+    foreach($frequencies as $letter => $value) {
+        $m = $value['count'] * ($value['count'] - 1);
+        $numerator = $numerator + $m;
+    }
+
+    return round(($numerator / $denominator), 3);
 }
 ?>

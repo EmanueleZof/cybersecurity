@@ -104,6 +104,40 @@
                 </table>
             </div>
         </section>
+        <section class="container">
+            <h2>Step 3: analisi delle frequenze delle lettere</h2>
+            <p>Analisi delle frequenze delle singole lettere del messaggio cifrato, da utilizzare per il test di Friedman.</p>
+            <table>
+                <tr>
+                    <th>Lettera</th>
+                    <th>Totale occorrenze</th>
+                    <th>Percentuale</th>
+                </tr>
+                <?php $letters = frequencyAnalysis($message); ?>
+                <script>var cypherGraphDataUnordered = <?php echo json_encode($letters); ?>;</script>
+                <?php
+                arsort($letters);
+                foreach($letters as $letter => $value) {
+                    echo '<tr>';
+                    echo '<td>'.$letter.'</td>';
+                    echo '<td>'.$value['count'].'</td>';
+                    echo '<td>'.$value['percent'].'%</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </table>
+        </section>
+        <section class="container">
+            <h2>Step 4: metodo di Friedman</h2>
+            <p>Calcolo dell'indice di coincidenza</p>
+            <?php 
+            $c = count($italianFrequency);
+            $n = strlen($message);
+            $k0 = indexOfCoincidence($c, $n, $letters);
+            ?>
+            <p>c = <?php echo $c; ?> N = <?php echo $n; ?></p>
+            <p>k0 = <?php echo $k0; ?></p>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>
