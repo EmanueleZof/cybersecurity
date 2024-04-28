@@ -1,6 +1,6 @@
 <?php
 /**
- * frequenza delle lettere dell'alfabeto Italiano
+ * Frequenza delle lettere dell'alfabeto Italiano
  */
 $italianFrequency = array(
     "A"=>11.74,
@@ -32,7 +32,7 @@ $italianFrequency = array(
 );
 
 /**
- * 
+ * Frequenza delle lettere dell'alfabeto Inglese
  */
 $englishFrequency = array(
     "A"=>8.12,
@@ -79,12 +79,12 @@ $italianDoppieFrequency = array(
 );
 
 /**
- * 
+ * Costante di probabilità che due variabili casuali scelte a caso da una sorgente che emette lettere dell'alfabeto Italiano
  */
 $kpItaliano = 0.075;
 
 /**
- * 
+ * Costante di probabilità di coincidenza per una selezione casuale con distribuzione uniforme per l'alfabeto Italiano
  */
 $krItaliano = 0.0385;
 
@@ -171,7 +171,13 @@ function decode($text, $alphabet) {
 }
 
 /**
- * 
+ * Trova i pattern di lunghezza specificata all'interno del testo e restituisce un array associativo
+ * contenente i pattern che compaiono più di una volta nel testo e il loro conteggio di occorrenze.
+ *
+ * @param string $text Il testo in cui cercare i pattern.
+ * @param int $length La lunghezza dei pattern da cercare.
+ * @return array Un array associativo contenente i pattern che compaiono più di una volta nel testo
+ *               e il loro conteggio di occorrenze.
  */
 function findPattern($text, $length) {
     $letters = str_split($text);
@@ -194,7 +200,11 @@ function findPattern($text, $length) {
 }
 
 /**
- * 
+ * Calcola le distanze tra le occorrenze di un determinato pattern all'interno di un testo.
+ *
+ * @param string $text Il testo in cui cercare il pattern.
+ * @param string $pattern Il pattern da cercare all'interno del testo.
+ * @return array Un array contenente le distanze tra le occorrenze del pattern nel testo.
  */
 function patternDistance($text, $pattern) {
     preg_match_all('/'.$pattern.'/', $text, $matches, PREG_OFFSET_CAPTURE);
@@ -210,6 +220,11 @@ function patternDistance($text, $pattern) {
 }
 
 /**
+ * Trova i fattori primi di un numero intero positivo e restituisce una stringa contenente
+ * i fattori primi separati da spazi.
+ *
+ * @param int $n Il numero intero positivo di cui trovare i fattori primi.
+ * @return string Una stringa contenente i fattori primi separati da spazi.
  * @see https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
  */
 function primeFactors($n) {
@@ -235,7 +250,12 @@ function primeFactors($n) {
 }
 
 /**
- * 
+ * Calcola l'indice di coincidenza per un insieme di frequenze di caratteri.
+ *
+ * @param int $c Il numero di caratteri distinti.
+ * @param int $n La lunghezza del testo.
+ * @param array $frequencies Un array associativo contenente le frequenze dei caratteri.
+ * @return float Il valore dell'indice di coincidenza calcolato.
  */
 function indexOfCoincidence($c, $n, $frequencies) {
     $numerator = 0;
@@ -251,7 +271,12 @@ function indexOfCoincidence($c, $n, $frequencies) {
 }
 
 /**
- * 
+ * Stima la lunghezza della chiave utilizzando il metodo di Friedman.
+ *
+ * @param float $kp Il valore calcolato per Kp (indice di coincidenza atteso).
+ * @param float $kr Il valore calcolato per Kr (indice di coincidenza reale).
+ * @param float $k0 Il valore iniziale della lunghezza della chiave.
+ * @return float La stima della lunghezza della chiave.
  */
 function keyLenghtEstimate($kp, $kr, $k0) {
     $numerator = $kp - $kr;
@@ -260,7 +285,11 @@ function keyLenghtEstimate($kp, $kr, $k0) {
 }
 
 /**
- * 
+ * Genera una matrice di caratteri suddivisi in colonne di lunghezza specificata.
+ *
+ * @param string $text Il testo da trasformare in una matrice.
+ * @param int $length La lunghezza desiderata delle colonne.
+ * @return array Una matrice di caratteri, con ciascuna colonna contenente un numero massimo di caratteri pari a $length.
  */
 function getTextMatrix($text, $length) {
     $columns = str_split($text, $length);
@@ -273,7 +302,11 @@ function getTextMatrix($text, $length) {
 }
 
 /**
- * 
+ * Suddivide una matrice di testo in coseti di lunghezza specificata.
+ *
+ * @param array $textMatrix La matrice di testo da suddividere.
+ * @param int $cosetLength La lunghezza dei coseti desiderata.
+ * @return array Un array di coseti, ognuno contenente una serie di caratteri estratti dalla matrice di testo.
  */
 function splitCosets($textMatrix, $cosetLength) {
     $cosets = array();
@@ -292,13 +325,21 @@ function splitCosets($textMatrix, $cosetLength) {
 }
 
 /**
- * 
+ * Calcola la media dei valori in un array.
+ *
+ * @param array $values Un array di valori numerici.
+ * @return float La media dei valori nell'array, arrotondata a 5 cifre decimali.
  */
 function average($values) {
     return round(array_sum($values) / count($values), 5);
 }
 
 /**
+ * Ruota una stringa di un numero specificato di posizioni nell'alfabeto.
+ *
+ * @param string $s La stringa da ruotare.
+ * @param int $n Il numero di posizioni di rotazione nell'alfabeto. Il valore predefinito è 13.
+ * @return string La stringa ruotata di $n posizioni nell'alfabeto.
  * @see https://www.php.net/manual/en/function.str-rot13.php
  */
 function str_rot($s, $n = 13) {
