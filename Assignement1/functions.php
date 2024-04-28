@@ -65,7 +65,7 @@ function frequencyAnalysis($text) {
     foreach($frequency as $key => $value) {
         $frequency[$key]['percent'] = ($value['count']*26)/100;
     }
-    arsort($frequency);
+    //arsort($frequency);
     return $frequency;
 }
 

@@ -54,8 +54,10 @@
                     <th>Totale occorrenze</th>
                     <th>Percentuale</th>
                 </tr>
+                <?php $letters = frequencyAnalysis($message); ?>
+                <script>var cypherGraphDataUnordered = <?php echo json_encode($letters); ?>;</script>
                 <?php
-                $letters = frequencyAnalysis($message);
+                arsort($letters);
                 foreach($letters as $letter => $value) {
                     echo '<tr>';
                     echo '<td>'.$letter.'</td>';
@@ -87,7 +89,7 @@
                 <div class="col">
                     <p class="mb-2">Grafico a barre delle frequenze delle lettere del testo cifrato</p>
                     <script>var cypherGraphData = <?php echo json_encode($letters); ?>;</script>
-                    <div id="cypher_graph"></div>
+                    <div id="cypher_graph_unordered"></div>
                 </div>
                 <div class="col">
                     <p class="mb-2">Grafico a barre delle frequenze delle lettere della lingua Italiana</p>

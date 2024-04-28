@@ -1,6 +1,7 @@
 window.onload = function () {
 	drawCypherGraph();
 	drawItalianGraph();
+	drawCypherGraphUnordered();
 	drawItalianGraphUnordered();
 	highlightLetters();
 }
@@ -16,6 +17,30 @@ function drawCypherGraph() {
 			x: Object.keys(window.cypherGraphData),
 			y: y,
     		type: 'bar',
+		}
+	];
+	var layout = {
+		title: 'Frequenze delle lettere del testo cifrato', 
+		xaxis: {title: 'Lettera'}, 
+		yaxis: {title: 'Percentuale di occorrenze'}
+	  };
+	Plotly.newPlot(target, data, layout);
+}
+
+function drawCypherGraphUnordered() {
+	var target = document.getElementById('cypher_graph_unordered');
+	var y = [];
+	Object.values(window.cypherGraphDataUnordered).forEach(function(current) {
+		y.push(current['percent']);
+	});
+	var data = [
+		{
+			x: Object.keys(window.cypherGraphDataUnordered),
+			y: y,
+    		type: 'bar',
+			marker: {
+				color: 'rgba(58,200,225,.5)'
+			}
 		}
 	];
 	var layout = {
