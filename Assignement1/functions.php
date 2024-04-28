@@ -32,6 +32,38 @@ $italianFrequency = array(
 );
 
 /**
+ * 
+ */
+$englishFrequency = array(
+    "A"=>8.12,
+    "B"=>1.49,
+    "C"=>2.71,
+    "D"=>4.32,
+    "E"=>12.02,
+    "F"=>2.30,
+    "G"=>2.03,
+    "H"=>5.92,
+    "I"=>7.31,
+    "J"=>0.10,
+    "K"=>0.69,
+    "L"=>3.98,
+    "M"=>2.61,
+    "N"=>6.95,
+    "O"=>7.68,
+    "P"=>1.82,
+    "Q"=>0.11,
+    "R"=>6.02,
+    "S"=>6.28,
+    "T"=>9.10,
+    "U"=>2.88,
+    "V"=>1.11,
+    "W"=>2.09,
+    "X"=>0.17,
+    "Y"=>2.11,
+    "Z"=>0.07
+);
+
+/**
  * Doppie più frequenti della lingua Italiana
  */
 $italianDoppieFrequency = array(
@@ -264,5 +296,24 @@ function splitCosets($textMatrix, $cosetLength) {
  */
 function average($values) {
     return round(array_sum($values) / count($values), 5);
+}
+
+/**
+ * @see https://www.php.net/manual/en/function.str-rot13.php
+ */
+function str_rot($s, $n = 13) {
+    static $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $n = (int)$n % 26;
+    if (!$n) return $s;
+    if ($n == 13) return str_rot13($s);
+    for ($i = 0, $l = strlen($s); $i < $l; $i++) {
+        $c = $s[$i];
+        if ($c >= 'a' && $c <= 'z') {
+            $s[$i] = $letters[(ord($c) - 71 + $n) % 26];
+        } else if ($c >= 'A' && $c <= 'Z') {
+            $s[$i] = $letters[(ord($c) - 39 + $n) % 26 + 26];
+        }
+    }
+    return $s;
 }
 ?>

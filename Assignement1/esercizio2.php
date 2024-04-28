@@ -193,16 +193,38 @@
         <section class="container">
             <h2>Step 6: decifrazione del messaggio</h2>
             <div class="mt-2 mb-2">
-                <p>Lettere ordinate per frequenza per ciascun coset</p>
-                <?php 
+                <p>Lettere ordinate per frequenza in ciascun coset</p>
+                <?php
                     foreach($cosets as $coset) {
-                        echo '<table><tr>';
-                        $cosetFrequencyAnalysis = frequencyAnalysis(implode($coset));
-                        arsort($cosetFrequencyAnalysis);
-                        foreach($cosetFrequencyAnalysis as $letter => $value) {
-                            echo '<td>'.$letter.'('.$value['percent'].'%) </td>';
-                        }
-                        echo '</tr></table>';
+                        echo '<table class="mt-2 mb-2">';
+                        echo '<tr>';
+                        echo '<th>Shift</td>';
+                        echo '<th>Lettera alfabeto</td>';
+                        echo '<th>Coset</td>';
+                        echo '<th>Valore di X<sup>2</sup></td>';
+                        echo '</tr>';
+                        for ($i = 0; $i < count($englishFrequency); $i++) {
+                            $shiftedCoset = str_rot(implode($coset), $i);
+                            $cosetFrequencyAnalysis = frequencyAnalysis($shiftedCoset);
+                            $sumX = 0;
+                            
+                            echo '<tr>';
+                            echo '<td>'.$i.'</td>';
+                            echo '<td>'.array_keys($englishFrequency)[$i].'</td>';
+                            echo '<td>'.$shiftedCoset.'</td>';
+
+                            foreach($cosetFrequencyAnalysis as $letter => $value) {
+                                $x = 0;
+                                if ($englishFrequency[$letter] != 0) {
+                                    $x = pow(($value['percent'] - $englishFrequency[$letter]), 2) / $englishFrequency[$letter];
+                                }
+                                $sumX += $x;
+                            }
+
+                            echo '<td>'.$sumX.'</td>';
+                            echo '</tr>';
+                        }   
+                        echo '</table>';
                     }
                 ?>
             </div>
