@@ -224,6 +224,45 @@ function indexOfCoincidence($c, $n, $frequencies) {
 function keyLenghtEstimate($kp, $kr, $k0) {
     $numerator = $kp - $kr;
     $denominator = $k0 - $kr;
-    return $numerator / $denominator;
+    return round($numerator / $denominator, 5);
+}
+
+/**
+ * 
+ */
+function getTextMatrix($text, $length) {
+    $columns = str_split($text, $length);
+    $matrix = array();
+    foreach($columns as $column) {
+        $letters = str_split($column);
+        array_push($matrix, $letters);
+    }
+    return $matrix;
+}
+
+/**
+ * 
+ */
+function splitCosets($textMatrix, $cosetLength) {
+    $cosets = array();
+
+    for ($i = 0; $i < $cosetLength; ++$i) {
+        $coset = array();
+        foreach($textMatrix as $row) {
+            if (array_key_exists($i, $row)) {
+                array_push($coset, $row[$i]);
+            }
+        }
+        array_push($cosets, $coset);
+    }
+
+    return $cosets;
+}
+
+/**
+ * 
+ */
+function average($values) {
+    return round(array_sum($values) / count($values), 5);
 }
 ?>

@@ -149,6 +149,46 @@
                 <p>l = <?php echo $l; ?></p>
             </div>
         </section>
+        <section class="container">
+            <h2>Step 5: analisi del messaggio in base alla lunghezza stimata della chiave</h2>
+            <div class="mt-2 mb-2">
+                <?php 
+                $keyLenght = 6;
+                $matrix = getTextMatrix($message, $keyLenght); 
+                ?>
+                <p>Lunghezza della chiave <?php echo $keyLenght ?></p>
+                <p class="monospace">
+                    <?php 
+                    foreach($matrix as $column) {
+                        echo '<span>'.implode($column).'  </span>';
+                    }
+                    ?>
+                </p>
+            </div>
+            <div class="mt-2 mb-2">
+                <p>Suddivisione in cosets e calcolo dell'indice di coincidenza</p>
+                <table>
+                    <tr>
+                        <th>Coset</th>
+                        <th>indice di coincidenza</th>
+                    </tr>
+                    <?php
+                    $cosets = splitCosets($matrix, $keyLenght);
+                    $allCosetIndexes = array();
+                    foreach($cosets as $coset) {
+                        $cosetFrequencyAnalysis = frequencyAnalysis(implode($coset));
+                        $cosetIndexOfCoincidence = indexOfCoincidence($c, count($coset), $cosetFrequencyAnalysis);
+                        array_push($allCosetIndexes, $cosetIndexOfCoincidence);
+                        echo '<tr>';
+                        echo '<td>'.implode($coset).'</td>';
+                        echo '<td>'.$cosetIndexOfCoincidence.'</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                </table>
+                <p class="mt-2 mb-2">La media di tutti gli indici di coincidenza è: <b><?php echo average($allCosetIndexes) ?></b></p>
+            </div>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>
