@@ -202,15 +202,28 @@ function primeFactors($n) {
     return $factors;
 }
 
+/**
+ * 
+ */
 function indexOfCoincidence($c, $n, $frequencies) {
     $numerator = 0;
-    $denominator = $n*($n - 1);
+    $denominator = $n * ($n - 1);
+    $keys = array_keys($frequencies);
 
-    foreach($frequencies as $letter => $value) {
-        $m = $value['count'] * ($value['count'] - 1);
-        $numerator = $numerator + $m;
+    for ($i= 0; $i < $c; $i++) {
+        $m = $frequencies[$keys[$i]]['count'] * ($frequencies[$keys[$i]]['count'] - 1);
+        $numerator += $m;
     }
 
-    return round(($numerator / $denominator), 3);
+    return round(($numerator / $denominator), 5);
+}
+
+/**
+ * 
+ */
+function keyLenghtEstimate($kp, $kr, $k0) {
+    $numerator = $kp - $kr;
+    $denominator = $k0 - $kr;
+    return $numerator / $denominator;
 }
 ?>

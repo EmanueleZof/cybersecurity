@@ -113,9 +113,8 @@
                     <th>Totale occorrenze</th>
                     <th>Percentuale</th>
                 </tr>
-                <?php $letters = frequencyAnalysis($message); ?>
-                <script>var cypherGraphDataUnordered = <?php echo json_encode($letters); ?>;</script>
                 <?php
+                $letters = frequencyAnalysis($message);
                 arsort($letters);
                 foreach($letters as $letter => $value) {
                     echo '<tr>';
@@ -129,14 +128,26 @@
         </section>
         <section class="container">
             <h2>Step 4: metodo di Friedman</h2>
-            <p>Calcolo dell'indice di coincidenza</p>
-            <?php 
-            $c = count($italianFrequency);
-            $n = strlen($message);
-            $k0 = indexOfCoincidence($c, $n, $letters);
-            ?>
-            <p>c = <?php echo $c; ?> N = <?php echo $n; ?></p>
-            <p>k0 = <?php echo $k0; ?></p>
+            <div class="mt-2 mb-2">
+                <p>Calcolo dell'indice di coincidenza</p>
+                <?php 
+                $c = count($italianFrequency);
+                $n = strlen($message);
+                $k0 = indexOfCoincidence($c, $n, $letters);
+                ?>
+                <p>c = <?php echo $c; ?> N = <?php echo $n; ?></p>
+                <p>k0 = <?php echo $k0; ?></p>
+            </div>
+            <div class="mt-2 mb-2">
+                <p>Stima della lunghezza della chiave</p>
+                <?php 
+                $kp = $kpItaliano;
+                $kr = $krItaliano;
+                $l = keyLenghtEstimate($kp, $kr, $k0);
+                ?>
+                <p>kp = <?php echo $kp; ?> kr = <?php echo $kr; ?> k0 = <?php echo $k0; ?></p>
+                <p>l = <?php echo $l; ?></p>
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
