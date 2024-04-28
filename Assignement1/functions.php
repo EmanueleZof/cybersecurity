@@ -1,7 +1,6 @@
 <?php
-
 /**
- * 
+ * frequenza delle lettere dell'alfabeto Italiano
  */
 $italianFrequency = array(
     "A"=>11.74,
@@ -32,6 +31,9 @@ $italianFrequency = array(
     "Z"=>0.49
 );
 
+/**
+ * Doppie più frequenti della lingua Italiana
+ */
 $italianDoppieFrequency = array(
     "LL"=>0.86,
     "TT"=>0.73,
@@ -45,7 +47,10 @@ $italianDoppieFrequency = array(
 );
 
 /**
- * 
+ * Esegue il preprocessing del testo, rimuovendo caratteri specifici.
+ *
+ * @param string $text Il testo da elaborare.
+ * @return string Il testo elaborato con i caratteri specifici rimossi.
  */
 function preProcessing($text) {
     $toRemove = array(".", ",", ";", " ", "'");
@@ -53,7 +58,12 @@ function preProcessing($text) {
 }
 
 /**
- * 
+ * Analizza la frequenza delle lettere all'interno del testo e restituisce un array
+ * associativo contenente il conteggio e la percentuale di occorrenza di ciascuna lettera.
+ *
+ * @param string $text Il testo da analizzare.
+ * @return array Un array associativo che contiene il conteggio e la percentuale di occorrenza
+ *              di ciascuna lettera dell'alfabeto inglese.
  */
 function frequencyAnalysis($text) {
     $frequency = array_fill_keys(range('A', 'Z'), array('count' => 0, 'percent' => 0));
@@ -65,12 +75,15 @@ function frequencyAnalysis($text) {
     foreach($frequency as $key => $value) {
         $frequency[$key]['percent'] = ($value['count']*26)/100;
     }
-    //arsort($frequency);
     return $frequency;
 }
 
 /**
- * 
+ * Esegue l'evidenziazione del testo, evidenziando coppie di caratteri consecutivi identici
+ * con un colore arancione.
+ *
+ * @param string $text Il testo da evidenziare.
+ * @return array Un array associativo contenente le coppie di caratteri identiche e il loro conteggio.
  */
 function hihglighter($text) {
     $letters = str_split($text);
@@ -101,7 +114,12 @@ function hihglighter($text) {
 }
 
 /**
- * 
+ * Decodifica il testo sostituendo ogni carattere dell'alfabeto con il rispettivo valore
+ * all'interno di tag <span>.
+ *
+ * @param string $text Il testo da decodificare.
+ * @param array $alphabet Un array associativo che mappa i caratteri dell'alfabeto ai loro valori.
+ * @return string Il testo decodificato con i caratteri dell'alfabeto sostituiti.
  */
 function decode($text, $alphabet) {
     foreach ($alphabet as $key => $value) {
