@@ -1,0 +1,33 @@
+main > .container {
+    padding: 20px 15px 0;
+}
+
+.monospace {
+    font-family: monospace;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 4px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;  
+}
+
+.highlight-orange {
+    background-color: orange !important;
+}
+.highlight-yellow {
+    background-color: yellow;
+}
+
+.decode span {
+    color: red;
+}
