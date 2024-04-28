@@ -153,10 +153,11 @@
             <h2>Step 5: analisi del messaggio in base alla lunghezza stimata della chiave</h2>
             <div class="mt-2 mb-2">
                 <?php 
-                $keyLenght = 6;
+                $keyLenght = 13;
                 $matrix = getTextMatrix($message, $keyLenght); 
                 ?>
-                <p>Lunghezza della chiave <?php echo $keyLenght ?></p>
+                <p><b>Lunghezza della chiave <?php echo $keyLenght ?></b></p>
+                <p>Suddivisione del testo del messaggio in base ala lunghezza della chiave</p>
                 <p class="monospace">
                     <?php 
                     foreach($matrix as $column) {
@@ -187,6 +188,23 @@
                     ?>
                 </table>
                 <p class="mt-2 mb-2">La media di tutti gli indici di coincidenza è: <b><?php echo average($allCosetIndexes) ?></b></p>
+            </div>
+        </section>
+        <section class="container">
+            <h2>Step 6: decifrazione del messaggio</h2>
+            <div class="mt-2 mb-2">
+                <p>Lettere ordinate per frequenza per ciascun coset</p>
+                <?php 
+                    foreach($cosets as $coset) {
+                        echo '<table><tr>';
+                        $cosetFrequencyAnalysis = frequencyAnalysis(implode($coset));
+                        arsort($cosetFrequencyAnalysis);
+                        foreach($cosetFrequencyAnalysis as $letter => $value) {
+                            echo '<td>'.$letter.'('.$value['percent'].'%) </td>';
+                        }
+                        echo '</tr></table>';
+                    }
+                ?>
             </div>
         </section>
     </main>
