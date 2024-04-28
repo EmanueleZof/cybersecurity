@@ -131,7 +131,7 @@ function decode($text, $alphabet) {
 /**
  * 
  */
-function findPattern($text, $length){
+function findPattern($text, $length) {
     $letters = str_split($text);
     $textLength = count($letters);
     $counter = array();
@@ -149,5 +149,46 @@ function findPattern($text, $length){
     }
 
     return $counter;
+}
+
+/**
+ * 
+ */
+function patternDistance($text, $pattern) {
+    preg_match_all('/'.$pattern.'/', $text, $matches, PREG_OFFSET_CAPTURE);
+    $matchesLength = count($matches[0]) - 1;
+    $distances = array();
+
+    for ($i = 0; $i < $matchesLength; ++$i)  {
+        $distance = $matches[0][$i + 1][1] - $matches[0][$i][1];
+        array_push($distances, $distance);
+    }
+
+    return $distances;
+}
+
+/**
+ * @see https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
+ */
+function primeFactors($n) {
+    $factors = '';
+
+    while($n % 2 == 0) {
+        $factors = $factors.'2'.' ';
+        $n = $n / 2;
+    }
+
+    for ($i = 3; $i <= sqrt($n); $i = $i + 2) {
+        while ($n % $i == 0) {
+            $factors = $factors.$i.' ';
+            $n = $n / $i;
+        }
+    }
+
+    if ($n > 2) {
+        $factors = $factors.$n.' ';
+    }
+
+    return $factors;
 }
 ?>

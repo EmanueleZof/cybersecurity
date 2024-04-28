@@ -49,21 +49,59 @@
             <h2>Step 2: metodo di Kasiski</h2>
             <div class="mt-2 mb-2">
                 <p>Cerco tutte le sequenze di caratteri di lunghezza 3, che si ripetono nel testo</p>
-                <p class="monospace text-break">
-                    <?php 
+                <table>
+                    <tr>
+                        <th>Sequenza</th>
+                        <th>Numero di occorrenze</th>
+                        <th>Distanze</th>
+                        <th>Scomposizione delle distanze in fattori primi</th>
+                    </tr>
+                    <?php
                     $pattern3 = findPattern($message, 3);
-                    print_r($pattern3);
+                    foreach($pattern3 as $sequence => $value) {
+                        $distances = patternDistance($message, $sequence);
+                        $primeFactors3 = array();
+                        foreach($distances as $distance) {
+                            array_push($primeFactors3, primeFactors($distance));
+                        }
+
+                        echo '<tr>';
+                        echo '<td>'.$sequence.'</td>';
+                        echo '<td>'.$value.'</td>';
+                        echo '<td>'.implode(',', $distances).'</td>';
+                        echo '<td>'.implode(',', $primeFactors3).'</td>';
+                        echo '</tr>';
+                    }
                     ?>
-                </p>
+                </table>
             </div>
             <div class="mt-2 mb-2">
                 <p>Cerco tutte le sequenze di caratteri di lunghezza 4, che si ripetono nel testo</p>
-                <p class="monospace text-break">
-                    <?php 
+                <table>
+                    <tr>
+                        <th>Sequenza</th>
+                        <th>Numero di occorrenze</th>
+                        <th>Distanze</th>
+                        <th>Scomposizione delle distanze in fattori primi</th>
+                    </tr>
+                    <?php
                     $pattern3 = findPattern($message, 4);
-                    print_r($pattern3);
+                    foreach($pattern3 as $sequence => $value) {
+                        $distances = patternDistance($message, $sequence);
+                        $primeFactors4 = array();
+                        foreach($distances as $distance) {
+                            array_push($primeFactors4, primeFactors($distance));
+                        }
+
+                        echo '<tr>';
+                        echo '<td>'.$sequence.'</td>';
+                        echo '<td>'.$value.'</td>';
+                        echo '<td>'.implode(',', $distances).'</td>';
+                        echo '<td>'.implode(',', $primeFactors4).'</td>';
+                        echo '</tr>';
+                    }
                     ?>
-                </p>
+                </table>
             </div>
         </section>
     </main>
