@@ -42,15 +42,24 @@
             <div class="monospace">
                 <?php
                 $ar = str_split($key1, 8);
+                echo $ar[1].' =<br>';
+
                 //$test = 0b00101100;
                 //echo printBinary($test)
-                echo $ar[1];
-                ?> 
-            =</div>
-            <div class="monospace">
-                <?php
+
                 $result = bindec($input1) ^ bindec($ar[1]);
                 echo printBinary($result);
+                ?> 
+            </div>
+            <p>Test S-box</p>
+            <div class="monospace">
+                <?php
+                print_r(str_split('abcdefgh'));
+                $test = pbox('abcd','efgh');
+                echo '<br>';
+                print_r($test);
+                echo '<br>';
+                print_r(pbox('hdfc','bgae','decript'));
                 ?>
             </div>
         </section>
