@@ -38,21 +38,25 @@
         <section class="container">
             <h1 class="mt-5">Assignement 2 - Esercizio 1</h1>
             <p class="lead">TODO</p>
-            <div class="monospace"><?php echo $input1 ?> XOR</div>
-            <div class="monospace">
+            <p>Test xor</p>
+            <p class="monospace">
                 <?php
                 $ar = str_split($key1, 8);
+                echo $input1.' XOR<br>';
                 echo $ar[1].' =<br>';
-
-                //$test = 0b00101100;
-                //echo printBinary($test)
-
-                $result = bindec($input1) ^ bindec($ar[1]);
-                echo printBinary($result);
+                $result = binaryxor($input1, $ar[1]);
+                echo printBinary($result).'<br>';
                 ?> 
-            </div>
+            </p>
             <p>Test S-box</p>
-            <div class="monospace">
+            <p class="monospace">
+                <?php
+                echo '0000<br>';
+                echo sbox('0000').'<br>';
+                ?>
+            </p>
+            <p>Test P-box</p>
+            <p class="monospace">
                 <?php
                 print_r(str_split('abcdefgh'));
                 $test = pbox('abcd','efgh');
@@ -61,7 +65,7 @@
                 echo '<br>';
                 print_r(pbox('hdfc','bgae','decript'));
                 ?>
-            </div>
+            </p>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

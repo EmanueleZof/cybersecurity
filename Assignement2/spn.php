@@ -9,6 +9,13 @@ function printBinary($binary) {
 /**
  * 
  */
+function binaryxor($input1, $input2) {
+    return bindec($input1) ^ bindec($input2);
+}
+
+/**
+ * 
+ */
 function sbox($input, $type = 'encript') {
     $s = array(
         '0000' => '1110',
