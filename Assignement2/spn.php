@@ -9,14 +9,14 @@ function printBinary($binary) {
 /**
  * 
  */
-function binaryxor($input1, $input2) {
+function binaryXOR($input1, $input2) {
     return bindec($input1) ^ bindec($input2);
 }
 
 /**
  * 
  */
-function sbox($input, $type = 'encript') {
+function sBox($input, $type = 'encript') {
     $s = array(
         '0000' => '1110',
         '0001' => '0100',
@@ -44,7 +44,7 @@ function sbox($input, $type = 'encript') {
 /**
  * 
  */
-function pbox($input1, $input2, $type = 'encript') {
+function pBox($input1, $input2, $type = 'encript') {
     $input = str_split($input1.$input2);
     $output = array();
 
@@ -68,6 +68,40 @@ function pbox($input1, $input2, $type = 'encript') {
         $output[7] = $input[4];
     }
 
-    return $output;
+    return implode('', $output);
+}
+
+/**
+ * 
+ */
+function keySchedule($key) {
+    return str_split($key, 8);
+}
+
+/**
+ * 
+ */
+function spBlock($input, $key, $permutation = true) {
+    $b = str_split($input, 4);
+    $c1 = sBox($b[0]);
+    $c2 = sBox($b[1]);
+    if ($permutation) {
+        $d = pBox($c1, $c2);
+    } else {
+        $d = $c1.$c2;
+    }
+    $e = binaryXOR($d, $key);
+    return printBinary($e);
+}
+
+/**
+ * 
+ */
+function getDifference($input1, $input2) {
+    $d = printBinary(binaryXOR($input1, $input2));
+    $l = strlen($d);
+    $n = substr_count($d, '1');
+    $p = ($n / $l) * 100;
+    return array($n, $p.'%');
 }
 ?>

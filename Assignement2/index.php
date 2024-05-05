@@ -1,10 +1,10 @@
 <?php
     include 'spn.php';
     
-    $input1 = '10100110'; //bindec('10100110'); //0b10100110;
-    $input2 = 0b10110110;
-    $key1 = '0010110010010101'; //bindec('0010110010010101'); //0b0010110010010101;
-    $key2 = 0b0010010010010101;
+    $plainText1 = '10100110';
+    $plainText2 = '10110110';
+    $key1 = '0010110010010101';
+    $key2 = '0010010010010101';
 ?>
 
 <!doctype html>
@@ -37,38 +37,45 @@
     <main class="flex-shrink-0">
         <section class="container">
             <h1 class="mt-5">Assignement 2 - Esercizio 1</h1>
-            <p class="lead">TODO</p>
-            <p>Test xor</p>
-            <p class="monospace">
+            <p class="lead">Testo da cifrare e chiavi</p>
+            <p><b>Plaintext 1: </b><code><?php echo $plainText1 ?></code></p>
+            <p><b>Plaintext 2: </b><code><?php echo $plainText2 ?></code></p>
+            <p><b>Key 1: </b><code><?php echo $key1 ?></code></p>
+            <p><b>Key 2: </b><code><?php echo $key2 ?></code></p>
+        </section>
+        <section class="container">
+            <h2>Step 1: analisi del PLAINTEXT</h2>
+            <p>Risultato dell'algoritmo SPN quando il testo in chiaro viene cambiato di 1 bit</p>
+            <?php $keysStep1 = keySchedule($key1); ?>
+            <p>Chiave utilizzata (Key 1): <code><?php echo $key1 ?></code> => K<sub>0</sub>: <code><?php echo $keysStep1[0] ?></code> K<sub>1</sub>: <code><?php echo $keysStep1[1] ?></code></p>
+            <table>
+                <tr>
+                    <th>Round</th>
+                    <th>Risultato</th>
+                    <th>Differenza</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><code><?php echo $plainText1 ?></code><br><code><?php echo $plainText2 ?></code></td>
+                    <td>1 bit (12,5%)</td>
+                </tr>
                 <?php
-                $ar = str_split($key1, 8);
-                echo $input1.' XOR<br>';
-                echo $ar[1].' =<br>';
-                $result = binaryxor($input1, $ar[1]);
-                echo printBinary($result).'<br>';
-                ?> 
-            </p>
-            <p>Test S-box</p>
-            <p class="monospace">
-                <?php
-                echo '0000<br>';
-                echo sbox('0000').'<br>';
+                $a = printBinary(binaryXOR($plainText1, $keysStep1[0]));
+                $b = printBinary(binaryXOR($plainText2, $keysStep1[0]));
+                for ($i = 1; $i <= 5; ++$i) {
+                    $result1 = spBlock($a, $keysStep1[1]);
+                    $result2 = spBlock($b, $keysStep1[1]);
+                    list($differenceBits, $differencePercentage) = getDifference($result1, $result2);
+                    echo '<tr>';
+                    echo '<td>'.$i.'</td>';
+                    echo '<td><code>'.$result1.'</code><br><code>'.$result2.'</code></td>';
+                    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+                    echo '</tr>';
+                }
                 ?>
-            </p>
-            <p>Test P-box</p>
-            <p class="monospace">
-                <?php
-                print_r(str_split('abcdefgh'));
-                $test = pbox('abcd','efgh');
-                echo '<br>';
-                print_r($test);
-                echo '<br>';
-                print_r(pbox('hdfc','bgae','decript'));
-                ?>
-            </p>
+            </table>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>
 </body>
 </html>
