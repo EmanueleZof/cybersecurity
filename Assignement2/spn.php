@@ -16,6 +16,16 @@ function binaryXOR($input1, $input2) {
 /**
  * 
  */
+function binaryLeftShift($input) {
+    $stack = str_split($input);
+    $shifted = array_shift($stack);
+    array_push($stack, $shifted);
+    return implode('', $stack);
+}
+
+/**
+ * 
+ */
 function sBox($input, $type = 'encript') {
     $s = array(
         '0000' => '1110',
@@ -76,6 +86,20 @@ function pBox($input1, $input2, $type = 'encript') {
  */
 function keySchedule($key) {
     return str_split($key, 8);
+}
+
+/**
+ * 
+ */
+function keyScheduleTest1($key, $tot) {
+    $s = str_split($key, 8);
+    $a = array($s[0],$s[1]);
+    for ($i = 2; $i < $tot; $i = $i + 2) {
+        $key = binaryLeftShift($key);
+        $s = str_split($key, 8);
+        array_push($a, $s[0],$s[1]);
+    }
+    return $a;
 }
 
 /**
