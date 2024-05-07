@@ -268,4 +268,47 @@ function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iteratio
     echo '<script>var '.$elementID.'GraphData = '.json_encode($differenceResults).';</script>';
     echo '<div id="'.$elementID.'" class="graph"></div>';
 }
+
+/**
+ * 
+ */
+function drawPlaintextComparisonTableTest($plainText1, $plainText2, $key, $keyLabel, $iterations) {
+    $roundKeys = keyScheduleTest($key, $iterations);
+    $differenceResults = array();
+
+    echo '<p>Chiave utilizzata ('.$keyLabel.'): <code>'.$key.'</code> => K<sub>0</sub>: <code>'.$roundKeys[0].'</code> K<sub>1</sub>: <code>'.$roundKeys[1].'</code></p>';
+    echo '<table>';
+    echo '<tr><th>Round</th><th>Sotto chiave</th><th>Output</th><th>Differenza</th></tr>';
+
+    echo '<tr>';
+    echo '<td></td>';
+    echo '<td><code>'.$roundKeys[0].'</code></td>';
+    echo '<td><code>'.$plainText1.'</code><br><code>'.$plainText2.'</code></td>';
+    list($differenceBits, $differencePercentage) = getDifference($plainText1, $plainText2);
+    array_push($differenceResults, $differenceBits);
+    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+    echo '</tr>';
+
+    $a = printBinary(binaryXOR($plainText1, $roundKeys[0]));
+    $b = printBinary(binaryXOR($plainText2, $roundKeys[0]));
+    for ($i = 1; $i < $iterations; ++$i) {
+        $keySelector = $i;
+        $a = spBlock($a, $roundKeys[$keySelector]);
+        $b = spBlock($b, $roundKeys[$keySelector]);
+        list($differenceBits, $differencePercentage) = getDifference($a, $b);
+        array_push($differenceResults, $differenceBits);
+        echo '<tr>';
+        echo '<td>'.$i.'</td>';
+        echo '<td><code>'.$roundKeys[$keySelector].'</code></td>';
+        echo '<td><code>'.$a.'</code><br><code>'.$b.'</code></td>';
+        echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+
+    $elementID = str_replace(' ', '', strtolower($keyLabel));
+    echo '<script>var '.$elementID.'GraphData = '.json_encode($differenceResults).';</script>';
+    echo '<div id="'.$elementID.'" class="graph"></div>';
+}
 ?>
