@@ -1,5 +1,9 @@
 <?php
 /**
+ * Converte un numero binario in una stringa di 8 cifre binarie.
+ *
+ * @param int $binary Il numero binario da stampare.
+ * @return string Una stringa rappresentante il numero binario su 8 cifre.
  * @see https://www.php.net/manual/en/function.decbin.php
  */
 function printBinary($binary) {
@@ -7,14 +11,21 @@ function printBinary($binary) {
 }
 
 /**
- * 
+ * Esegue l'operazione di XOR bit a bit tra due numeri binari e restituisce il risultato.
+ *
+ * @param string $input1 Il primo numero binario.
+ * @param string $input2 Il secondo numero binario.
+ * @return int Il risultato dell'operazione XOR tra i due numeri binari.
  */
 function binaryXOR($input1, $input2) {
     return bindec($input1) ^ bindec($input2);
 }
 
 /**
- * 
+ * Esegue uno shift a sinistra su una rappresentazione binaria di un numero.
+ *
+ * @param string $input La rappresentazione binaria del numero da cui eseguire lo shift a sinistra.
+ * @return string La rappresentazione binaria del numero dopo lo shift a sinistra.
  */
 function binaryLeftShift($input) {
     $stack = str_split($input);
@@ -24,7 +35,12 @@ function binaryLeftShift($input) {
 }
 
 /**
- * 
+ * Implementa la S-box della SPN. 
+ * Applica la sostituzione di un numero binario in input in un'altro in output, secondo il criterio dato.
+ *
+ * @param string $input Il numero binario da sottoporre alla sostituzione S-box.
+ * @param string $type Il tipo di operazione da eseguire sulla S-box, 'encript' per crittografare (predefinito) o 'decript' per decrittografare.
+ * @return string Il risultato della sostituzione S-box.
  */
 function sBox($input, $type = 'encript') {
     $s = array(
@@ -52,7 +68,13 @@ function sBox($input, $type = 'encript') {
 }
 
 /**
- * 
+ * Implementa la P-box della SPN.
+ * Applica una permutazione su due stringhe binarie date in input.
+ *
+ * @param string $input1 La prima stringa binaria da sottoporre alla permutazione P-box.
+ * @param string $input2 La seconda stringa binaria da sottoporre alla permutazione P-box.
+ * @param string $type Il tipo di operazione da eseguire sulla P-box, 'encript' per crittografare (predefinito) o 'decript' per decrittografare.
+ * @return string Il risultato della permutazione P-box.
  */
 function pBox($input1, $input2, $type = 'encript') {
     $input = str_split($input1.$input2);
@@ -82,16 +104,23 @@ function pBox($input1, $input2, $type = 'encript') {
 }
 
 /**
- * 
+ * Suddivide una chiave in una serie di sottochiavi di lunghezza fissa.
+ *
+ * @param string $key La chiave da suddividere.
+ * @return array Un array contenente le sottochiavi generate dalla divisione della chiave.
  */
 function keySchedule($key) {
     return str_split($key, 8);
 }
 
 /**
- * 
+ * Genera una serie di sottochiavi shiftando a sinistra di un bit e dividendo in sottochiavi di lunghezza fissa.
+ *
+ * @param string $key La chiave principale da utilizzare per generare le sottochiavi.
+ * @param int $tot Il numero totale di sottochiavi da generare.
+ * @return array Un array contenente le sottochiavi generate.
  */
-function keyScheduleTest1($key, $tot) {
+function keyScheduleTest($key, $tot) {
     $s = str_split($key, 8);
     $a = array($s[0],$s[1]);
     for ($i = 2; $i < $tot; $i = $i + 2) {
@@ -103,7 +132,13 @@ function keyScheduleTest1($key, $tot) {
 }
 
 /**
- * 
+ * Implementa un singolo strato della SPN.
+ * Applica una combinazione di sostituzione e permutazione (S-box e P-box) e un XOR bit a bit tra l'input generato e la chiave.
+ *
+ * @param string $input Il blocco di input da elaborare.
+ * @param string $key La chiave da utilizzare per l'operazione di XOR.
+ * @param bool $permutation Specifica se applicare anche la permutazione P-box. Il valore predefinito è true.
+ * @return string Il risultato dell'elaborazione del blocco di input.
  */
 function spBlock($input, $key, $permutation = true) {
     $b = str_split($input, 4);
@@ -119,7 +154,11 @@ function spBlock($input, $key, $permutation = true) {
 }
 
 /**
- * 
+ * Calcola la differenza tra due stringhe binarie e restituisce il numero di bit diversi e la percentuale di differenza.
+ *
+ * @param string $input1 La prima stringa binaria.
+ * @param string $input2 La seconda stringa binaria.
+ * @return array Un array contenente il numero di bit diversi e la percentuale di differenza.
  */
 function getDifference($input1, $input2) {
     $d = printBinary(binaryXOR($input1, $input2));
@@ -130,7 +169,14 @@ function getDifference($input1, $input2) {
 }
 
 /**
- * 
+ * Disegna la tabella di confronto (ed il grafico) tra testi in chiaro, utilizzando l'algoritmo SPN implementato.
+ *
+ * @param string $plainText1 Il primo testo in chiaro da confrontare.
+ * @param string $plainText2 Il secondo testo in chiaro da confrontare.
+ * @param string $key La chiave utilizzata per la crittografia.
+ * @param string $keyLabel Etichetta della chiave per l'output.
+ * @param int $iterations Il numero di round dell'algoritmo.
+ * @return void
  */
 function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel, $iterations) {
     $roundKeys = keySchedule($key);
@@ -173,7 +219,14 @@ function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel,
 }
 
 /**
- * 
+ * Disegna una tabella di confronto (e il grafico) tra due chiavi, utilizzando l'algoritmo SPN implementato.
+ *
+ * @param string $plainText Il testo in chiaro utilizzato per il confronto.
+ * @param string $textLabel Etichetta del testo per l'output.
+ * @param string $key1 La prima chiave utilizzata per la crittografia.
+ * @param string $key2 La seconda chiave utilizzata per la crittografia.
+ * @param int $iterations Il numero di round dell'algoritmo.
+ * @return void
  */
 function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iterations) {
     $roundKeys1 = keySchedule($key1);
