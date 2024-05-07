@@ -134,6 +134,7 @@ function getDifference($input1, $input2) {
  */
 function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel, $iterations) {
     $roundKeys = keySchedule($key);
+    $differenceResults = array();
 
     echo '<p>Chiave utilizzata ('.$keyLabel.'): <code>'.$key.'</code> => K<sub>0</sub>: <code>'.$roundKeys[0].'</code> K<sub>1</sub>: <code>'.$roundKeys[1].'</code></p>';
     echo '<table>';
@@ -144,6 +145,7 @@ function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel,
     echo '<td><code>'.$roundKeys[0].'</code></td>';
     echo '<td><code>'.$plainText1.'</code><br><code>'.$plainText2.'</code></td>';
     list($differenceBits, $differencePercentage) = getDifference($plainText1, $plainText2);
+    array_push($differenceResults, $differenceBits);
     echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
     echo '</tr>';
 
@@ -154,6 +156,7 @@ function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel,
         $a = spBlock($a, $roundKeys[$keySelector]);
         $b = spBlock($b, $roundKeys[$keySelector]);
         list($differenceBits, $differencePercentage) = getDifference($a, $b);
+        array_push($differenceResults, $differenceBits);
         echo '<tr>';
         echo '<td>'.$i.'</td>';
         echo '<td><code>'.$roundKeys[$keySelector].'</code></td>';
@@ -163,6 +166,10 @@ function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel,
     }
 
     echo '</table>';
+
+    $elementID = str_replace(' ', '', strtolower($keyLabel));
+    echo '<script>var '.$elementID.'GraphData = '.json_encode($differenceResults).';</script>';
+    echo '<div id="'.$elementID.'" class="graph"></div>';
 }
 
 /**
@@ -171,6 +178,7 @@ function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel,
 function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iterations) {
     $roundKeys1 = keySchedule($key1);
     $roundKeys2 = keySchedule($key2);
+    $differenceResults = array();
 
     echo '<p>Testo utilizzato ('.$textLabel.'): <code>'.$plainText.'</code></p>';
     echo '<table>';
@@ -181,6 +189,7 @@ function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iteratio
     echo '<td><code>'.$roundKeys1[0].'</code><br><code>'.$roundKeys2[0].'</code></td>';
     echo '<td><code>'.$plainText.'</code><br><code>'.$plainText.'</code></td>';
     list($differenceBits, $differencePercentage) = getDifference($plainText, $plainText);
+    array_push($differenceResults, $differenceBits);
     echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
     echo '</tr>';
 
@@ -191,6 +200,7 @@ function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iteratio
         $a = spBlock($a, $roundKeys1[$keySelector]);
         $b = spBlock($b, $roundKeys2[$keySelector]);
         list($differenceBits, $differencePercentage) = getDifference($a, $b);
+        array_push($differenceResults, $differenceBits);
         echo '<tr>';
         echo '<td>'.$i.'</td>';
         echo '<td><code>'.$roundKeys1[$keySelector].'</code><br><code>'.$roundKeys2[$keySelector].'</code></td>';
@@ -200,5 +210,9 @@ function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iteratio
     }
 
     echo '</table>';
+
+    $elementID = str_replace(' ', '', strtolower($textLabel));
+    echo '<script>var '.$elementID.'GraphData = '.json_encode($differenceResults).';</script>';
+    echo '<div id="'.$elementID.'" class="graph"></div>';
 }
 ?>
