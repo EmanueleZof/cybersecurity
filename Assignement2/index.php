@@ -44,55 +44,26 @@
             <p><b>Key 2: </b><code><?php echo $key2 ?></code></p>
         </section>
         <section class="container">
-            <h2>Step 1: analisi del PLAINTEXT</h2>
-            <p>Risultato dell'algoritmo SPN quando il testo in chiaro viene cambiato di 1 bit</p>
-            <?php
-            $iterations = 10;
-            $keysStep1 = keySchedule($key1);
-            //$keysStep1 = keyScheduleTest1($key1, $iterations);
-            ?>
-            <!--<p>Chiave utilizzata (Key 1): <code><?php echo $key1 ?></code> => K<sub>0</sub>: <code><?php echo $keysStep1[0] ?></code> K<sub>1</sub>: <code><?php echo $keysStep1[1] ?></code></p>-->
-            <p>Chiave utilizzata (Key 1): <code><?php echo $key1 ?></code></code></p>
-            <table>
-                <tr>
-                    <th>Round</th>
-                    <th>Sotto chiave</th>
-                    <th>Output</th>
-                    <th>Differenza</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><code><?php echo $keysStep1[0] ?></code></td>
-                    <td><code><?php echo $plainText1 ?></code><br><code><?php echo $plainText2 ?></code></td>
-                    <td>1 bit (12,5%)</td>
-                </tr>
-                <?php
-                $a = printBinary(binaryXOR($plainText1, $keysStep1[0]));
-                $b = printBinary(binaryXOR($plainText2, $keysStep1[0]));
-                for ($i = 1; $i < $iterations; ++$i) {
-                    $keySelector = $i % 2;
-                    //$keySelector = $i;
-                    $a = spBlock($a, $keysStep1[$keySelector]);
-                    $b = spBlock($b, $keysStep1[$keySelector]);
-                    list($differenceBits, $differencePercentage) = getDifference($a, $b);
-                    echo '<tr>';
-                    echo '<td>'.$i.'</td>';
-                    echo '<td><code>'.$keysStep1[$keySelector].'</code></td>';
-                    echo '<td><code>'.$a.'</code><br><code>'.$b.'</code></td>';
-                    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
-                    echo '</tr>';
-                    /*$result1 = spBlock($a, $keysStep1[$keySelector]);
-                    $result2 = spBlock($b, $keysStep1[$keySelector]);
-                    list($differenceBits, $differencePercentage) = getDifference($result1, $result2);
-                    echo '<tr>';
-                    echo '<td>'.$i.'</td>';
-                    echo '<td><code>'.$keysStep1[$keySelector].'</code></td>';
-                    echo '<td><code>'.$result1.'</code><br><code>'.$result2.'</code></td>';
-                    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
-                    echo '</tr>';*/
-                }
-                ?>
-            </table>
+            <h2>Effetto valanga: cambiamento nel PLAINTEXT</h2>
+            <p>Risultato dell'algoritmo SPN proposto, quando il testo in chiaro viene cambiato di 1 bit</p>
+            <?php $iterations = 20; ?>
+            <div class="mt-3 mb-3">
+            <?php drawPlaintextComparisonTable($plainText1, $plainText2, $key1, 'Key 1', $iterations) ?>
+            </div>
+            <div class="mt-3 mb-3">
+            <?php drawPlaintextComparisonTable($plainText1, $plainText2, $key2, 'Key 2', $iterations) ?>
+            </div>
+        </section>
+        <section class="container">
+            <h2>Effetto valanga: cambiamento nella CHIAVE</h2>
+            <p>Risultato dell'algoritmo SPN proposto, quando le chiavi differiscono di 1 bit</p>
+            <?php $iterations = 20; ?>
+            <div class="mt-3 mb-3">
+            <?php drawKeysComparisonTable($plainText1, 'Plaintext 1', $key1, $key2, $iterations) ?>
+            </div>
+            <div class="mt-3 mb-3">
+            <?php drawKeysComparisonTable($plainText2, 'Plaintext 2', $key1, $key2, $iterations) ?>
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

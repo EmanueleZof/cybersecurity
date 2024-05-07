@@ -128,4 +128,77 @@ function getDifference($input1, $input2) {
     $p = ($n / $l) * 100;
     return array($n, $p.'%');
 }
+
+/**
+ * 
+ */
+function drawPlaintextComparisonTable($plainText1, $plainText2, $key, $keyLabel, $iterations) {
+    $roundKeys = keySchedule($key);
+
+    echo '<p>Chiave utilizzata ('.$keyLabel.'): <code>'.$key.'</code> => K<sub>0</sub>: <code>'.$roundKeys[0].'</code> K<sub>1</sub>: <code>'.$roundKeys[1].'</code></p>';
+    echo '<table>';
+    echo '<tr><th>Round</th><th>Sotto chiave</th><th>Output</th><th>Differenza</th></tr>';
+
+    echo '<tr>';
+    echo '<td></td>';
+    echo '<td><code>'.$roundKeys[0].'</code></td>';
+    echo '<td><code>'.$plainText1.'</code><br><code>'.$plainText2.'</code></td>';
+    list($differenceBits, $differencePercentage) = getDifference($plainText1, $plainText2);
+    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+    echo '</tr>';
+
+    $a = printBinary(binaryXOR($plainText1, $roundKeys[0]));
+    $b = printBinary(binaryXOR($plainText2, $roundKeys[0]));
+    for ($i = 1; $i < $iterations; ++$i) {
+        $keySelector = $i % 2;
+        $a = spBlock($a, $roundKeys[$keySelector]);
+        $b = spBlock($b, $roundKeys[$keySelector]);
+        list($differenceBits, $differencePercentage) = getDifference($a, $b);
+        echo '<tr>';
+        echo '<td>'.$i.'</td>';
+        echo '<td><code>'.$roundKeys[$keySelector].'</code></td>';
+        echo '<td><code>'.$a.'</code><br><code>'.$b.'</code></td>';
+        echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
+
+/**
+ * 
+ */
+function drawKeysComparisonTable($plainText, $textLabel, $key1, $key2, $iterations) {
+    $roundKeys1 = keySchedule($key1);
+    $roundKeys2 = keySchedule($key2);
+
+    echo '<p>Testo utilizzato ('.$textLabel.'): <code>'.$plainText.'</code></p>';
+    echo '<table>';
+    echo '<tr><th>Round</th><th>Sotto chiave</th><th>Output</th><th>Differenza</th></tr>';
+
+    echo '<tr>';
+    echo '<td></td>';
+    echo '<td><code>'.$roundKeys1[0].'</code><br><code>'.$roundKeys2[0].'</code></td>';
+    echo '<td><code>'.$plainText.'</code><br><code>'.$plainText.'</code></td>';
+    list($differenceBits, $differencePercentage) = getDifference($plainText, $plainText);
+    echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+    echo '</tr>';
+
+    $a = printBinary(binaryXOR($plainText, $roundKeys1[0]));
+    $b = printBinary(binaryXOR($plainText, $roundKeys2[0]));
+    for ($i = 1; $i < $iterations; ++$i) {
+        $keySelector = $i % 2;
+        $a = spBlock($a, $roundKeys1[$keySelector]);
+        $b = spBlock($b, $roundKeys2[$keySelector]);
+        list($differenceBits, $differencePercentage) = getDifference($a, $b);
+        echo '<tr>';
+        echo '<td>'.$i.'</td>';
+        echo '<td><code>'.$roundKeys1[$keySelector].'</code><br><code>'.$roundKeys2[$keySelector].'</code></td>';
+        echo '<td><code>'.$a.'</code><br><code>'.$b.'</code></td>';
+        echo '<td>'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+        echo '</tr>';
+    }
+
+    echo '</table>';
+}
 ?>
