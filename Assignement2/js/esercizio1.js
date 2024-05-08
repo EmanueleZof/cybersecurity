@@ -19,7 +19,6 @@ function drawComparisonGraphs(target) {
 		}
 	];
 	var layout = {
-		title: 'title', 
 		xaxis: {
             title: 'Round',
             tickmode: 'linear'
