@@ -1,5 +1,7 @@
 <?php
-    //include 'functions.php';
+    include 'feistel.php';
+
+    $plainText = '0010110010010101';
 ?>
 
 <!doctype html>
@@ -32,7 +34,16 @@
     <main class="flex-shrink-0">
         <section class="container">
             <h1 class="mt-5">Assignement 2 - Esercizio 2</h1>
-            <p class="lead">TODO</p>
+            <p class="lead">Testo da cifrare</p>
+            <p><b>Plaintext: </b><code><?php echo $plainText ?></code></p>
+        </section>
+        <section class="container">
+            <h2>Test 1</h2>
+            <p>Funzione F: K0 e K1</p>
+            <?php 
+            $output = feistelNetwork($plainText, 2, $testFunc, ['12345678','87654321']);
+            //print_r($output);
+            ?>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
