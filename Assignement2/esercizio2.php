@@ -41,7 +41,7 @@
             <h2>Test 1</h2>
             <p>Funzione F: K0 e K1</p>
             <?php 
-            $output = feistelNetwork($plainText, 2, $testFunc, ['12345678','87654321']);
+            $output = feistelNetwork($plainText, 2, $testFunc, testKeySchedule('0000000011111111'));
             //print_r($output);
             ?>
         </section>

@@ -33,4 +33,11 @@ function feistelNetwork($input, $stages, $function, $keys) {
 $testFunc = function($text, $key) {  
     return $text;
 };
+
+/**
+ * 
+ */
+function testKeySchedule($key) {  
+    return ['00000000','11111111'];
+};
 ?>
