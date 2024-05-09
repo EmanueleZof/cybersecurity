@@ -20,9 +20,9 @@ function feistelNetwork($input, $stages, $function, $keys) {
         $f = $function($right, $keys[$i]);
         $left = $right;
         $right = binaryXOR($l, $f);
-        echo 'L'.$i.': '.$left.' R'.$i.': '.$right.'<br>';
+        echo 'L'.($i+1).': '.$left.' R'.($i+1).': '.$right.'<br>';
     }
-    echo 'R'.($i).': '.$right.' L'.($i).': '.$left.'<br>';
+    echo 'R'.($i+1).': '.$right.' L'.($i+1).': '.$left.'<br>';
     return $right.$left;
 }
 
