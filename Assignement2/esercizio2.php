@@ -45,51 +45,15 @@
                 <p>Funzione: \( F(R_i, K_i) = (R_i + K_i) \mod 2^4 \)</p>
                 <p>K<sub>0</sub>: <code><?php echo $kA[0] ?></code></p>
                 <p>K<sub>1</sub>: <code><?php echo $kA[1] ?></code></p>
-                <?php
-                list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
-                list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
-                ?>
             </div>
-            <table class="borders">
-                <tr><th>Plaintext</th><th>Esecuzione</th><th>Risultato</th><th>Differenza</th></tr>
-                <tr>
-                    <td>a</td>
-                    <td>a</td>
-                    <td>a</td>
-                    <td rowspan="2">z</td>
-                </tr>
-                <tr>
-                    <td>s</td>
-                    <td>s</td>
-                    <td>s</td>
-                </tr>
-            </table>
-            <!--<div class="mt-3 mb-3">
-                <p>Esecuzione su Plaintext 1: <code><?php echo $plainText1 ?></code></p>
-                <?php 
-                /*list($result, $log) = feistelNetwork($plainText1, 2, $f1, $k1);
-                foreach($log as $row) {
-                    print_r($row);
-                    echo '<br>';
-                }
-                echo $result;*/
-                ?>
-            </div>
-            <div class="mt-3 mb-3">
-                <p>Risultato esecuzione su Plaintext 2: <code><?php echo $plainText2 ?></code></p>
-                <?php 
-                /*list($result1, $log1) = feistelNetwork($plainText2, 2, $f1, $k1);
-                foreach($log1 as $row) {
-                    print_r($row);
-                    echo '<br>';
-                }
-                echo $result1;*/
-                ?>
-            </div>-->
+            <?php
+            list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
+            list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
+            drawComparisonTable($plainText1, $plainText2, $log1a, $log2a, $result1a, $result2a);
+            ?>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!--<script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>-->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
