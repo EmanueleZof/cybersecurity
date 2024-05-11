@@ -14,30 +14,29 @@ function feistelNetwork($input, $stages, $function, $keys) {
     $split = str_split($input, strlen($input)/2);
     $left = $split[0];
     $right = $split[1];
-    echo 'L0: '.$left.' R0: '.$right.'<br>';
+    $log = array();
+    $log[0] = array('L' => $left, 'R' => $right);
     for ($i = 0; $i < $stages; ++$i) {
         $l = $left;
         $f = $function($right, $keys[$i]);
         $left = $right;
         $right = binaryXOR($l, $f);
-        echo 'L'.($i+1).': '.$left.' R'.($i+1).': '.$right.'<br>';
-    }
-    echo 'R'.($i+1).': '.$right.' L'.($i+1).': '.$left.'<br>';
-    return $right.$left;
+        $log[$i+1] = array('L' => $left, 'R' => $right);
+    }    
+    $log[$i+1] = array('R' => $right, 'L' => $left);
+    $result = $right.$left;
+    return array($result, $log);
 }
 
 
 /**
  * 
  */
-$testFunc = function($text, $key) {  
-    return $text;
+$functiontest1 = function($text, $key) {  
+    $sum = bindec($text) + bindec($key);
+    $mod = $sum % 16;
+    return sprintf('%08b',  $mod);
 };
+$keyScheduleTest1 = ['11101011','10111110'];
 
-/**
- * 
- */
-function testKeySchedule($key) {  
-    return ['00000000','11111111'];
-};
 ?>

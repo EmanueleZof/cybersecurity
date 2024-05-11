@@ -39,14 +39,21 @@
         </section>
         <section class="container">
             <h2>Test 1</h2>
-            <p>Funzione F: K0 e K1</p>
+            <p>Funzione F: \( F(R_i, K_i) = (R_i + K_i) \mod 2^4 \)</p>
+            <p>K<sub>0</sub>: <code><?php echo $keyScheduleTest1[0] ?></code></p>
+            <p>K<sub>1</sub>: <code><?php echo $keyScheduleTest1[1] ?></code></p>
             <?php 
-            $output = feistelNetwork($plainText, 2, $testFunc, testKeySchedule('0000000011111111'));
-            //print_r($output);
+            list($result, $log) = feistelNetwork($plainText, 2, $functiontest1, $keyScheduleTest1);
+            foreach($log as $row) {
+                print_r($row);
+                echo '<br>';
+            }
             ?>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>
+    <!--<script src="https://cdn.plot.ly/plotly-2.31.1.min.js" charset="utf-8"></script>-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>
