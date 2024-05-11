@@ -30,13 +30,14 @@ function feistelNetwork($input, $stages, $function, $keys) {
 
 
 /**
- * 
+ * Test A
  */
-$functiontest1 = function($text, $key) {  
+$fA = function($text, $key) {  
     $sum = bindec($text) + bindec($key);
     $mod = $sum % 16;
     return sprintf('%08b',  $mod);
 };
-$keyScheduleTest1 = ['11101011','10111110'];
+$kA = ['11101011','10111110'];
+//$k1 = ['11111111','00000000'];
 
 ?>
