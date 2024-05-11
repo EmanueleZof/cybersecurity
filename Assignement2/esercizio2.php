@@ -116,6 +116,37 @@
             ));
             ?>
         </section>
+        <section class="container">
+            <h2>Round function C</h2>
+            <div class="mt-3 mb-3">
+                <p>Funzione: \( F(x, K_i) = x \oplus K_i \) per tutti \(K_i \in \{0,1\}^4\) definita con la funzione \( f: \{0,1\}^4 \to \{0,1\}^4 \) utilizzando la tabella di "lookup" della S-box proposta nell' Esercizio 1</p>
+            </div>
+            <?php
+            list($result1c, $log1c) = feistelNetwork($plainText1, 2, $roundFunctionC, $kA);
+            list($result2c, $log2c) = feistelNetwork($plainText2, 2, $roundFunctionC, $kA);
+
+            list($result3c, $log3c) = feistelNetwork($plainText1, 2, $roundFunctionC, $kB);
+            list($result4c, $log4c) = feistelNetwork($plainText2, 2, $roundFunctionC, $kB);
+
+            list($result5c, $log5c) = feistelNetwork($plainText1, 2, $roundFunctionC, $kC);
+            list($result6c, $log6c) = feistelNetwork($plainText2, 2, $roundFunctionC, $kC);
+
+            drawComparisonTable($plainText1, $plainText2, array(
+                'A' => array(
+                    'results' => array($result1c, $result2c),
+                    'logs' => array($log1c, $log2c)
+                ),
+                'B' => array(
+                    'results' => array($result3c, $result4c),
+                    'logs' => array($log3c, $log4c)
+                ),
+                'C' => array(
+                    'results' => array($result5c, $result6c),
+                    'logs' => array($log5c, $log6c)
+                )
+            ));
+            ?>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
