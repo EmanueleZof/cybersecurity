@@ -18,7 +18,7 @@ function feistelNetwork($input, $stages, $function, $keys) {
     $log[0] = array('L' => $left, 'R' => $right);
     for ($i = 0; $i < $stages; ++$i) {
         $l = $left;
-        $f = $function($right, $keys[$i]);
+        $f = $function($right, $keys[$i], $i);
         $left = $right;
         $right = binaryXOR($l, $f);
         $log[$i+1] = array('L' => $left, 'R' => $right);
@@ -79,11 +79,20 @@ function drawComparisonTable($text1, $text2, $log1, $log2, $res1, $res2) {
 /**
  * Test A
  */
-$fA = function($text, $key) {  
+$fA = function($text, $key, $index) {  
     $sum = bindec($text) + bindec($key);
     $mod = $sum % 16;
     return sprintf('%08b',  $mod);
 };
 $kA = ['11101011','10111110'];
+
+
+/**
+ * Test B
+ */
+$fB = function($text, $key, $index) {  
+    return binaryXOR($text, $key);
+};
+$kB = ['10101001','01010011']; //10010101
 
 ?>

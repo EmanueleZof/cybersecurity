@@ -42,7 +42,7 @@
         <section class="container">
             <h2>Test A</h2>
             <div class="mt-3 mb-3">
-                <p>Funzione: \( F(R_i, K_i) = (R_i + K_i) \mod 2^4 \)</p>
+                <p>Funzione: \( F(x, K_i) = (x + K_i) \mod 2^4 \)</p>
                 <p>K<sub>0</sub>: <code><?php echo $kA[0] ?></code></p>
                 <p>K<sub>1</sub>: <code><?php echo $kA[1] ?></code></p>
             </div>
@@ -50,6 +50,19 @@
             list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
             list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
             drawComparisonTable($plainText1, $plainText2, $log1a, $log2a, $result1a, $result2a);
+            ?>
+        </section>
+        <section class="container">
+            <h2>Test B</h2>
+            <div class="mt-3 mb-3">
+                <p>Funzione: \( F(x, K_i) = x \oplus K_i \)</p>
+                <p>K<sub>0</sub>: <code><?php echo $kB[0] ?></code></p>
+                <p>K<sub>1</sub>: <code><?php echo $kB[1] ?></code></p>
+            </div>
+            <?php
+            list($result1b, $log1b) = feistelNetwork($plainText1, 2, $fB, $kB);
+            list($result2b, $log2b) = feistelNetwork($plainText2, 2, $fB, $kB);
+            drawComparisonTable($plainText1, $plainText2, $log1b, $log2b, $result1b, $result2b);
             ?>
         </section>
     </main>
