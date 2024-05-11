@@ -50,24 +50,42 @@
             $kB = keyScheduleB($key2);
             $kC = keyScheduleC($key3);
             ?>
-            <p><b>kA</b>: <code><?php echo $key1 ?></code> (8 bit) => K<sub>0</sub>: <code><?php echo $kA[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kA[1] ?></code> (8 bit)</p>
-            <p><b>kB</b>: <code><?php echo $key2 ?></code> (10 bit) => K<sub>0</sub>: <code><?php echo $kB[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kB[1] ?></code> (8 bit)</p>
-            <p><b>kC</b>: <code><?php echo $key3 ?></code> (16 bit) => K<sub>0</sub>: <code><?php echo $kC[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kC[1] ?></code> (8 bit)</p>
-        </section>
-        <!--<section class="container">
-            <h2>Test A</h2>
-            <div class="mt-3 mb-3">
-                <p>Funzione: \( F(x, K_i) = (x + K_i) \mod 2^4 \)</p>
-                <p>K<sub>0</sub>: <code><?php //echo $kA[0] ?></code></p>
-                <p>K<sub>1</sub>: <code><?php //echo $kA[1] ?></code></p>
-            </div>
-            <?php
-            //list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
-            //list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
-            //drawComparisonTable($plainText1, $plainText2, $log1a, $log2a, $result1a, $result2a);
-            ?>
+            <p><b>K<sub>A</sub></b>: <code><?php echo $key1 ?></code> (8 bit) => K<sub>A0</sub>: <code><?php echo $kA[0] ?></code> (8 bit) K<sub>A1</sub>: <code><?php echo $kA[1] ?></code> (8 bit)</p>
+            <p><b>K<sub>B</sub></b>: <code><?php echo $key2 ?></code> (10 bit) => K<sub>B0</sub>: <code><?php echo $kB[0] ?></code> (8 bit) K<sub>B1</sub>: <code><?php echo $kB[1] ?></code> (8 bit)</p>
+            <p><b>K<sub>C</sub></b>: <code><?php echo $key3 ?></code> (16 bit) => K<sub>C0</sub>: <code><?php echo $kC[0] ?></code> (8 bit) K<sub>C1</sub>: <code><?php echo $kC[1] ?></code> (8 bit)</p>
         </section>
         <section class="container">
+            <h2>Round function A</h2>
+            <div class="mt-3 mb-3">
+                <p>Funzione: \( F(x, K_i) = (x + K_i) \mod 2^4 \)</p>
+            </div>
+            <?php
+            list($result1a, $log1a) = feistelNetwork($plainText1, 2, $roundFunctionA, $kA);
+            list($result2a, $log2a) = feistelNetwork($plainText2, 2, $roundFunctionA, $kA);
+
+            list($result3a, $log3a) = feistelNetwork($plainText1, 2, $roundFunctionA, $kB);
+            list($result4a, $log4a) = feistelNetwork($plainText2, 2, $roundFunctionA, $kB);
+
+            list($result5a, $log5a) = feistelNetwork($plainText1, 2, $roundFunctionA, $kC);
+            list($result6a, $log6a) = feistelNetwork($plainText2, 2, $roundFunctionA, $kC);
+            
+            drawComparisonTable($plainText1, $plainText2, array(
+                'A' => array(
+                    'results' => array($result1a, $result2a),
+                    'logs' => array($log1a, $log2a)
+                ),
+                'B' => array(
+                    'results' => array($result3a, $result4a),
+                    'logs' => array($log3a, $log4a)
+                ),
+                'C' => array(
+                    'results' => array($result5a, $result6a),
+                    'logs' => array($log5a, $log6a)
+                )
+            ));
+            ?>
+        </section>
+        <!--<section class="container">
             <h2>Test B</h2>
             <div class="mt-3 mb-3">
                 <p>Funzione: \( F(x, K_i) = x \oplus K_i \)</p>

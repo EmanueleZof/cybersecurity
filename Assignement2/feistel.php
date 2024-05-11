@@ -58,39 +58,43 @@ function getDifference($input1, $input2) {
 /**
  * 
  */
-function drawComparisonTable($text1, $text2, $log1, $log2, $res1, $res2) {
+function drawComparisonTable($text1, $text2, $data) {
     echo '<table class="borders">';
-    echo '<tr><th>Plaintext</th><th>Esecuzione</th><th>Risultato</th><th>Differenza</th></tr>';
+    echo '<tr><th>Plaintext</th><th>Chiavi</th><th>Esecuzione</th><th>Risultato</th><th>Differenza</th></tr>';
     
-    echo '<tr>';
-    echo '<td><code>'.$text1.'</code></td>';
-    echo '<td>';
-    foreach($log1 as $row) {
-        print_r($row);
-        echo '<br>';
-    }
-    echo '</td>';
-    echo '<td><code>'.$res1.'</code></td>';
-    list($differenceBits, $differencePercentage) = getDifference($res1, $res2);
-    echo '<td rowspan="2">'.$differenceBits.'bit ('.$differencePercentage.')</td>';
-    echo '</tr>';
+    foreach($data as $label => $row) {
+        echo '<tr>';
+        echo '<td><code>'.$text1.'</code></td>';
+        echo '<td>K<sub>'.$label.'</sub></td>';
+        echo '<td>';
+        foreach($row['logs'][0] as $log) {
+            print_r($log);
+            echo '<br>';
+        }
+        echo '</td>';
+        echo '<td><code>'.$row['results'][0].'</code></td>';
+        list($differenceBits, $differencePercentage) = getDifference($row['results'][0], $row['results'][1]);
+        echo '<td rowspan="2">'.$differenceBits.'bit ('.$differencePercentage.')</td>';
+        echo '</tr>';
 
-    echo '<tr>';
-    echo '<td><code>'.$text2.'</code></td>';
-    echo '<td>';
-    foreach($log2 as $row) {
-        print_r($row);
-        echo '<br>';
+        echo '<tr>';
+        echo '<td><code>'.$text2.'</code></td>';
+        echo '<td>K<sub>'.$label.'</sub></td>';
+        echo '<td>';
+        foreach($row['logs'][1] as $log) {
+            print_r($log);
+            echo '<br>';
+        }
+        echo '</td>';
+        echo '<td><code>'.$row['results'][1].'</code></td>';
+        echo '</tr>';
     }
-    echo '</td>';
-    echo '<td><code>'.$res2.'</code></td>';
-    echo '</tr>';
 
     echo '</table>';
 }
 
 /**
- * Key schedule Test A
+ * Key schedule A
  */ 
 function keyScheduleA($input) {
     $r = strrev($input);
@@ -98,7 +102,7 @@ function keyScheduleA($input) {
 }
 
 /**
- * Key schedule Test B
+ * Key schedule B
  */ 
 function keyScheduleB($input) {
     $k = str_split($input);
@@ -116,7 +120,7 @@ function keyScheduleB($input) {
 }
 
 /**
- * Key schedule Test C
+ * Key schedule C
  */ 
 function keyScheduleC($input) {
     $s = str_split($input, 8);
@@ -124,22 +128,27 @@ function keyScheduleC($input) {
 }
 
 /**
- * Test A
+ * Round function A
  */
-/*$fA = function($text, $key, $index) {  
+$roundFunctionA = function($text, $key, $index) {  
     $sum = bindec($text) + bindec($key);
     $mod = $sum % 16;
     return sprintf('%08b',  $mod);
 };
-$kA = ['11101011','10111110'];*/
+
+/**
+ * Round function B
+ */
+$roundFunctionB = function($text, $key, $index) {  
+    return binaryXOR($text, $key);
+};
 
 
 /**
- * Test B
+ * Round function C
  */
-/*$fB = function($text, $key, $index) {  
-    return binaryXOR($text, $key);
+$roundFunctionC = function($text, $key, $index) {  
+    return $text;
 };
-$kB = ['10101001','01010011']; //10010101*/
 
 ?>
