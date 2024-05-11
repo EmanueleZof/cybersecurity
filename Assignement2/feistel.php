@@ -8,6 +8,19 @@ function binaryXOR($input1, $input2) {
 }
 
 /**
+ * Esegue uno shift a sinistra su una rappresentazione binaria di un numero.
+ *
+ * @param string $input La rappresentazione binaria del numero da cui eseguire lo shift a sinistra.
+ * @return string La rappresentazione binaria del numero dopo lo shift a sinistra.
+ */
+function binaryLeftShift($input) {
+    $stack = str_split($input);
+    $shifted = array_shift($stack);
+    array_push($stack, $shifted);
+    return implode('', $stack);
+}
+
+/**
  * 
  */
 function feistelNetwork($input, $stages, $function, $keys) {
@@ -77,22 +90,56 @@ function drawComparisonTable($text1, $text2, $log1, $log2, $res1, $res2) {
 }
 
 /**
+ * Key schedule Test A
+ */ 
+function keyScheduleA($input) {
+    $r = strrev($input);
+    return array($r, binaryLeftShift($r));
+}
+
+/**
+ * Key schedule Test B
+ */ 
+function keyScheduleB($input) {
+    $k = str_split($input);
+    $p10 = array($k[2],$k[4],$k[1],$k[6],$k[3],$k[9],$k[0],$k[8],$k[7],$k[5]);
+    $s = str_split(implode($p10), 5);
+    $l = binaryLeftShift($s[0]);
+    $r = binaryLeftShift($s[1]);
+    $kk = str_split($l.$r);
+    $k1 = array($kk[5],$kk[2],$kk[6],$kk[3],$kk[7],$kk[4],$kk[9],$kk[8]);
+    $l = binaryLeftShift(binaryLeftShift($l));
+    $r = binaryLeftShift(binaryLeftShift($r));
+    $kk = str_split($l.$r);
+    $k2 = array($kk[5],$kk[2],$kk[6],$kk[3],$kk[7],$kk[4],$kk[9],$kk[8]);
+    return array(implode($k1), implode($k2));
+}
+
+/**
+ * Key schedule Test C
+ */ 
+function keyScheduleC($input) {
+    $s = str_split($input, 8);
+    return array($s[0], $s[1]);
+}
+
+/**
  * Test A
  */
-$fA = function($text, $key, $index) {  
+/*$fA = function($text, $key, $index) {  
     $sum = bindec($text) + bindec($key);
     $mod = $sum % 16;
     return sprintf('%08b',  $mod);
 };
-$kA = ['11101011','10111110'];
+$kA = ['11101011','10111110'];*/
 
 
 /**
  * Test B
  */
-$fB = function($text, $key, $index) {  
+/*$fB = function($text, $key, $index) {  
     return binaryXOR($text, $key);
 };
-$kB = ['10101001','01010011']; //10010101
+$kB = ['10101001','01010011']; //10010101*/
 
 ?>

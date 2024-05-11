@@ -3,6 +3,10 @@
 
     $plainText1 = '0010110010010101';
     $plainText2 = '0010010010010101';
+
+    $key1 = '10100110';
+    $key2 = '1010011010';
+    $key3 = '1010011010110110';
 ?>
 
 <!doctype html>
@@ -35,36 +39,47 @@
     <main class="flex-shrink-0">
         <section class="container">
             <h1 class="mt-5">Assignement 2 - Esercizio 2</h1>
-            <p class="lead">Testo da cifrare</p>
+            <p class="lead">Esempi di testo da cifrare</p>
             <p><b>Plaintext 1: </b><code><?php echo $plainText1 ?></code></p>
             <p><b>Plaintext 2: </b><code><?php echo $plainText2 ?></code></p>
         </section>
         <section class="container">
+            <h2>Key schedule</h2>
+            <?php 
+            $kA = keyScheduleA($key1);
+            $kB = keyScheduleB($key2);
+            $kC = keyScheduleC($key3);
+            ?>
+            <p><b>kA</b>: <code><?php echo $key1 ?></code> (8 bit) => K<sub>0</sub>: <code><?php echo $kA[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kA[1] ?></code> (8 bit)</p>
+            <p><b>kB</b>: <code><?php echo $key2 ?></code> (10 bit) => K<sub>0</sub>: <code><?php echo $kB[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kB[1] ?></code> (8 bit)</p>
+            <p><b>kC</b>: <code><?php echo $key3 ?></code> (16 bit) => K<sub>0</sub>: <code><?php echo $kC[0] ?></code> (8 bit) K<sub>1</sub>: <code><?php echo $kC[1] ?></code> (8 bit)</p>
+        </section>
+        <!--<section class="container">
             <h2>Test A</h2>
             <div class="mt-3 mb-3">
                 <p>Funzione: \( F(x, K_i) = (x + K_i) \mod 2^4 \)</p>
-                <p>K<sub>0</sub>: <code><?php echo $kA[0] ?></code></p>
-                <p>K<sub>1</sub>: <code><?php echo $kA[1] ?></code></p>
+                <p>K<sub>0</sub>: <code><?php //echo $kA[0] ?></code></p>
+                <p>K<sub>1</sub>: <code><?php //echo $kA[1] ?></code></p>
             </div>
             <?php
-            list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
-            list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
-            drawComparisonTable($plainText1, $plainText2, $log1a, $log2a, $result1a, $result2a);
+            //list($result1a, $log1a) = feistelNetwork($plainText1, 2, $fA, $kA);
+            //list($result2a, $log2a) = feistelNetwork($plainText2, 2, $fA, $kA);
+            //drawComparisonTable($plainText1, $plainText2, $log1a, $log2a, $result1a, $result2a);
             ?>
         </section>
         <section class="container">
             <h2>Test B</h2>
             <div class="mt-3 mb-3">
                 <p>Funzione: \( F(x, K_i) = x \oplus K_i \)</p>
-                <p>K<sub>0</sub>: <code><?php echo $kB[0] ?></code></p>
-                <p>K<sub>1</sub>: <code><?php echo $kB[1] ?></code></p>
+                <p>K<sub>0</sub>: <code><?php //echo $kB[0] ?></code></p>
+                <p>K<sub>1</sub>: <code><?php //echo $kB[1] ?></code></p>
             </div>
             <?php
-            list($result1b, $log1b) = feistelNetwork($plainText1, 2, $fB, $kB);
-            list($result2b, $log2b) = feistelNetwork($plainText2, 2, $fB, $kB);
-            drawComparisonTable($plainText1, $plainText2, $log1b, $log2b, $result1b, $result2b);
+            //list($result1b, $log1b) = feistelNetwork($plainText1, 2, $fB, $kB);
+            //list($result2b, $log2b) = feistelNetwork($plainText2, 2, $fB, $kB);
+            //drawComparisonTable($plainText1, $plainText2, $log1b, $log2b, $result1b, $result2b);
             ?>
-        </section>
+        </section>-->
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
