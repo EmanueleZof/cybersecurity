@@ -85,19 +85,37 @@
             ));
             ?>
         </section>
-        <!--<section class="container">
-            <h2>Test B</h2>
+        <section class="container">
+            <h2>Round function B</h2>
             <div class="mt-3 mb-3">
                 <p>Funzione: \( F(x, K_i) = x \oplus K_i \)</p>
-                <p>K<sub>0</sub>: <code><?php //echo $kB[0] ?></code></p>
-                <p>K<sub>1</sub>: <code><?php //echo $kB[1] ?></code></p>
             </div>
             <?php
-            //list($result1b, $log1b) = feistelNetwork($plainText1, 2, $fB, $kB);
-            //list($result2b, $log2b) = feistelNetwork($plainText2, 2, $fB, $kB);
-            //drawComparisonTable($plainText1, $plainText2, $log1b, $log2b, $result1b, $result2b);
+            list($result1b, $log1b) = feistelNetwork($plainText1, 2, $roundFunctionB, $kA);
+            list($result2b, $log2b) = feistelNetwork($plainText2, 2, $roundFunctionB, $kA);
+
+            list($result3b, $log3b) = feistelNetwork($plainText1, 2, $roundFunctionB, $kB);
+            list($result4b, $log4b) = feistelNetwork($plainText2, 2, $roundFunctionB, $kB);
+
+            list($result5b, $log5b) = feistelNetwork($plainText1, 2, $roundFunctionB, $kC);
+            list($result6b, $log6b) = feistelNetwork($plainText2, 2, $roundFunctionB, $kC);
+
+            drawComparisonTable($plainText1, $plainText2, array(
+                'A' => array(
+                    'results' => array($result1b, $result2b),
+                    'logs' => array($log1b, $log2b)
+                ),
+                'B' => array(
+                    'results' => array($result3b, $result4b),
+                    'logs' => array($log3b, $log4b)
+                ),
+                'C' => array(
+                    'results' => array($result5b, $result6b),
+                    'logs' => array($log5b, $log6b)
+                )
+            ));
             ?>
-        </section>-->
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
