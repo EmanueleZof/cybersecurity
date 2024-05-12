@@ -150,11 +150,10 @@
         <section class="container">
             <h2>Round function D</h2>
             <div class="mt-3 mb-3">
-                <p>
-                    Funzione: \( F(x, K_i) = (p(A) + p(B) \oplus p(C) + p(D)) \) dove la funzione \( p: \{0,1\}^4 \to \{0,1\}^4 \) è una permutazione utilizzando la tabella di "lookup" della S-box proposta nell' Esercizio 1.
-                    <br>
-                    Gli elementi della funzione F sono rispettivamente \( x = A || C \) e \( K_i = B || D \).
-                </p>
+                <p>Funzione: \( F(x, K_i) = s((s(p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
+                <p>La funzione \( p: \{0,1\}^4 \to \{0,1\}^4 \) è una permutazione utilizzando la tabella di "lookup" della S-box proposta nell' Esercizio 1.</p>
+                <p>La funzione \( s: \{0,1\}^4 \to \{0,1\}^4 \) fa uno shift a sinistra dei bit.</p>
+                <p>Gli elementi della funzione F sono rispettivamente \( x = A || C \) e \( K_i = B || D \).</p>
             </div>
             <?php
             list($result1d, $log1d) = feistelNetwork($plainText1, 2, $roundFunctionD, $kA);
