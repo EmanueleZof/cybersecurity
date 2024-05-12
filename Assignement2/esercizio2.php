@@ -39,7 +39,7 @@
     <main class="flex-shrink-0">
         <section class="container">
             <h1 class="mt-5">Assignement 2 - Esercizio 2</h1>
-            <p class="lead">Esempi di testo da cifrare</p>
+            <p>Esempi di testo da cifrare</p>
             <p><b>Plaintext 1: </b><code><?php echo $plainText1 ?></code></p>
             <p><b>Plaintext 2: </b><code><?php echo $plainText2 ?></code></p>
         </section>
@@ -180,6 +180,45 @@
                 )
             ));
             ?>
+        </section>
+        <section class="container">
+            <h2>Esempio di crittazione e decrittazione</h2>
+            <p>Testo in chiaro (<b>Plaintext 1</b>): <code><?php echo $plainText1 ?></code> (16 bit)</p>
+            <p>Chiavi (<b>K<sub>A</sub></b>)
+                <ul>
+                    <li>K<sub>A0</sub>: <code><?php echo $kA[0] ?></code> (8 bit)</li>
+                    <li>K<sub>A1</sub>: <code><?php echo $kA[1] ?></code> (8 bit)</li>
+                </ul>
+            </p>
+            <p>Funzione di round (<b>D</b>): \( F(x, K_i) = s((s(p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
+            <div class="mt-3 mb-3">
+                <p class="lead"><b>Crittazione</b></p>
+                <?php list($eRes, $eLog) = feistelNetwork($plainText1, 2, $roundFunctionD, $kA); ?>
+                <p>Operazioni: 
+                    <br>
+                    <?php
+                    foreach($eLog as $log) {
+                        print_r($log);
+                        echo '<br>';
+                    }
+                    ?>
+                </p>
+                <p>Risultato: <code><?php echo $eRes ?></code></p>
+            </div>
+            <div class="mt-3 mb-3">
+                <p class="lead"><b>Decrittazione</b></p>
+                <?php list($dRes, $dLog) = feistelNetwork($eRes, 2, $roundFunctionD, array_reverse($kA)); ?>
+                <p>Operazioni: 
+                    <br>
+                    <?php
+                    foreach($dLog as $log) {
+                        print_r($log);
+                        echo '<br>';
+                    }
+                    ?>
+                </p>
+                <p>Risultato: <code><?php echo $dRes ?></code></p>
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
