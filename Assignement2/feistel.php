@@ -244,4 +244,13 @@ $roundFunctionD = function($text, $key, $index) {
     return sprintf('%08b',  $output);
 };
 
+/**
+ * Round function E
+ */
+$roundFunctionE = function($text, $key, $index) {
+    $num = bindec($key);
+    $exp = bindec($text);
+    $output = pow($num, $exp) % 8;
+    return sprintf('%08b',  $output);
+};
 ?>
