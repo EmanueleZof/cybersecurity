@@ -147,6 +147,41 @@
             ));
             ?>
         </section>
+        <section class="container">
+            <h2>Round function D</h2>
+            <div class="mt-3 mb-3">
+                <p>
+                    Funzione: \( F(x, K_i) = (p(A) + p(B) \oplus p(C) + p(D)) \) dove la funzione \( p: \{0,1\}^4 \to \{0,1\}^4 \) è una permutazione utilizzando la tabella di "lookup" della S-box proposta nell' Esercizio 1.
+                    <br>
+                    Gli elementi della funzione F sono rispettivamente \( x = A || C \) e \( K_i = B || D \).
+                </p>
+            </div>
+            <?php
+            list($result1d, $log1d) = feistelNetwork($plainText1, 2, $roundFunctionD, $kA);
+            list($result2d, $log2d) = feistelNetwork($plainText2, 2, $roundFunctionD, $kA);
+
+            list($result3d, $log3d) = feistelNetwork($plainText1, 2, $roundFunctionD, $kB);
+            list($result4d, $log4d) = feistelNetwork($plainText2, 2, $roundFunctionD, $kB);
+
+            list($result5d, $log5d) = feistelNetwork($plainText1, 2, $roundFunctionD, $kC);
+            list($result6d, $log6d) = feistelNetwork($plainText2, 2, $roundFunctionD, $kC);
+
+            drawComparisonTable($plainText1, $plainText2, array(
+                'A' => array(
+                    'results' => array($result1d, $result2d),
+                    'logs' => array($log1d, $log2d)
+                ),
+                'B' => array(
+                    'results' => array($result3d, $result4d),
+                    'logs' => array($log3d, $log4d)
+                ),
+                'C' => array(
+                    'results' => array($result5d, $result6d),
+                    'logs' => array($log5d, $log6d)
+                )
+            ));
+            ?>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
