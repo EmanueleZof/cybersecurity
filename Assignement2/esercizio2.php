@@ -150,9 +150,10 @@
         <section class="container">
             <h2>Round function D</h2>
             <div class="mt-3 mb-3">
-                <p>Funzione: \( F(x, K_i) = s((s(p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
+                <p>Funzione: \( F(x, K_i) = s(((p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
                 <p>La funzione \( p: \{0,1\}^4 \to \{0,1\}^4 \) è una permutazione utilizzando la tabella di "lookup" della S-box proposta nell' Esercizio 1.</p>
                 <p>La funzione \( s: \{0,1\}^4 \to \{0,1\}^4 \) fa uno shift a sinistra dei bit.</p>
+                <p>La somma è una addizione binaria in modulo \( 2^8 \)</p>
                 <p>Gli elementi della funzione F sono rispettivamente \( x = A || C \) e \( K_i = B || D \).</p>
             </div>
             <?php
@@ -190,7 +191,7 @@
                     <li>K<sub>A1</sub>: <code><?php echo $kA[1] ?></code> (8 bit)</li>
                 </ul>
             </p>
-            <p>Funzione di round (<b>D</b>): \( F(x, K_i) = s((s(p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
+            <p>Funzione di round (<b>D</b>): \( F(x, K_i) = s(((p(A) + p(B)) \oplus p(C)) + p(D)) \).</p>
             <div class="mt-3 mb-3">
                 <p class="lead"><b>Crittazione</b></p>
                 <?php list($eRes, $eLog) = feistelNetwork($plainText1, 2, $roundFunctionD, $kA); ?>
