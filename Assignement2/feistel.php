@@ -235,11 +235,10 @@ $roundFunctionD = function($text, $key, $index) {
     $c = bindec($p[$t[1]]);
     $d = bindec($p[$k[1]]);
 
-    $output = ($a + $b);
-    $output = $output << $index + 1;
+    $output = ($a + $b) % pow(2, 8);
     $output = $output ^ $c;
-    $output = ($output + $d);
-    $output = $output << $index + 1;
+    $output = ($output + $d) % pow(2, 8);
+    $output = $output << 1;
 
     return sprintf('%08b',  $output);
 };
