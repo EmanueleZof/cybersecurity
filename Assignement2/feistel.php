@@ -174,40 +174,6 @@ $roundFunctionC = function($text, $key, $index) {
 /**
  * Round function D
  */
-/*$roundFunctionD = function($text, $key, $index) {
-    $t = str_split($text, 4);
-    $k = str_split($key, 4);
-
-    $p = array(
-        '0000' => '1110',
-        '0001' => '0100',
-        '0010' => '1101',
-        '0011' => '0001',
-        '0100' => '0010',
-        '0101' => '1111',
-        '0110' => '1011',
-        '0111' => '1000',
-        '1000' => '0011',
-        '1001' => '1010',
-        '1010' => '0110',
-        '1011' => '1100',
-        '1100' => '0101',
-        '1101' => '1001',
-        '1110' => '0000',
-        '1111' => '0111',
-    );
-    $a = bindec($p[$t[0]]);
-    $b = bindec($p[$k[0]]);
-    $c = bindec($p[$t[1]]);
-    $d = bindec($p[$k[1]]);
-
-    $output = ($a + $b);
-    $output = $output ^ $c;
-    $output = ($output + $d);
-
-    return sprintf('%08b',  $output);
-};*/
-
 $roundFunctionD = function($text, $key, $index) {
     $t = str_split($text, 4);
     $k = str_split($key, 4);
