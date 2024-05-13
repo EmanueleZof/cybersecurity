@@ -1,6 +1,10 @@
 <?php
 /**
- * 
+ * Esegue l'operazione di XOR bit a bit tra due numeri binari e restituisce il risultato in formato stringa.
+ *
+ * @param string $input1 Il primo numero binario.
+ * @param string $input2 Il secondo numero binario.
+ * @return string Una stringa rappresentante il numero binario.
  */
 function binaryXOR($input1, $input2) {
     $output = bindec($input1) ^ bindec($input2);
@@ -21,23 +25,43 @@ function binaryLeftShift($input) {
 }
 
 /**
- * 
+ * Implementa una rete di Feistel su un input utilizzando una data funzione e una serie di chiavi.
+ *
+ * @param string $input Il testo in input da elaborare.
+ * @param int $stages Il numero di stadi della rete di Feistel da eseguire.
+ * @param callable $function La funzione da utilizzare per ogni stadio della rete di Feistel.
+ * @param array $keys Un array contenente le chiavi da utilizzare per ogni stadio della rete di Feistel.
+ * @return array Un array contenente il risultato dell'elaborazione e un registro delle operazioni eseguite.
  */
 function feistelNetwork($input, $stages, $function, $keys) {
+    // Dividi l'input in due parti
     $split = str_split($input, strlen($input)/2);
     $left = $split[0];
     $right = $split[1];
+    
+    // Inizializza un registro per memorizzare lo stato della rete
     $log = array();
     $log[0] = array('L' => $left, 'R' => $right);
+
+    // Logica di ciascun stadio
     for ($i = 0; $i < $stages; ++$i) {
         $l = $left;
+        // Applica la funzione specificata al blocco destro utilizzando la chiave corrispondente.
         $f = $function($right, $keys[$i], $i);
         $left = $right;
+        // Esegui un'operazione XOR tra il blocco sinistro originale e il risultato della funzione.
         $right = binaryXOR($l, $f);
+        // Aggiungi lo stato attuale al registro.
         $log[$i+1] = array('L' => $left, 'R' => $right);
-    }    
+    }
+
+    // Aggiungi lo stato finale al registro.
     $log[$i+1] = array('R' => $right, 'L' => $left);
+
+    // Concatena il blocco destro e sinistro per ottenere il risultato finale.
     $result = $right.$left;
+
+    // Restituisce un array contenente il risultato dell'elaborazione e il registro delle operazioni eseguite.
     return array($result, $log);
 }
 
@@ -56,7 +80,15 @@ function getDifference($input1, $input2) {
 }
 
 /**
- * 
+ * Disegna una tabella di confronto tra due testi e i loro risultati crittografici, inclusa la differenza tra i risultati.
+ *
+ * @param string $text1 Il primo testo da confrontare.
+ * @param string $text2 Il secondo testo da confrontare.
+ * @param array $data Un array contenente i dati da visualizzare nella tabella di confronto.
+ * Ogni elemento dell'array rappresenta un confronto tra i due testi e contiene i seguenti campi:
+ * - 'logs': un array bidimensionale contenente i log delle operazioni eseguite durante la crittografia per entrambi i testi.
+ * - 'results': un array contenente i risultati crittografici per entrambi i testi.
+ * @return void
  */
 function drawComparisonTable($text1, $text2, $data) {
     echo '<table class="borders">';
@@ -142,7 +174,6 @@ $roundFunctionA = function($text, $key, $index) {
 $roundFunctionB = function($text, $key, $index) {  
     return binaryXOR($text, $key);
 };
-
 
 /**
  * Round function C
