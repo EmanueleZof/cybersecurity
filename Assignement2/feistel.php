@@ -246,7 +246,7 @@ $roundFunctionD = function($text, $key, $index) {
 $roundFunctionE = function($text, $key, $index) {
     $num = bindec($key);
     $exp = bindec($text);
-    $output = pow($num, $exp) % 8;
+    $output = pow($num, $exp) % pow(2, 8);
     return sprintf('%08b',  $output);
 };
 ?>
