@@ -62,6 +62,25 @@
                 ?>
             </p>
         </section>
+        <section class="container">
+            <p>DCT test</p>
+            <p>
+                <?php 
+                $testMatrix = array(
+                    array(88,84,83,84,85,86,83,82),
+                    array(86,82,82,83,82,83,83,81),
+                    array(82,82,84,87,87,87,81,84),
+                    array(81,86,87,89,82,82,84,87),
+                    array(81,84,83,87,85,89,80,81),
+                    array(81,85,85,86,81,89,81,85),
+                    array(82,81,86,83,86,89,81,84),
+                    array(88,88,90,84,85,88,88,81),
+                );
+                $testDCT = dctTransform($testMatrix);
+                printMatrix($testDCT);
+                ?>
+            </p>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

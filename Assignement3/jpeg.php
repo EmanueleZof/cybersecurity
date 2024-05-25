@@ -39,4 +39,51 @@ function printMatrix($matrix) {
     echo '</table>';
 }
 
+/**
+ * 
+ */
+function dctTransform($matrix) {
+    $m = $n = 8;
+    $dct = array(
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+    );
+
+    for ($i = 0; $i < $m; $i++) {
+        for ($j = 0; $j < $n; $j++) {
+
+            if ($i == 0) {
+                $ci = 1 / sqrt($m);
+            } else {
+                $ci = sqrt(2) / sqrt($m);
+            }
+
+            if ($j == 0) {
+                $cj = 1 / sqrt($n);
+            } else {
+                $cj = sqrt(2) / sqrt($n);
+            }
+
+            $sum = 0;
+
+            for ($k = 0; $k < $m; $k++) {
+                for ($l = 0; $l < $n; $l++) {
+                    $dct1 = $matrix[$k][$l] * cos((2 * $k + 1) * $i * pi() / (2 * $m)) * cos((2 * $l + 1) * $j * pi() / (2 * $n));
+                    $sum = $sum + $dct1;
+                }
+            }
+
+            $dct[$i][$j] = round($ci * $cj * $sum);
+        }
+    }
+
+    return $dct;
+}
+
 ?>
