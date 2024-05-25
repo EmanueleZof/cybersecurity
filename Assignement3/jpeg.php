@@ -2,7 +2,7 @@
 /**
  * 
  */
-$quantizationY = array(
+$quantizationMatrixY = array(
     array(16,11,10,16,24,40,51,61),
     array(12,12,14,19,26,58,60,55),
     array(14,13,16,24,40,57,69,56),
@@ -13,7 +13,7 @@ $quantizationY = array(
     array(72,92,95,98,112,100,103,99),
 );
 
-$quantizationQ = array(
+$quantizationMatrixQ = array(
     array(17,18,24,47,99,99,99,99),
     array(18,21,26,66,99,99,99,99),
     array(24,26,56,99,99,99,99,99),
@@ -84,6 +84,31 @@ function dctTransform($matrix) {
     }
 
     return $dct;
+}
+
+/**
+ * 
+ */
+function quantization($dctMatrix, $quantizationMatrix) {
+    $m = $n = 8;
+    $quantizedCoefficents = array(
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+        array(),
+    );
+
+    for ($i = 0; $i < $m; $i++) {
+        for ($j = 0; $j < $n; $j++) {
+            $quantizedCoefficents[$i][$j] = floor($dctMatrix[$i][$j] / $quantizationMatrix[$i][$j]);
+        }
+    }
+
+    return $quantizedCoefficents;
 }
 
 ?>

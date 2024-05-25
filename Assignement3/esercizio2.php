@@ -63,10 +63,10 @@
             </p>
         </section>
         <section class="container">
-            <p>DCT test</p>
+            <p>DCT</p>
             <p>
                 <?php 
-                $testMatrix = array(
+                /*$testMatrix = array(
                     array(88,84,83,84,85,86,83,82),
                     array(86,82,82,83,82,83,83,81),
                     array(82,82,84,87,87,87,81,84),
@@ -77,7 +77,49 @@
                     array(88,88,90,84,85,88,88,81),
                 );
                 $testDCT = dctTransform($testMatrix);
-                printMatrix($testDCT);
+                printMatrix($testDCT);*/
+                
+                $dctY = dctTransform($Y);
+                printMatrix($dctY);
+
+                $dctQ = dctTransform($Q);
+                printMatrix($dctQ);
+                ?>
+            </p>
+        </section>
+        <section class="container">
+            <p>Quantization</p>
+            <p>
+                <?php 
+                /*$dctCoefficentsTest = array(
+                    array(120,60,40,30,4,3,0,0),
+                    array(70,48,32,3,4,1,0,0),
+                    array(50,36,4,4,20,0,0,0),
+                    array(40,4,5,1,1,0,0,0),
+                    array(5,4,0,0,0,0,0,0),
+                    array(3,2,0,0,0,0,0,0),
+                    array(1,1,0,0,0,0,0,0),
+                    array(0,0,0,0,0,0,0,0),
+                );
+                $quantizationTableTest = array(
+                    array(10,10,15,20,25,30,35,40),
+                    array(10,15,20,25,30,35,40,50),
+                    array(15,20,25,30,35,40,50,60),
+                    array(20,25,30,35,40,50,60,70),
+                    array(25,30,35,40,50,60,70,80),
+                    array(30,35,40,50,60,70,80,90),
+                    array(35,40,50,60,70,80,90,100),
+                    array(40,50,60,70,80,90,100,110),
+                );
+
+                $qc = quantization($dctCoefficentsTest, $quantizationTableTest);
+                printMatrix($qc);*/
+
+                $cY = quantization($dctY, $quantizationMatrixY);
+                printMatrix($cY);
+
+                $cQ = quantization($dctQ, $quantizationMatrixQ);
+                printMatrix($cQ);
                 ?>
             </p>
         </section>
