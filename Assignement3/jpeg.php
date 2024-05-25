@@ -111,11 +111,10 @@ function quantization($dctMatrix, $quantizationMatrix) {
     return $quantizedCoefficents;
 }
 
-
 /**
  * 
  */
-function zigzagScan ($matrix) {
+function zigzagScan($matrix) {
     $m = $n = 8;
     $row = $col = 0;
     $row_inc = false;
@@ -212,4 +211,29 @@ function zigzagScan ($matrix) {
     return $a;
 }
 
+/**
+ * 
+ */
+function linearCongruentialGenerator($module, $multiplier, $increment, $seed, $length) {
+    $X = array_fill(0, $length, 0);
+    for ($i = 0; $i < $length; $i++) {
+        if ($i == 0) {
+            $X[$i] = (($multiplier * $seed) + $increment) % $module;
+        } else {
+            $X[$i] = (($multiplier * $X[$i-1]) + $increment) % $module;
+        }
+    }
+    return $X;
+}
+
+/**
+ * 
+ */
+function binaryLCG($lcg) {
+    $b = array();
+    foreach($lcg as $element) {
+        array_push($b, $element % 2);
+    }
+    return $b;
+}
 ?>
