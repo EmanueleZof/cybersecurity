@@ -20,3 +20,12 @@ tr:nth-child(even) {
 table code {
     color: black;
 }
+
+table.matrix, table.matrix tr, table.matrix th, table.matrix td {
+    border: 1px solid black;
+    background-color: white;
+}
+
+table.matrix th {
+    background-color: #dddddd;
+}
