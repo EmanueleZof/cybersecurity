@@ -111,4 +111,105 @@ function quantization($dctMatrix, $quantizationMatrix) {
     return $quantizedCoefficents;
 }
 
+
+/**
+ * 
+ */
+function zigzagScan ($matrix) {
+    $m = $n = 8;
+    $row = $col = 0;
+    $row_inc = false;
+    $min = min($m, $n);
+    $max = max($m, $n) - 1;
+    $a = array();
+
+    for ($len = 1; $len <= $min; $len++) {
+        for ($i = 0; $i < $len; $i++) {
+            array_push($a, $matrix[$row][$col]);
+
+            if ($i + 1 == $len) {
+                break;
+            }
+                
+            if ($row_inc) {
+                $row++; 
+                $col--;
+            } else {
+                $row--; 
+                $col++;
+            }
+        }
+
+        if ($len == $min) {
+            break;
+        }
+
+        if ($row_inc) {
+            ++$row; 
+            $row_inc = false;
+        } else {
+            ++$col; 
+            $row_inc = true;
+        }
+    }
+
+    if ($row == 0) {
+        if ($col == $m - 1) {
+            ++$row;
+        } else {
+            ++$col;
+        }
+        $row_inc = 1;
+    } else {
+        if ($row == $n - 1) {
+            ++$col;
+        } else {
+            ++$row;
+        }
+        $row_inc = 0;
+    }
+
+    for ($len, $diag = $max; $diag > 0; --$diag) {
+        if ($diag > $min) {
+            $len = $min;
+        } else {
+            $len = $diag;
+        }
+
+        for ($i = 0; $i < $len; ++$i) {
+            array_push($a, $matrix[$row][$col]);
+
+            if ($i + 1 == $len) {
+                break;
+            }
+
+            if ($row_inc) {
+                ++$row; 
+                --$col;
+            } else {
+                ++$col; 
+                --$row;
+            }
+        }
+
+        if ($row == 0 || $col == $m - 1) {
+            if ($col == $m - 1) {
+                ++$row;
+            } else {
+                ++$col;
+            }
+            $row_inc = true;
+        } else if ($col == 0 || $row == $n - 1) {
+            if ($row == $n - 1) {
+                ++$col;
+            } else {
+                ++$row;
+            }
+            $row_inc = false;
+        }
+    }
+
+    return $a;
+}
+
 ?>
