@@ -236,4 +236,19 @@ function binaryLCG($lcg) {
     }
     return $b;
 }
+
+function blumBlumShubGenerator($p, $q, $seed, $length) {
+    $n = $p * $q;
+    $X = array_fill(0, $length, 0);
+    $B = array();
+
+    $X[0] = pow($seed, 2) % $n;
+
+    for ($i = 1; $i < $length + 1; $i++) {
+        $X[$i] = pow($X[$i-1], 2) % $n;
+        array_push($B, $X[$i] % 2);
+    }
+
+    return $B;
+}
 ?>

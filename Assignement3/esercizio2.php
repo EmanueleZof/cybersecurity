@@ -137,6 +137,7 @@
         </section>
         <section class="container">
             <p>Pseudo random generator</p>
+            <p>Linear Congruential</p>
             <p>
                 <?php
                 $lcg = linearCongruentialGenerator(pow(2,31) - 1, pow(7,5), 0, 1, 64);
@@ -144,6 +145,13 @@
                 echo '<br>';
                 $lcg = binaryLCG($lcg);
                 print_r($lcg);
+                ?>
+            </p>
+            <p>Blum Blum Shub</p>
+            <p>
+                <?php
+                $bbs = blumBlumShubGenerator(383, 503, 101355, 64);
+                print_r($bbs);
                 ?>
             </p>
         </section>
