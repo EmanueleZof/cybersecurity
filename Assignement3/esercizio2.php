@@ -1,6 +1,8 @@
 <?php
     include 'jpeg.php';
 
+    $secretMessage = 'The text is beautiful if it is invisible';
+
     $Y = array(
         array(52,55,61,66,70,61,64,73),
         array(63,59,55,90,109,85,69,72),
@@ -59,6 +61,12 @@
                 <?php 
                 printMatrix($Y);
                 printMatrix($Q);
+                ?>
+            </p>
+            <p>
+                <?php 
+                print_r(textToBinary($secretMessage));
+                //echo implode(' ', $binary);
                 ?>
             </p>
         </section>

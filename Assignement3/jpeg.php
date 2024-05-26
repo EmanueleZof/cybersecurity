@@ -27,6 +27,24 @@ $quantizationMatrixQ = array(
 /**
  * 
  */
+function textToBinary($text) {
+    $text = str_replace(' ','',$text);
+    $chars = str_split($text);
+    $binary = array();
+
+    foreach ($chars as $char) {
+        $data = unpack('H*', $char);
+        $bin = base_convert($data[1], 16, 2);
+        $bin = str_pad($bin, 8, 0, STR_PAD_LEFT);
+        array_push($binary, $bin);
+    }
+ 
+    return $binary;
+}
+
+/**
+ * 
+ */
 function printMatrix($matrix) {
     echo '<table class="matrix">';
     foreach ($matrix as $row) {
