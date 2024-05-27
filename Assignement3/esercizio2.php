@@ -163,6 +163,75 @@
                 ?>
             </p>
         </section>
+        <section class="container">
+            <p>Int to binary</p>
+            <p>
+                <?php
+                $binaryDCT = intToBinary($cY);
+                print_r($binaryDCT);
+                //echo implode(' ',$binaryDCT);
+                ?>
+            </p>
+        </section>
+        <section class="container">
+            <p>Test watermarked</p>
+            <table class="matrix">
+                <tr>
+                    <th>Indice</th>
+                    <th>Coefficente DCT</th>
+                    <th>Coefficente DCT in binario</th>
+                    <th>Pseudo random distribution</th>
+                    <th>Bit messaggio segreto</th>
+                    <th>Cambiamento del LSB</th>
+                    <th>Coefficente Watermarked</th>
+                    <th>Distribuzione rumore pseudo casuale</th>
+                </tr>
+                <?php
+                $test = array(0,1,0,1,0,1,0,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,1,0,1,0,1,1,1,1,0,0,0,0,1,1,1,0,1,0,0,0,1,1,0,1,0,0,1);
+
+                $lastIndex = 0;
+                foreach($cY as $index => $coefficent) {
+                    echo '<tr>';
+                    echo '<td>'.$index.'</td>';
+                    echo '<td>'.$coefficent.'</td>';
+                    echo '<td>'.$binaryDCT[$index].'</td>';
+                    echo '<td>'.$lcg[$index].'</td>';
+                    echo '<td>';
+                        if ($lcg[$index] == 0) {
+                            echo '-';
+                        } else {
+                            $current =$test[$lastIndex];
+                            echo $current;
+                            ++$lastIndex;
+                        }
+                    echo '</td>';
+                    echo '<td>';
+                        if ($lcg[$index] == 0) {
+                            echo '-';
+                        } else {
+                            $changed = changeLSB($binaryDCT[$index], $current);
+                            echo $changed;
+                        }
+                    echo '</td>';
+                    echo '<td>';
+                        if ($lcg[$index] == 0) {
+                            echo '-';
+                        } else {
+                            echo bindec($changed);
+                        }
+                    echo'</td>';
+                    echo '<td>';
+                    if ($lcg[$index] == 0) {
+                        echo '0';
+                    } else {
+                        echo bindec($changed) - abs($coefficent);
+                    }
+                    echo '</td>';
+                    echo '<tr>';
+                }
+                ?>
+            </table>
+        </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

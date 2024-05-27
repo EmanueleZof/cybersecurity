@@ -45,6 +45,17 @@ function textToBinary($text) {
 /**
  * 
  */
+function intToBinary($array) {
+    $b = array();
+    foreach($array as $element) {
+        array_push($b, decbin(abs($element)));
+    }
+    return $b;
+}
+
+/**
+ * 
+ */
 function printMatrix($matrix) {
     echo '<table class="matrix">';
     foreach ($matrix as $row) {
@@ -255,6 +266,9 @@ function binaryLCG($lcg) {
     return $b;
 }
 
+/**
+ * 
+ */
 function blumBlumShubGenerator($p, $q, $seed, $length) {
     $n = $p * $q;
     $X = array_fill(0, $length, 0);
@@ -268,5 +282,15 @@ function blumBlumShubGenerator($p, $q, $seed, $length) {
     }
 
     return $B;
+}
+
+/**
+ * 
+ */
+function changeLSB($binary, $bit) {
+    $list = str_split($binary);
+    $last = count($list) - 1;
+    $list[$last] = $bit;
+    return implode('',$list);
 }
 ?>
