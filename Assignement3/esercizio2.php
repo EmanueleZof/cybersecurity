@@ -108,16 +108,21 @@
             ?>
         </section>
         <section class="container">
-            <p>Zig-Zag</p>
-            <p>
+            <h2>Step 4: lettura a zig-zag delle matrici</h2>
+            <p>Vettore di Luminanza <i>Y</i></p>
+            <code>
                 <?php 
                 $cY = zigzagScan($cY);
-                echo implode(' ',$cY);
-                echo '<br>';
-                $cQ = zigzagScan($cQ);
-                echo implode(' ',$cQ);
+                echo implode(', ',$cY);
                 ?>
-            </p>
+            </code>
+            <p>Vettore di Crominanza <i>Q</i></p>
+            <code>
+                <?php 
+                $cQ = zigzagScan($cQ);
+                echo implode(', ',$cQ);
+                ?>
+            </code>
         </section>
         <section class="container">
             <p>Pseudo random generator</p>
