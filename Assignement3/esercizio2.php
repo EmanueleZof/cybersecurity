@@ -79,32 +79,20 @@
                 echo implode(' ', $messageBinary);
                 ?>
             </code>
-            <p>Bit totali del messaggio: <?php echo count($messageBinary)* 8 ?></p>
+            <p>Bit totali del messaggio: <?php echo count($messageBinary) * 8 ?></p>
         </section>
         <section class="container">
-            <p>DCT</p>
-            <p>
-                <?php 
-                /*$testMatrix = array(
-                    array(88,84,83,84,85,86,83,82),
-                    array(86,82,82,83,82,83,83,81),
-                    array(82,82,84,87,87,87,81,84),
-                    array(81,86,87,89,82,82,84,87),
-                    array(81,84,83,87,85,89,80,81),
-                    array(81,85,85,86,81,89,81,85),
-                    array(82,81,86,83,86,89,81,84),
-                    array(88,88,90,84,85,88,88,81),
-                );
-                $testDCT = dctTransform($testMatrix);
-                printMatrix($testDCT);*/
-                
-                $dctY = dctTransform($Y);
-                printMatrix($dctY);
-
-                $dctQ = dctTransform($Q);
-                printMatrix($dctQ);
-                ?>
-            </p>
+            <h2>Step 2: calcolo dei coefficenti della DCT</h2>
+            <p>Blocco 8x8 di Luminanza <i>Y</i></p>
+            <?php 
+            $dctY = dctTransform($Y);
+            printMatrix($dctY);
+            ?>
+            <p>Blocco 8x8 di Crominanza <i>Q</i></p>
+            <?php 
+            $dctQ = dctTransform($Q);
+            printMatrix($dctQ);
+            ?>
         </section>
         <section class="container">
             <p>Quantization</p>
