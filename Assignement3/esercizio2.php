@@ -128,15 +128,27 @@
             <h2>Step 5: generatori pseudo casuali</h2>
             <h5>Linear Congruential</h5>
             <p>Parametri utilizzati:</p>
-            <p>
+            <ul>
+                <li>modulo: </li>
+                <li>moltiplicatore: </li>
+                <li>incremento: </li>
+                <li>seme: </li>
+                <li>iterazioni: 64</li>
+            </ul>
+            <p>Sequenza di numeri pseudo casuali:</p>
+            <code>
                 <?php
                 $lcg = linearCongruentialGenerator(pow(2,31) - 1, pow(7,5), 0, 1, 64);
-                print_r($lcg);
-                echo '<br>';
-                $lcg = binaryLCG($lcg);
-                print_r($lcg);
+                echo implode(', ', $lcg);
                 ?>
-            </p>
+            </code>
+            <p>Sequenza generata:</p>
+            <code>
+                <?php
+                $lcg = binaryLCG($lcg);
+                echo implode(', ', $lcg);
+                ?>
+            </code>
             <h5>Metodo: Blum Blum Shub</h5>
             <p>Parametri utilizzati:</p>
             <ul>
