@@ -120,13 +120,14 @@
             <code>
                 <?php 
                 $cQ = zigzagScan($cQ);
-                echo implode(', ',$cQ);
+                echo implode(', ', $cQ);
                 ?>
             </code>
         </section>
         <section class="container">
-            <p>Pseudo random generator</p>
-            <p>Linear Congruential</p>
+            <h2>Step 5: generatori pseudo casuali</h2>
+            <h5>Linear Congruential</h5>
+            <p>Parametri utilizzati:</p>
             <p>
                 <?php
                 $lcg = linearCongruentialGenerator(pow(2,31) - 1, pow(7,5), 0, 1, 64);
@@ -136,13 +137,21 @@
                 print_r($lcg);
                 ?>
             </p>
-            <p>Blum Blum Shub</p>
-            <p>
+            <h5>Metodo: Blum Blum Shub</h5>
+            <p>Parametri utilizzati:</p>
+            <ul>
+                <li>p: 383</li>
+                <li>q: 503</li>
+                <li>seme: 101355</li>
+                <li>iterazioni: 64</li>
+            </ul>
+            <p>Sequenza generata:</p>
+            <code>
                 <?php
                 $bbs = blumBlumShubGenerator(383, 503, 101355, 64);
-                print_r($bbs);
+                echo implode(', ', $bbs);
                 ?>
-            </p>
+            </code>
         </section>
         <section class="container">
             <p>Int to binary</p>
