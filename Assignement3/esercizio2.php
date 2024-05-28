@@ -95,40 +95,17 @@
             ?>
         </section>
         <section class="container">
-            <p>Quantization</p>
-            <p>
-                <?php 
-                /*$dctCoefficentsTest = array(
-                    array(120,60,40,30,4,3,0,0),
-                    array(70,48,32,3,4,1,0,0),
-                    array(50,36,4,4,20,0,0,0),
-                    array(40,4,5,1,1,0,0,0),
-                    array(5,4,0,0,0,0,0,0),
-                    array(3,2,0,0,0,0,0,0),
-                    array(1,1,0,0,0,0,0,0),
-                    array(0,0,0,0,0,0,0,0),
-                );
-                $quantizationTableTest = array(
-                    array(10,10,15,20,25,30,35,40),
-                    array(10,15,20,25,30,35,40,50),
-                    array(15,20,25,30,35,40,50,60),
-                    array(20,25,30,35,40,50,60,70),
-                    array(25,30,35,40,50,60,70,80),
-                    array(30,35,40,50,60,70,80,90),
-                    array(35,40,50,60,70,80,90,100),
-                    array(40,50,60,70,80,90,100,110),
-                );
-
-                $qc = quantization($dctCoefficentsTest, $quantizationTableTest);
-                printMatrix($qc);*/
-
-                $cY = quantization($dctY, $quantizationMatrixY);
-                printMatrix($cY);
-
-                $cQ = quantization($dctQ, $quantizationMatrixQ);
-                printMatrix($cQ);
-                ?>
-            </p>
+            <h2>Step 3: quantizzazione dei coefficenti della DCT</h2>
+            <p>Blocco 8x8 di Luminanza <i>Y</i></p>
+            <?php 
+            $cY = quantization($dctY, $quantizationMatrixY);
+            printMatrix($cY);
+            ?>
+            <p>Blocco 8x8 di Crominanza <i>Q</i></p>
+            <?php 
+            $cQ = quantization($dctQ, $quantizationMatrixQ);
+            printMatrix($cQ);
+            ?>
         </section>
         <section class="container">
             <p>Zig-Zag</p>
