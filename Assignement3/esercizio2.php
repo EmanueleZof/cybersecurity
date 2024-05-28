@@ -39,7 +39,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Assignement 3</a>
+                <a class="navbar-brand" href="#">Assignment 3</a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
@@ -55,20 +55,31 @@
     </header>
     <main class="flex-shrink-0">
         <section class="container">
-            <h1 class="mt-5">Assignement 3 - Esercizio 2</h1>
-            <p class="lead">TODO</p>
-            <p>
+            <h1 class="mt-5">Assignment 3 - Esercizio 2</h1>
+            <p class="lead">Frase da nascondere</p>
+            <p><?php echo $secretMessage; ?></p>
+            <p class="lead">Blocco 8x8 di Luminanza <i>Y</i></p>
+            <?php printMatrix($Y); ?>
+            <p class="lead">Blocco 8x8 di Crominanza <i>Q</i></p>
+            <?php printMatrix($Q); ?>
+        </section>
+        <section class="container">
+            <h2>Step 1: analisi del messaggio segreto</h2>
+            <p>Rimozione di tutti gli spazi e delle maiuscole</p>
+            <code>
                 <?php 
-                printMatrix($Y);
-                printMatrix($Q);
+                $messageProcessed = textPreProcess($secretMessage);
+                echo $messageProcessed;
                 ?>
-            </p>
-            <p>
-                <?php 
-                print_r(textToBinary($secretMessage));
-                //echo implode(' ', $binary);
+            </code>
+            <p>Conversione in binario di tutte le lettere del messaggio</p>
+            <code>
+                <?php
+                $messageBinary = textToBinary($messageProcessed);
+                echo implode(' ', $messageBinary);
                 ?>
-            </p>
+            </code>
+            <p>Bit totali del messaggio: <?php echo count($messageBinary)* 8 ?></p>
         </section>
         <section class="container">
             <p>DCT</p>

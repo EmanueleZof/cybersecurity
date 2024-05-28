@@ -27,8 +27,16 @@ $quantizationMatrixQ = array(
 /**
  * 
  */
+function textPreProcess($text) {
+    $text = str_replace(' ', '', $text);
+    $text = strtolower($text);
+    return $text;
+}
+
+/**
+ * 
+ */
 function textToBinary($text) {
-    $text = str_replace(' ','',$text);
     $chars = str_split($text);
     $binary = array();
 
