@@ -129,16 +129,16 @@
             <h5>Linear Congruential</h5>
             <p>Parametri utilizzati:</p>
             <ul>
-                <li>modulo: </li>
-                <li>moltiplicatore: </li>
-                <li>incremento: </li>
-                <li>seme: </li>
+                <li>modulo: 2<sup>31</sup> - 1</li>
+                <li>moltiplicatore: 48271</li>
+                <li>incremento: 0</li>
+                <li>seme: 64</li>
                 <li>iterazioni: 64</li>
             </ul>
             <p>Sequenza di numeri pseudo casuali:</p>
             <code>
                 <?php
-                $lcg = linearCongruentialGenerator(pow(2,31) - 1, pow(7,5), 0, 1, 64);
+                $lcg = linearCongruentialGenerator(pow(2,31) - 1, 48271, 0, 64, 64);
                 echo implode(', ', $lcg);
                 ?>
             </code>
