@@ -168,7 +168,7 @@
         <section class="container">
             <h2>Step 6: calcolo dei coefficenti watermarked</h2>
             <?php $bitsToHide = flattenBits($messageBinary); ?>
-            <div class="mb-3">
+            <div class="mb-4">
                 <h5>Test A</h5>
                 <p>Generatore pseudo casuale: <b>LCG</b></p>
                 <p>Bit cambiati: <b>1</b></p>
@@ -180,7 +180,7 @@
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <h5>Test B</h5>
                 <p>Generatore pseudo casuale: <b>BBS</b></p>
                 <p>Bit cambiati: <b>1</b></p>
@@ -191,6 +191,18 @@
                 <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, $totBit); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
+            </div>
+            <div class="mb-4">
+                <h5>Test C</h5>
+                <p>Generatore pseudo casuale: <b>LCG</b></p>
+                <p>Bit cambiati: <b>2</b></p>
+                <p>Vettore: <b>Luminanza <i>Y</i></b></p>
+                <!--<?php //$totBit = drawTable($cY, $lcg, $bitsToHide); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php //echo $totBit ?></b> di 264</p>
+                <p>Vettore: <b>Crominanza <i>Q</i></b></p>
+                <?php //$totBit = drawTable($cQ, $lcg, $bitsToHide, $totBit); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php //echo $totBit ?></b> di 264</p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>-->
             </div>
         </section>
     </main>
