@@ -180,6 +180,18 @@
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
             </div>
+            <div class="mb-3">
+                <h5>Test B</h5>
+                <p>Generatore pseudo casuale: <b>BBS</b></p>
+                <p>Bit cambiati: <b>1</b></p>
+                <p>Vettore: <b>Luminanza <i>Y</i></b></p>
+                <?php $totBit = drawTable($cY, $bbs, $bitsToHide); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
+                <p>Vettore: <b>Crominanza <i>Q</i></b></p>
+                <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, $totBit); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

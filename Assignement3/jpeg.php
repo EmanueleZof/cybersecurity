@@ -362,7 +362,7 @@ function drawTable($vector, $prd, $message, $lastIndex = 0) {
             // Coefficente Watermarked
             echo '<td><code>';
                 if ($prd[$index] == 1) {
-                    if ($coefficent < 0) {
+                    if ($coefficent < 0 && $changed != 0) {
                         echo '-';
                     }
                     echo bindec($changed);
