@@ -56,7 +56,9 @@ function textToBinary($text) {
 function intToBinary($array) {
     $b = array();
     foreach($array as $element) {
-        array_push($b, decbin(abs($element)));
+        $bin = decbin(abs($element));
+        $bin = str_pad($bin, 8, 0, STR_PAD_LEFT);
+        array_push($b, $bin);
     }
     return $b;
 }
@@ -300,5 +302,75 @@ function changeLSB($binary, $bit) {
     $last = count($list) - 1;
     $list[$last] = $bit;
     return implode('',$list);
+}
+
+/**
+ * 
+ */
+function drawTable($vector, $prd, $message) {
+    $binaryDCT = intToBinary($vector);
+    $lastIndex = 0;
+
+    echo '<table>';
+    echo '<tr>';
+        echo '<th>Indice</th>';
+        echo '<th>Coefficente DCT</th>';
+        echo '<th>Coefficente DCT in binario</th>';
+        echo '<th>Pseudo random distribution</th>';
+        echo '<th>Bit messaggio segreto</th>';
+        echo '<th>Cambiamento del LSB</th>';
+        echo '<th>Coefficente Watermarked</th>';
+        echo '<th>Distribuzione rumore pseudo casuale</th>';
+    echo '</tr>';
+
+    foreach($vector as $index => $coefficent) {
+        if ($prd[$index] == 1) {
+            echo '<tr class="highlight">';
+        } else {
+            echo '<tr>';
+        }
+            echo '<td>'.$index.'</td>';
+            echo '<td><code>'.$coefficent.'</code></td>';
+            echo '<td><code>'.$binaryDCT[$index].'</code></td>';
+            echo '<td><code>'.$prd[$index].'</code></td>';
+            echo '<td><code>';
+                if ($prd[$index] == 1) {
+                    $current = $message[$lastIndex];
+                    echo $current;
+                    ++$lastIndex;
+                } else {
+                    echo '-';
+                }
+            echo '</code></td>';
+            echo '<td><code>';
+                if ($prd[$index] == 1) {
+                    $changed = changeLSB($binaryDCT[$index], $current);
+                    if ($binaryDCT[$index] != $changed) {
+                        $last_one = substr($changed, -1);
+                        echo substr($changed, 0, -1).'<span class="digits">'.$last_one.'</span>';
+                    } else {
+                        echo $changed;
+                    }
+                } else {
+                    echo '-';
+                }
+            echo '</code></td>';
+            echo '<td><code>';
+                if ($prd[$index] == 1) {
+                    echo bindec($changed);
+                } else {
+                    echo '-';
+                }
+            echo'</code></td>';
+            echo '<td><code>';
+                if ($prd[$index] == 1) {
+                    echo bindec($changed) - abs($coefficent);
+                } else {
+                    echo '0';
+                }
+            echo '</code></td>';
+        echo '</tr>';
+    }
+    echo '</table>';
 }
 ?>

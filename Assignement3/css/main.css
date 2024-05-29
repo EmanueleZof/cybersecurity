@@ -8,17 +8,27 @@ table {
 }
 
 td, th {
-    border: 1px solid #dddddd;
+    border: 1px solid black !important;
     text-align: left;
     padding: 4px;
+    text-align: center;
 }
 
-tr:nth-child(even) {
+th {
+    background-color: #dddddd;
+}
+
+/*tr:nth-child(odd) {
     background-color: #dddddd;  
+}*/
+
+tr.highlight {
+    background-color: #e9ecef;
 }
 
 table code {
     color: black;
+    margin-bottom: 0;
 }
 
 table.matrix {
@@ -30,11 +40,11 @@ table.matrix, table.matrix tr, table.matrix th, table.matrix td {
     background-color: white;
 }
 
-table.matrix th {
-    background-color: #dddddd;
-}
-
 code {
     margin-bottom: 1rem;
     display: block;
+}
+
+.digits {
+    color: red;
 }

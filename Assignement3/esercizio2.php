@@ -56,11 +56,11 @@
     <main class="flex-shrink-0">
         <section class="container">
             <h1 class="mt-5">Assignment 3 - Esercizio 2</h1>
-            <p class="lead">Frase da nascondere</p>
+            <p>Frase da nascondere</p>
             <p><?php echo $secretMessage; ?></p>
-            <p class="lead">Blocco 8x8 di Luminanza <i>Y</i></p>
+            <p>Blocco 8x8 di Luminanza <i>Y</i></p>
             <?php printMatrix($Y); ?>
-            <p class="lead">Blocco 8x8 di Crominanza <i>Q</i></p>
+            <p>Blocco 8x8 di Crominanza <i>Q</i></p>
             <?php printMatrix($Q); ?>
         </section>
         <section class="container">
@@ -166,73 +166,15 @@
             </code>
         </section>
         <section class="container">
-            <p>Int to binary</p>
-            <p>
-                <?php
-                $binaryDCT = intToBinary($cY);
-                print_r($binaryDCT);
-                //echo implode(' ',$binaryDCT);
-                ?>
-            </p>
-        </section>
-        <section class="container">
-            <p>Test watermarked</p>
-            <table class="matrix">
-                <tr>
-                    <th>Indice</th>
-                    <th>Coefficente DCT</th>
-                    <th>Coefficente DCT in binario</th>
-                    <th>Pseudo random distribution</th>
-                    <th>Bit messaggio segreto</th>
-                    <th>Cambiamento del LSB</th>
-                    <th>Coefficente Watermarked</th>
-                    <th>Distribuzione rumore pseudo casuale</th>
-                </tr>
-                <?php
-                $test = array(0,1,0,1,0,1,0,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,1,0,1,0,1,1,1,1,0,0,0,0,1,1,1,0,1,0,0,0,1,1,0,1,0,0,1);
+            <h2>Step 6: calcolo dei coefficenti watermarked</h2>
+            <p>Vettore: <b>Luminanza <i>Y</i></b></p>
+            <p>Generatore pseudo casuale: <b>LCG</b></p>
+            <p>Bit cambiati: <b>1</b></p>
+            <?php
+            $test = array(0,1,0,1,0,1,0,0,0,1,1,0,1,0,0,0,0,1,1,0,0,1,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,1,0,1,0,1,1,1,1,0,0,0,0,1,1,1,0,1,0,0,0,1,1,0,1,0,0,1);
 
-                $lastIndex = 0;
-                foreach($cY as $index => $coefficent) {
-                    echo '<tr>';
-                    echo '<td>'.$index.'</td>';
-                    echo '<td>'.$coefficent.'</td>';
-                    echo '<td>'.$binaryDCT[$index].'</td>';
-                    echo '<td>'.$lcg[$index].'</td>';
-                    echo '<td>';
-                        if ($lcg[$index] == 0) {
-                            echo '-';
-                        } else {
-                            $current =$test[$lastIndex];
-                            echo $current;
-                            ++$lastIndex;
-                        }
-                    echo '</td>';
-                    echo '<td>';
-                        if ($lcg[$index] == 0) {
-                            echo '-';
-                        } else {
-                            $changed = changeLSB($binaryDCT[$index], $current);
-                            echo $changed;
-                        }
-                    echo '</td>';
-                    echo '<td>';
-                        if ($lcg[$index] == 0) {
-                            echo '-';
-                        } else {
-                            echo bindec($changed);
-                        }
-                    echo'</td>';
-                    echo '<td>';
-                    if ($lcg[$index] == 0) {
-                        echo '0';
-                    } else {
-                        echo bindec($changed) - abs($coefficent);
-                    }
-                    echo '</td>';
-                    echo '<tr>';
-                }
-                ?>
-            </table>
+            drawTable($cY, $lcg, $test);
+            ?>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
