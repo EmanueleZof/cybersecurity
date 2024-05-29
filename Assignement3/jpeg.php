@@ -307,9 +307,8 @@ function changeLSB($binary, $bit) {
 /**
  * 
  */
-function drawTable($vector, $prd, $message) {
+function drawTable($vector, $prd, $message, $lastIndex = 0) {
     $binaryDCT = intToBinary($vector);
-    $lastIndex = 0;
 
     echo '<table>';
     echo '<tr>';
@@ -330,9 +329,13 @@ function drawTable($vector, $prd, $message) {
             echo '<tr>';
         }
             echo '<td>'.$index.'</td>';
+            // Coefficente DCT
             echo '<td><code>'.$coefficent.'</code></td>';
+            // Coefficente DCT in binario
             echo '<td><code>'.$binaryDCT[$index].'</code></td>';
+            // Pseudo random distribution
             echo '<td><code>'.$prd[$index].'</code></td>';
+            // Bit messaggio segreto
             echo '<td><code>';
                 if ($prd[$index] == 1) {
                     $current = $message[$lastIndex];
@@ -342,6 +345,7 @@ function drawTable($vector, $prd, $message) {
                     echo '-';
                 }
             echo '</code></td>';
+            // Cambiamento del LSB
             echo '<td><code>';
                 if ($prd[$index] == 1) {
                     $changed = changeLSB($binaryDCT[$index], $current);
@@ -355,13 +359,18 @@ function drawTable($vector, $prd, $message) {
                     echo '-';
                 }
             echo '</code></td>';
+            // Coefficente Watermarked
             echo '<td><code>';
                 if ($prd[$index] == 1) {
+                    if ($coefficent < 0) {
+                        echo '-';
+                    }
                     echo bindec($changed);
                 } else {
                     echo '-';
                 }
             echo'</code></td>';
+            // Distribuzione rumore pseudo casuale
             echo '<td><code>';
                 if ($prd[$index] == 1) {
                     echo bindec($changed) - abs($coefficent);
@@ -372,5 +381,21 @@ function drawTable($vector, $prd, $message) {
         echo '</tr>';
     }
     echo '</table>';
+
+    return $lastIndex;
+}
+
+/**
+ * 
+ */
+function flattenBits($array) {
+    $b = array();
+    foreach($array as $bite) {
+        $bits = str_split($bite);
+        foreach($bits as $bit) {
+            array_push($b, $bit);
+        }
+    }
+    return $b;
 }
 ?>
