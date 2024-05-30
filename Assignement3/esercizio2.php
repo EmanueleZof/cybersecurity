@@ -202,7 +202,7 @@
                 <p>Vettore: <b>Crominanza <i>Q</i></b></p>
                 <?php $totBit = drawTable($cQ, $lcg, $bitsToHide, 2, $totBit); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
-                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 3]</b></p>
             </div>
             <div class="mb-4">
                 <h5>Test D</h5>
@@ -214,7 +214,7 @@
                 <p>Vettore: <b>Crominanza <i>Q</i></b></p>
                 <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, 2, $totBit); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
-                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 3]</b></p>
             </div>
         </section>
     </main>
