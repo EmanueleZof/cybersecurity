@@ -297,17 +297,22 @@ function blumBlumShubGenerator($p, $q, $seed, $length) {
 /**
  * 
  */
-function changeLSB($binary, $bit) {
+function changeLSB($binary, $bit1, $bit2 = null) {
     $list = str_split($binary);
     $last = count($list) - 1;
-    $list[$last] = $bit;
+    if ($bit2 != null) {
+        $list[$last - 1] = $bit1;
+        $list[$last] = $bit2;
+    } else {
+        $list[$last] = $bit1;
+    }
     return implode('',$list);
 }
 
 /**
  * 
  */
-function drawTable($vector, $prd, $message, $lastIndex = 0) {
+function drawTable($vector, $prd, $message, $bitToChange = 1, $lastIndex = 0) {
     $binaryDCT = intToBinary($vector);
 
     echo '<table>';
@@ -338,9 +343,16 @@ function drawTable($vector, $prd, $message, $lastIndex = 0) {
             // Bit messaggio segreto
             echo '<td><code>';
                 if ($prd[$index] == 1) {
-                    $current = $message[$lastIndex];
-                    echo $current;
-                    ++$lastIndex;
+                    if ($bitToChange == 2) {
+                        $current = $message[$lastIndex];
+                        $current2 = $message[$lastIndex + 1];
+                        echo $current.$current2;
+                        $lastIndex = $lastIndex + 2;
+                    } else {
+                        $current = $message[$lastIndex];
+                        echo $current;
+                        ++$lastIndex;
+                    }
                 } else {
                     echo '-';
                 }
@@ -348,10 +360,19 @@ function drawTable($vector, $prd, $message, $lastIndex = 0) {
             // Cambiamento del LSB
             echo '<td><code>';
                 if ($prd[$index] == 1) {
-                    $changed = changeLSB($binaryDCT[$index], $current);
+                    if ($bitToChange == 2) {
+                        $changed = changeLSB($binaryDCT[$index], $current, $current2);
+                    } else {
+                        $changed = changeLSB($binaryDCT[$index], $current);
+                    }
                     if ($binaryDCT[$index] != $changed) {
-                        $last_one = substr($changed, -1);
-                        echo substr($changed, 0, -1).'<span class="digits">'.$last_one.'</span>';
+                        if ($bitToChange == 2) {
+                            $last_two = substr($changed, -2);
+                            echo substr($changed, 0, -2).'<span class="digits">'.$last_two.'</span>';
+                        } else {
+                            $last_one = substr($changed, -1);
+                            echo substr($changed, 0, -1).'<span class="digits">'.$last_one.'</span>';
+                        }
                     } else {
                         echo $changed;
                     }

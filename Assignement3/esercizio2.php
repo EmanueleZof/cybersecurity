@@ -173,10 +173,10 @@
                 <p>Generatore pseudo casuale: <b>LCG</b></p>
                 <p>Bit cambiati: <b>1</b></p>
                 <p>Vettore: <b>Luminanza <i>Y</i></b></p>
-                <?php $totBit = drawTable($cY, $lcg, $bitsToHide); ?>
+                <?php $totBit = drawTable($cY, $lcg, $bitsToHide, 1); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Vettore: <b>Crominanza <i>Q</i></b></p>
-                <?php $totBit = drawTable($cQ, $lcg, $bitsToHide, $totBit); ?>
+                <?php $totBit = drawTable($cQ, $lcg, $bitsToHide, 1, $totBit); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
             </div>
@@ -185,10 +185,10 @@
                 <p>Generatore pseudo casuale: <b>BBS</b></p>
                 <p>Bit cambiati: <b>1</b></p>
                 <p>Vettore: <b>Luminanza <i>Y</i></b></p>
-                <?php $totBit = drawTable($cY, $bbs, $bitsToHide); ?>
+                <?php $totBit = drawTable($cY, $bbs, $bitsToHide, 1); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Vettore: <b>Crominanza <i>Q</i></b></p>
-                <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, $totBit); ?>
+                <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, 1, $totBit); ?>
                 <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
             </div>
@@ -197,12 +197,24 @@
                 <p>Generatore pseudo casuale: <b>LCG</b></p>
                 <p>Bit cambiati: <b>2</b></p>
                 <p>Vettore: <b>Luminanza <i>Y</i></b></p>
-                <!--<?php //$totBit = drawTable($cY, $lcg, $bitsToHide); ?>
-                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php //echo $totBit ?></b> di 264</p>
+                <?php $totBit = drawTable($cY, $lcg, $bitsToHide, 2); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
                 <p>Vettore: <b>Crominanza <i>Q</i></b></p>
-                <?php //$totBit = drawTable($cQ, $lcg, $bitsToHide, $totBit); ?>
-                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php //echo $totBit ?></b> di 264</p>
-                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>-->
+                <?php $totBit = drawTable($cQ, $lcg, $bitsToHide, 2, $totBit); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
+            </div>
+            <div class="mb-4">
+                <h5>Test D</h5>
+                <p>Generatore pseudo casuale: <b>BBS</b></p>
+                <p>Bit cambiati: <b>2</b></p>
+                <p>Vettore: <b>Luminanza <i>Y</i></b></p>
+                <?php $totBit = drawTable($cY, $bbs, $bitsToHide, 2); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
+                <p>Vettore: <b>Crominanza <i>Q</i></b></p>
+                <?php $totBit = drawTable($cQ, $bbs, $bitsToHide, 2, $totBit); ?>
+                <p class="mt-3">Totale bit del messaggio segreto stenografati: <b><?php echo $totBit ?></b> di 264</p>
+                <p>Distribuzione del rumore pseudo casuale: <b>[-1, 1]</b></p>
             </div>
         </section>
     </main>
