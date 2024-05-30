@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ * Matrici di quantizzazione per la Luminanza (Y) e Crominanza (Q)
  */
 $quantizationMatrixY = array(
     array(16,11,10,16,24,40,51,61),
@@ -25,7 +25,14 @@ $quantizationMatrixQ = array(
 );
 
 /**
- * 
+ * Pre-processa il testo rimuovendo gli spazi e convertendo tutti i caratteri in minuscolo.
+ *
+ * Questa funzione prende una stringa di testo, rimuove tutti gli spazi al suo interno e
+ * converte tutti i caratteri in minuscolo. È utile per preparare il testo per ulteriori
+ * elaborazioni, come analisi testuale o cifratura.
+ *
+ * @param string $text Il testo da pre-processare.
+ * @return string Il testo pre-processato senza spazi e in minuscolo.
  */
 function textPreProcess($text) {
     $text = str_replace(' ', '', $text);
@@ -34,7 +41,14 @@ function textPreProcess($text) {
 }
 
 /**
- * 
+ * Converte una stringa di testo in un array binario.
+ *
+ * Questa funzione prende una stringa di testo e la converte in un array dove
+ * ogni elemento rappresenta il valore binario di un carattere del testo. Ogni
+ * valore binario è una stringa di 8 bit.
+ *
+ * @param string $text Il testo da convertire in binario.
+ * @return array Un array di stringhe binarie, ciascuna rappresentante un carattere del testo.
  */
 function textToBinary($text) {
     $chars = str_split($text);
@@ -51,7 +65,15 @@ function textToBinary($text) {
 }
 
 /**
- * 
+ * Converte un array di numeri interi in un array binario.
+ *
+ * Questa funzione prende un array di numeri interi, li converte in valori binari
+ * a 8 bit (considerando solo i valori assoluti degli interi) e restituisce un array
+ * di stringhe binarie. Ogni stringa binaria è una rappresentazione a 8 bit dell'intero
+ * corrispondente.
+ *
+ * @param array $array L'array di numeri interi da convertire in binario.
+ * @return array Un array di stringhe binarie a 8 bit, ciascuna rappresentante un intero dell'array di input.
  */
 function intToBinary($array) {
     $b = array();
@@ -64,7 +86,13 @@ function intToBinary($array) {
 }
 
 /**
- * 
+ * Stampa una matrice in formato HTML.
+ *
+ * Questa funzione prende una matrice bidimensionale e la stampa come una tabella HTML.
+ * Ogni riga della matrice diventa una riga della tabella, e ogni elemento diventa una cella.
+ * La tabella risultante avrà la classe CSS "matrix".
+ *
+ * @param array $matrix La matrice bidimensionale da stampare.
  */
 function printMatrix($matrix) {
     echo '<table class="matrix">';
@@ -79,7 +107,14 @@ function printMatrix($matrix) {
 }
 
 /**
- * 
+ * Calcola la Trasformata Discreta del Coseno (DCT) di una matrice 8x8.
+ *
+ * Questa funzione prende una matrice bidimensionale 8x8 come input e calcola la sua
+ * Trasformata Discreta del Coseno (DCT). La trasformata viene calcolata utilizzando
+ * la formula DCT-II e il risultato viene restituito come una nuova matrice 8x8.
+ *
+ * @param array $matrix La matrice bidimensionale 8x8 da trasformare.
+ * @return array La matrice risultante dopo aver applicato la DCT.
  */
 function dctTransform($matrix) {
     $m = $n = 8;
@@ -126,7 +161,16 @@ function dctTransform($matrix) {
 }
 
 /**
- * 
+ * Applica la quantizzazione a una matrice DCT utilizzando una matrice di quantizzazione.
+ *
+ * Questa funzione prende una matrice risultante dalla Trasformata Discreta del Coseno (DCT)
+ * e una matrice di quantizzazione come input. Per ogni elemento della matrice DCT, divide
+ * l'elemento corrispondente per l'elemento della matrice di quantizzazione e arrotonda per difetto
+ * il risultato. La matrice quantizzata risultante viene quindi restituita.
+ *
+ * @param array $dctMatrix La matrice DCT 8x8 da quantizzare.
+ * @param array $quantizationMatrix La matrice di quantizzazione 8x8 da utilizzare per la quantizzazione.
+ * @return array La matrice 8x8 dei coefficienti quantizzati.
  */
 function quantization($dctMatrix, $quantizationMatrix) {
     $m = $n = 8;
@@ -151,7 +195,14 @@ function quantization($dctMatrix, $quantizationMatrix) {
 }
 
 /**
- * 
+ * Esegue la scansione zigzag di una matrice 8x8.
+ *
+ * Questa funzione prende una matrice 8x8 come input e restituisce un array lineare contenente
+ * gli elementi della matrice disposti in ordine di scansione zigzag. La scansione zigzag
+ * è una tecnica comune utilizzata nella compressione di immagini, come nel formato JPEG.
+ *
+ * @param array $matrix La matrice 8x8 da scansionare in ordine zigzag.
+ * @return array Un array contenente gli elementi della matrice in ordine di scansione zigzag.
  */
 function zigzagScan($matrix) {
     $m = $n = 8;
@@ -251,7 +302,17 @@ function zigzagScan($matrix) {
 }
 
 /**
- * 
+ * Genera una sequenza di numeri pseudo-casuali utilizzando un generatore lineare congruenziale.
+ *
+ * Questa funzione implementa un generatore lineare congruenziale (LCG) per creare una sequenza di numeri
+ * pseudo-casuali. La sequenza è determinata dai parametri forniti: modulo, moltiplicatore, incremento e seed.
+ *
+ * @param int $module Il modulo utilizzato per il generatore. Questo valore determina l'intervallo dei numeri generati.
+ * @param int $multiplier Il moltiplicatore utilizzato nel calcolo della sequenza.
+ * @param int $increment L'incremento aggiunto in ogni passo del calcolo della sequenza.
+ * @param int $seed Il valore iniziale (seed) da cui parte la sequenza.
+ * @param int $length La lunghezza della sequenza da generare.
+ * @return array Un array contenente la sequenza di numeri pseudo-casuali generata.
  */
 function linearCongruentialGenerator($module, $multiplier, $increment, $seed, $length) {
     $X = array_fill(0, $length, 0);
@@ -266,7 +327,13 @@ function linearCongruentialGenerator($module, $multiplier, $increment, $seed, $l
 }
 
 /**
- * 
+ * Converte una sequenza di numeri generata da un generatore lineare congruenziale in una sequenza binaria.
+ *
+ * Questa funzione prende una sequenza di numeri generata da un generatore lineare congruenziale (LCG)
+ * e converte ciascun numero in un valore binario (0 o 1) utilizzando il modulo 2.
+ *
+ * @param array $lcg Un array contenente la sequenza di numeri generata da un LCG.
+ * @return array Un array contenente la sequenza di valori binari corrispondente.
  */
 function binaryLCG($lcg) {
     $b = array();
@@ -277,7 +344,18 @@ function binaryLCG($lcg) {
 }
 
 /**
- * 
+ * Genera una sequenza di bit pseudo-casuali utilizzando l'algoritmo Blum Blum Shub.
+ *
+ * Questa funzione implementa il generatore di numeri pseudo-casuali Blum Blum Shub (BBS).
+ * Il generatore richiede due numeri primi grandi `p` e `q`, un seme iniziale `seed` e 
+ * la lunghezza della sequenza desiderata `length`.
+ * La funzione restituisce una sequenza di bit binari pseudo-casuali.
+ *
+ * @param int $p Primo numero primo.
+ * @param int $q Secondo numero primo.
+ * @param int $seed Seme iniziale.
+ * @param int $length Lunghezza della sequenza di bit da generare.
+ * @return array Un array contenente la sequenza di bit binari pseudo-casuali generata.
  */
 function blumBlumShubGenerator($p, $q, $seed, $length) {
     $n = $p * $q;
@@ -295,7 +373,15 @@ function blumBlumShubGenerator($p, $q, $seed, $length) {
 }
 
 /**
- * 
+ * Modifica il bit meno significativo (LSB) di una stringa binaria.
+ *
+ * Questa funzione modifica il bit meno significativo (LSB) di una stringa binaria.
+ * Se specificato, il secondo bit meno significativo (penultimo) può essere modificato.
+ *
+ * @param string $binary La stringa binaria di input.
+ * @param int $bit1 Il nuovo valore per il bit meno significativo (LSB).
+ * @param int|null $bit2 (Opzionale) Il nuovo valore per il secondo bit meno significativo (penultimo).
+ * @return string La stringa binaria con il bit meno significativo modificato.
  */
 function changeLSB($binary, $bit1, $bit2 = null) {
     $list = str_split($binary);
@@ -310,7 +396,25 @@ function changeLSB($binary, $bit1, $bit2 = null) {
 }
 
 /**
- * 
+ * Disegna una tabella con le informazioni sui coefficienti DCT, la distribuzione pseudo-casuale,
+ * il messaggio segreto, il cambio del LSB, il coefficiente watermark e la distribuzione del rumore.
+ *
+ * Questa funzione disegna una tabella HTML con le seguenti colonne:
+ * - Indice: l'indice del coefficiente DCT nell'array.
+ * - Coefficiente DCT: il valore del coefficiente DCT.
+ * - Coefficiente DCT in binario: il valore del coefficiente DCT rappresentato in binario.
+ * - Pseudo random distribution: la distribuzione pseudo-casuale (PRD) per il coefficiente.
+ * - Bit messaggio segreto: il bit del messaggio segreto associato al coefficiente PRD.
+ * - Cambiamento del LSB: il coefficiente DCT con il LSB modificato se il bit del messaggio segreto è 1.
+ * - Coefficiente Watermarked: il coefficiente DCT con il LSB modificato convertito in decimale.
+ * - Distribuzione rumore pseudo casuale: la differenza tra il coefficiente watermarked e il coefficiente DCT originale.
+ *
+ * @param array $vector L'array dei coefficienti DCT.
+ * @param array $prd L'array della distribuzione pseudo-casuale (PRD).
+ * @param string $message Il messaggio segreto rappresentato in binario.
+ * @param int $bitToChange (Opzionale) Specifica se cambiare 1 o 2 bit nel LSB. Valore predefinito: 1.
+ * @param int $lastIndex (Opzionale) L'indice dell'ultimo bit processato nel messaggio segreto. Valore predefinito: 0.
+ * @return int L'indice dell'ultimo bit processato nel messaggio segreto.
  */
 function drawTable($vector, $prd, $message, $bitToChange = 1, $lastIndex = 0) {
     $binaryDCT = intToBinary($vector);
@@ -407,7 +511,13 @@ function drawTable($vector, $prd, $message, $bitToChange = 1, $lastIndex = 0) {
 }
 
 /**
- * 
+ * Appiattisce un array di byte in un array di singoli bit.
+ *
+ * Questa funzione prende un array di byte (rappresentati come stringhe di bit)
+ * e restituisce un array di singoli bit.
+ *
+ * @param array $array L'array di byte da appiattire.
+ * @return array L'array di singoli bit.
  */
 function flattenBits($array) {
     $b = array();
