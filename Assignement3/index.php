@@ -45,11 +45,12 @@
                 <ol>
                     <li>Converti il messaggio di testo in una sequenza binaria.</li>
                     <li>Calcola la dimensione minima del file audio per poter includere il messaggio segreto.</li>
+                    <li>Nascondi i bit del messaggio nei LSB dei campioni audio.</li>
                     <li>Scrivi una funzione in PHP che accetta un file audio WAV e un messaggio di testo, e restituisce un nuovo file audio con il messaggio nascosto.</li>
                 </ol>
             </div>
             <div class="mb-4">
-                <h5>Step1</h5>
+                <h5>Step 1</h5>
                 <p>Rimozione di tutti gli spazi e delle maiuscole</p>
                 <code>
                     <?php 
@@ -67,7 +68,7 @@
                 <p>Bit totali del messaggio: <?php echo count($messageBinary2) * 8 ?></p>
             </div>
             <div class="mb-4">
-                <h5>Step2</h5>
+                <h5>Step 2</h5>
                 <p>Calcolo della dimensione minima del file audio:</p>
                 <ul>
                     <li>Durata: 10 millisecondi (0,01 secondi)</li>
@@ -78,10 +79,14 @@
                 <p>Bit disponibili per inserire il messaggio: <?php echo availableBits(0.01, 44100, 1, 16); ?></p>
             </div>
             <div class="mb-4">
-                <h5>Step3</h5>
+                <h5>Step 3</h5>
                 <?php 
                 hideMessageInAudio($inputWav, $outputWav, $messageBinary2);
                 ?>
+            </div>
+            <div class="mb-4">
+                <h5>Step 4</h5>
+                <p>Spettrogramma del file audio originale (a sinistra) e del file audio stenografato (a destra):</p>
                 <img src="media/horse_spectrogram.png">
                 <img src="media/stego_spectrogram.png">
             </div>

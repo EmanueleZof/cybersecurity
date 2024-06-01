@@ -50,6 +50,40 @@ function availableBits($seconds, $samplingFrequency, $channels, $resolution) {
 }
 
 /**
+ * Modifica il bit meno significativo (LSB) di una stringa binaria.
+ *
+ * Questa funzione modifica il bit meno significativo (LSB) di una stringa binaria.
+ * Se specificato, il secondo bit meno significativo (penultimo) può essere modificato.
+ *
+ * @param string $binary La stringa binaria di input.
+ * @param int $bit1 Il nuovo valore per il bit meno significativo (LSB).
+ * @param int|null $bit2 (Opzionale) Il nuovo valore per il secondo bit meno significativo (penultimo).
+ * @return string La stringa binaria con il bit meno significativo modificato.
+ */
+function changeLSB($binary, $bitZ, $bitY = null) {
+    $list = str_split($binary);
+    $lastPosition = count($list) - 1;
+    if ($bitY != null) {
+        $list[$lastPosition - 1] = $bitY;
+    }
+    $list[$lastPosition] = $bitZ;
+    return implode('',$list);
+}
+
+/**
+ * 
+ */
+function bindecSigned($bin) {
+    if (strlen($bin) == 64 && $bin[0] == '1') {
+        for ($i = 0; $i < 64; $i++) {
+            $bin[$i] = $bin[$i] == '1' ? '0' : '1';
+        }
+        return (bindec($bin) + 1) * -1;
+    }
+    return bindec($bin);
+}
+
+/**
  * 
  */
 function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
@@ -63,13 +97,35 @@ function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
 
     $samples = unpack('s*', $data);
 
-    for ($i = 1; $i < strlen($binaryString) + 1; $i++) {
-        $binarySample = decbin($samples[$i]);
-        $digits = str_split($binarySample);
-        $lastDigit = count($digits) - 1;
-        $digits[$lastDigit] = $binaryString[$i - 1];
-        $samples[$i] = bindec(implode('', $digits));
+    echo '<table>';
+    echo '<tr>';
+        echo '<th>Campione</th>';
+        echo '<th>Campione in binario</th>';
+        echo '<th>Bit da cambiare</th>';
+        echo '<th>Campione cambiato in binario</th>';
+        echo '<th>Campione cambiato</th>';
+    echo '</tr>';
+
+    for ($i = 0; $i < strlen($binaryString); $i++) {
+        echo '<tr>';
+        echo '<td>'.$samples[$i + 1].'</td>';
+
+        $sampleToBinary = decbin($samples[$i + 1]);
+
+        echo '<td>'.$sampleToBinary.'</td>';
+        echo '<td>'.$binaryString[$i].'</td>';
+
+        $sampleToBinary = changeLSB($sampleToBinary, $binaryString[$i]);
+        
+        echo '<td>'.$sampleToBinary.'</td>';
+
+        $binaryToSample = bindecSigned($sampleToBinary);
+
+        echo '<td>'.$binaryToSample.'</td>';
+        echo '</tr>';
     }
+
+    echo '</table>';
 
     $packedData = pack('s*', ...$samples);
 
