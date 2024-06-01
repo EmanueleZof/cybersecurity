@@ -40,7 +40,17 @@ function textToBinary($text) {
 }
 
 /**
+ * Calcola il numero di bit disponibili per l'inserimento di dati in un file audio.
  * 
+ * Questa funzione calcola il numero di byte disponibili per l'inserimento di dati 
+ * nascosti in un file audio, utilizzando la tecnica di steganografia LSB (Least Significant Bit).
+ * 
+ * @param int $seconds Durata dell'audio in secondi.
+ * @param int $samplingFrequency Frequenza di campionamento dell'audio (in Hz).
+ * @param int $channels Numero di canali audio (ad esempio, 1 per mono, 2 per stereo).
+ * @param int $resolution Risoluzione dell'audio (in bit per campione, ad esempio 16).
+ * 
+ * @return int Numero di bit disponibili per l'inserimento di dati nascosti.
  */
 function availableBits($seconds, $samplingFrequency, $channels, $resolution) {
     $totBits = $seconds * $samplingFrequency * $channels * $resolution;
@@ -71,7 +81,15 @@ function changeLSB($binary, $bitZ, $bitY = null) {
 }
 
 /**
+ * Converte una stringa binaria in un numero decimale con segno.
  * 
+ * Questa funzione prende una stringa binaria e la converte in un numero decimale con segno. 
+ * Se la stringa binaria rappresenta un numero negativo (cioè, se è lunga 64 bit e il primo bit è 1), 
+ * viene eseguita la conversione in complemento a due per ottenere il valore decimale negativo.
+ * 
+ * @param string $bin La stringa binaria da convertire.
+ * 
+ * @return int Il numero decimale con segno risultante dalla conversione della stringa binaria.
  */
 function bindecSigned($bin) {
     if (strlen($bin) == 64 && $bin[0] == '1') {
@@ -84,7 +102,20 @@ function bindecSigned($bin) {
 }
 
 /**
+ * Nasconde un messaggio binario in un file audio WAV.
  * 
+ * Questa funzione nasconde un messaggio binario all'interno di un file audio WAV 
+ * modificando il bit meno significativo (LSB) dei campioni audio. 
+ * Aggiunge una sequenza di terminazione '1111111111111110' alla fine del messaggio 
+ * per segnalare la fine del messaggio nascosto.
+ * Disegna una tabella in cui vengono riportati i dati di tutti i passaggi delle modifiche
+ * del LSB.
+ * 
+ * @param string $inputWav Il percorso del file WAV di input.
+ * @param string $outputWav Il percorso del file WAV di output dove verrà salvato l'audio con il messaggio nascosto.
+ * @param array $binaryMessage Un array di stringhe binarie che rappresentano il messaggio da nascondere.
+ * 
+ * @return void
  */
 function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
     array_push($binaryMessage, '1111111111111110');
@@ -129,9 +160,9 @@ function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
 
     $packedData = pack('s*', ...$samples);
 
-    /*$wavOut = fopen($outputWav, 'wb');
+    $wavOut = fopen($outputWav, 'wb');
     fwrite($wavOut, $header);
     fwrite($wavOut, $packedData);
-    fclose($wavOut);*/
+    fclose($wavOut);
 }
 ?>
