@@ -167,6 +167,14 @@ function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
 }
 
 /**
+ */
+function intToBinary($int) {
+    $b = decbin($int);
+    $b = str_pad($b, 8, 0, STR_PAD_LEFT);
+    return $b;
+}
+
+/**
  * 
  */
 function getPalette($inputGif) {
@@ -212,6 +220,64 @@ function drawPaletteTable($palette) {
 /**
  * 
  */
-function drawComparisonTable ($inputGif) {
+function drawComparisonTable($palette, $messageBits) {
+    $messageList = implode('', $messageBits);
+    $r_count = 0;
+    $g_count = 0;
+    $b_count = 0;
+
+    echo '<table>';
+    echo '<tr>';
+        echo '<th>Indice</th>';
+        echo '<th>Rosso</th>';
+        echo '<th>Verde</th>';
+        echo '<th>Blu</th>';
+        echo '<th>Bit messaggio segreto</th>';
+    echo '</tr>';
+
+    foreach($palette as $index => $color) {
+        $r = intToBinary($palette[$index][0]);
+        $g = intToBinary($palette[$index][1]);
+        $b = intToBinary($palette[$index][2]);
+        $r_array = str_split($r);
+        $g_array = str_split($g);
+        $b_array = str_split($b);
+        echo '<tr>';
+            echo '<td>'.$index.'</td>';
+            if ($index < strlen($messageList) && $r_array[7] == $messageList[$index]) {
+                echo '<td class="highlight">'.$r.'</td>';
+                ++$r_count;
+            } else {
+                echo '<td>'.$r.'</td>';
+            }
+            if ($index < strlen($messageList) && $g_array[7] == $messageList[$index]) {
+                echo '<td class="highlight">'.$g.'</td>';
+                ++$g_count;
+            } else {
+                echo '<td>'.$g.'</td>';
+            }
+            if ($index < strlen($messageList) && $b_array[7] == $messageList[$index]) {
+                echo '<td class="highlight">'.$b.'</td>';
+                ++$b_count;
+            } else {
+                echo '<td>'.$b.'</td>';
+            }
+            if ($index < strlen($messageList)) {
+                echo '<td>'.$messageList[$index].'</td>';
+            } else {
+                echo '<td> - </td>';
+            }
+        echo '</tr>';
+    }
+
+    echo '<tr>';
+        echo '<td><b>Tot</b></td>';
+        echo '<td>'.$r_count.'</td>';
+        echo '<td>'.$g_count.'</td>';
+        echo '<td>'.$b_count.'</td>';
+        echo '<td> - </td>';
+    echo '</tr>';
+
+    echo '</table>';
 }
 ?>

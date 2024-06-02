@@ -22,7 +22,7 @@ th {
     background-color: #dddddd;  
 }*/
 
-tr.highlight {
+tr.highlight, td.highlight {
     background-color: #e9ecef;
 }
 

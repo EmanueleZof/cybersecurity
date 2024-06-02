@@ -123,8 +123,8 @@
             </div>
             <div class="mb-4">
                 <h5>Step 3</h5>
-                <p></p>
-                <?php //drawComparisonTable($inputGif); ?>
+                <p>Tabella di confronto tra i valori binari dei colori ed i bit del messaggio segreto da stenografare.</p>
+                <?php drawComparisonTable($palette, $messageBinary); ?>
             </div>
         </section>
     </main>
