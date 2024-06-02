@@ -187,6 +187,7 @@ function getPalette($inputGif) {
             array_push($c, array($color['red'], $color['green'], $color['blue']));
         }
     }
+    imagedestroy($image);
     return $c;
 }
 
@@ -280,4 +281,49 @@ function drawComparisonTable($palette, $messageBits) {
 
     echo '</table>';
 }
+
+/**
+ * 
+ */
+function hideMessageInGifPalette($palette, $inputGif, $outputGif, $binaryMessage) {
+    array_push($binaryMessage, '1111111111111110');
+    $binaryString = implode('', $binaryMessage);
+
+    echo '<table>';
+    echo '<tr>';
+        echo '<th>Campione</th>';
+        echo '<th>Campione in binario</th>';
+        echo '<th>Bit da cambiare</th>';
+        echo '<th>Campione cambiato in binario</th>';
+        echo '<th>Campione cambiato</th>';
+    echo '</tr>';
+
+    $image = imagecreatefromgif($inputGif);
+
+    foreach($palette as $index => $color) {
+        if ($index < strlen($binaryString)) {
+            $r = $palette[$index][0];
+            $g = $palette[$index][1];
+            $b = $palette[$index][2];
+            $r_binary = intToBinary($r);
+            $r_changed = changeLSB($r_binary, $binaryString[$index]);
+            $r_watermarked = bindecSigned($r_changed);
+
+            echo '<tr>';
+            echo '<td>'.$r.'</td>';
+            echo '<td>'.$r_binary.'</td>';
+            echo '<td>'.$binaryString[$index].'</td>';
+            echo '<td>'.$r_changed.'</td>';
+            echo '<td>'.$r_watermarked.'</td>';
+            echo '</tr>';
+
+            imagecolorset($image, $index, $r_watermarked, $g, $b);
+        }
+    }
+    echo '</table>';
+
+    imagegif($image, $outputGif);
+    imagedestroy($image);
+}
+
 ?>

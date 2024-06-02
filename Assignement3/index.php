@@ -126,6 +126,16 @@
                 <p>Tabella di confronto tra i valori binari dei colori ed i bit del messaggio segreto da stenografare.</p>
                 <?php drawComparisonTable($palette, $messageBinary); ?>
             </div>
+            <div class="mb-4">
+                <h5>Step 4</h5>
+                <?php hideMessageInGifPalette($palette, $inputGif, $outputGif, $messageBinary); ?>
+            </div>
+            <div class="mb-4">
+                <h5>Step 5</h5>
+                <p>Comparazione del file GIF originale (a sinistra) e del file GIF stenografato (a destra):</p>
+                <img src="media/wikipedia_logo.gif">
+                <img src="media/wikipedia_stego.gif">
+            </div>
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
