@@ -1,9 +1,11 @@
 <?php
     include 'functions.php';
 
-    $secretMessage2 = 'CIAO';
+    $secretMessage = 'CIAO';
     $inputWav = 'media/horse.wav';
     $outputWav = 'media/output_stego.wav';
+    $inputGif = 'media/wikipedia_logo.gif';
+    $outputGif = 'media/wikipedia_stego.gif';
 ?>
 
 <!doctype html>
@@ -38,7 +40,7 @@
             <h1 class="mt-5">Assignement 3 - Esercizio 1</h1>
         </section>
         <section class="container">
-            <h2>Esercizio su "Audio/Images/Video Format (JPEG excluded)"</h2>
+            <h2>Esercizio proposto n.1 su "Audio/Images/Video Format (JPEG excluded)"</h2>
             <div class="mb-4">
                 <h5>Testo dell'esercizio</h5>
                 <p>Supponiamo di voler nascondere il messaggio di testo "CIAO" in un file audio WAV. Ogni carattere del messaggio sarà codificato utilizzando il codice ASCII a 8 bit e ogni bit del carattere sarà nascosto nel LSB (Least Significant Bit) di un campione audio. Supponiamo che il file audio abbia una qualità CD.</p>
@@ -54,18 +56,18 @@
                 <p>Rimozione di tutti gli spazi e delle maiuscole</p>
                 <code>
                     <?php 
-                    $messageProcessed2 = textPreProcess($secretMessage2);
-                    echo $messageProcessed2;
+                    $messageProcessed = textPreProcess($secretMessage);
+                    echo $messageProcessed;
                     ?>
                 </code>
                 <p>Conversione in binario di tutte le lettere del messaggio</p>
                 <code>
                     <?php
-                    $messageBinary2 = textToBinary($messageProcessed2);
-                    echo implode(' ', $messageBinary2);
+                    $messageBinary = textToBinary($messageProcessed);
+                    echo implode(' ', $messageBinary);
                     ?>
                 </code>
-                <p>Bit totali del messaggio: <?php echo count($messageBinary2) * 8 ?></p>
+                <p>Bit totali del messaggio: <?php echo count($messageBinary) * 8 ?></p>
             </div>
             <div class="mb-4">
                 <h5>Step 2</h5>
@@ -81,7 +83,7 @@
             <div class="mb-4">
                 <h5>Step 3</h5>
                 <?php 
-                hideMessageInAudio($inputWav, $outputWav, $messageBinary2);
+                hideMessageInAudio($inputWav, $outputWav, $messageBinary);
                 ?>
             </div>
             <div class="mb-4">
@@ -89,6 +91,37 @@
                 <p>Spettrogramma del file audio originale (a sinistra) e del file audio stenografato (a destra):</p>
                 <img src="media/horse_spectrogram.png">
                 <img src="media/stego_spectrogram.png">
+            </div>
+        </section>
+        <section class="container">
+            <h2>Esercizio proposto n.2 su "Audio/Images/Video Format (JPEG excluded)"</h2>
+            <div class="mb-4">
+                <h5>Testo dell'esercizio</h5>
+                <p>L'obiettivo di questo esercizio è nascondere un messaggio di testo all'interno di un'immagine GIF modificando la palette di colori.  Il messaggio segreto "CIAO" sarà nascosto nei bit meno significativi dei colori della palette dell'immagine GIF.</p>
+                <ol>
+                    <li>Converti il messaggio di testo in una sequenza binaria.</li>
+                    <li>Leggere un'immagine GIF di input ed estrai la palette di colori.</li>
+                    <li>Identifica quale è il migliore canale in cui nascondere il messaggio.</li>
+                    <li>Nascondi i bit del messaggio segreto nei LSB dei colori della palette individuata.</li>
+                    <li>Scrivi una funzione in PHP che accetta in input un'immagine GIF e un messaggio di testo, e restituisce una nuova immagine GIF con il messaggio nascosto.</li>
+                </ol>
+            </div>
+            <div class="mb-4">
+                <h5>Step 1</h5>
+                <p>Rimozione di tutti gli spazi e delle maiuscole</p>
+                <code><?php echo $messageProcessed; ?></code>
+                <p>Conversione in binario di tutte le lettere del messaggio</p>
+                <code><?php echo implode(' ', $messageBinary); ?></code>
+            </div>
+            <div class="mb-4">
+                <h5>Step 2</h5>
+                <p>Palette di colori</p>
+                <?php drawPaletteTable($inputGif); ?>
+            </div>
+            <div class="mb-4">
+                <h5>Step 3</h5>
+                <p></p>
+                <?php drawComparisonTable($inputGif); ?>
             </div>
         </section>
     </main>

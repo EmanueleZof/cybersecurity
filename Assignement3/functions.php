@@ -165,4 +165,40 @@ function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
     fwrite($wavOut, $packedData);
     fclose($wavOut);
 }
+
+/**
+ * 
+ */
+function drawPaletteTable($inputGif) {
+    $image = imagecreatefromgif($inputGif);
+    if ($image) {
+        echo '<table>';
+        echo '<tr>';
+            echo '<th>Indice</th>';
+            echo '<th>Red</th>';
+            echo '<th>Green</th>';
+            echo '<th>Blue</th>';
+            echo '<th>Colore</th>';
+        echo '</tr>';
+        $colors = imagecolorstotal($image);
+        for ($i = 0; $i < $colors; $i++) {
+            $color = imagecolorsforindex($image, $i);
+            echo '<tr>';
+                echo '<td>'.$i.'</td>';
+                echo '<td>'.$color['red'].'</td>';
+                echo '<td>'.$color['green'].'</td>';
+                echo '<td>'.$color['blue'].'</td>';
+                echo '<td style="background-color: rgb('.$color['red'].','.$color['green'].','.$color['blue'].');"></td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    }
+}
+
+/**
+ * 
+ */
+function drawComparisonTable ($inputGif) {
+
+}
 ?>
