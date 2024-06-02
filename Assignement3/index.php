@@ -116,12 +116,15 @@
             <div class="mb-4">
                 <h5>Step 2</h5>
                 <p>Palette di colori</p>
-                <?php drawPaletteTable($inputGif); ?>
+                <?php
+                $palette = getPalette($inputGif);
+                drawPaletteTable($palette); 
+                ?>
             </div>
             <div class="mb-4">
                 <h5>Step 3</h5>
                 <p></p>
-                <?php drawComparisonTable($inputGif); ?>
+                <?php //drawComparisonTable($inputGif); ?>
             </div>
         </section>
     </main>
