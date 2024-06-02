@@ -167,6 +167,14 @@ function hideMessageInAudio($inputWav, $outputWav, $binaryMessage) {
 }
 
 /**
+ * Converte un intero in una stringa binaria a 8 bit.
+ *
+ * Questa funzione prende un numero intero come input e lo converte nella sua rappresentazione binaria
+ * sotto forma di una stringa di 8 bit. Se la lunghezza della stringa binaria risultante è inferiore a 8 bit,
+ * vengono aggiunti degli zeri a sinistra per raggiungere la lunghezza desiderata.
+ *
+ * @param int $int Il numero intero da convertire.
+ * @return string La rappresentazione binaria a 8 bit del numero intero.
  */
 function intToBinary($int) {
     $b = decbin($int);
@@ -175,7 +183,15 @@ function intToBinary($int) {
 }
 
 /**
- * 
+ * Estrae la palette di colori da un'immagine GIF.
+ *
+ * Questa funzione prende un file GIF come input e restituisce un array contenente
+ * i colori presenti nella palette dell'immagine. Ogni colore è rappresentato come
+ * un array con tre elementi: rosso, verde e blu.
+ *
+ * @param string $inputGif Il percorso del file GIF da cui estrarre la palette di colori.
+ * @return array Un array di colori, dove ogni colore è un array con tre elementi: 'red', 'green', 'blue'.
+ * @see https://www.php.net/manual/en/book.image.php
  */
 function getPalette($inputGif) {
     $c = array();
@@ -192,7 +208,12 @@ function getPalette($inputGif) {
 }
 
 /**
- * 
+ * Disegna una tabella HTML con i colori di una palette.
+ *
+ * Questa funzione prende una palette di colori come input e genera una tabella HTML
+ * che mostra l'indice del colore, i valori RGB e un'anteprima del colore.
+ *
+ * @param array $palette Un array di colori, dove ogni colore è un array con tre elementi: 'red', 'green', 'blue'.
  */
 function drawPaletteTable($palette) {
     echo '<table>';
@@ -219,7 +240,14 @@ function drawPaletteTable($palette) {
 }
 
 /**
- * 
+ * Disegna una tabella HTML per confrontare la palette dei colori con i bit del messaggio segreto.
+ *
+ * Questa funzione prende una palette di colori e una lista di bit di un messaggio segreto.
+ * Genera una tabella HTML che mostra l'indice del colore, i valori RGB in binario e i bit del messaggio segreto.
+ * Evidenzia i valori RGB il cui ultimo bit (LSB) corrisponde al bit del messaggio segreto.
+ *
+ * @param array $palette Un array di colori, dove ogni colore è un array con tre elementi: 'red', 'green', 'blue'.
+ * @param array $messageBits Un array di bit che rappresenta il messaggio segreto.
  */
 function drawComparisonTable($palette, $messageBits) {
     $messageList = implode('', $messageBits);
@@ -283,7 +311,17 @@ function drawComparisonTable($palette, $messageBits) {
 }
 
 /**
- * 
+ * Nasconde un messaggio binario nella palette dei colori di un'immagine GIF.
+ *
+ * Questa funzione prende la palette dei colori di un'immagine GIF, un messaggio binario,
+ * e nasconde il messaggio modificando l'ultimo bit (LSB) dei valori rossi dei colori nella palette.
+ * Il messaggio viene esteso con un terminatore '1111111111111110'.
+ * La funzione genera una tabella HTML che mostra il processo di cambiamento e salva l'immagine modificata.
+ *
+ * @param array $palette La palette dei colori dell'immagine GIF, dove ogni colore è un array con tre elementi: 'red', 'green', 'blue'.
+ * @param string $inputGif Il percorso del file GIF di input.
+ * @param string $outputGif Il percorso del file GIF di output con il messaggio nascosto.
+ * @param array $binaryMessage Un array di bit che rappresenta il messaggio segreto.
  */
 function hideMessageInGifPalette($palette, $inputGif, $outputGif, $binaryMessage) {
     array_push($binaryMessage, '1111111111111110');
@@ -308,7 +346,7 @@ function hideMessageInGifPalette($palette, $inputGif, $outputGif, $binaryMessage
             $r_binary = intToBinary($r);
             $r_changed = changeLSB($r_binary, $binaryString[$index]);
             $r_watermarked = bindecSigned($r_changed);
-
+               
             echo '<tr>';
             echo '<td>'.$r.'</td>';
             echo '<td>'.$r_binary.'</td>';
@@ -325,5 +363,4 @@ function hideMessageInGifPalette($palette, $inputGif, $outputGif, $binaryMessage
     imagegif($image, $outputGif);
     imagedestroy($image);
 }
-
 ?>
