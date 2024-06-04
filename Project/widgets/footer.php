@@ -20,12 +20,20 @@
       </ul>
     </div>
     <div class="col-6 col-md">
-      <h5>Resources</h5>
+      <h5>Corsi più visti</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+        <li>
+          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 1</a>
+        </li>
+        <li>
+          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 2</a>
+        </li>
+        <li>
+          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 3</a>
+        </li>
+        <li>
+          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 4</a>
+        </li>
       </ul>
     </div>
     <div class="col-6 col-md">
