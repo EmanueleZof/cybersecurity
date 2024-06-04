@@ -12,7 +12,7 @@
             <h1 class="display-3 fw-bold">Piattaforma di video corsi</h1>
             <h3 class="fw-normal text-muted mb-3">Impara quando vuoi con i nostri tutorial</h3>
             <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                <a class="icon-link" href="#">
+                <a class="icon-link" href="info.php">
                     Maggiori informazioni
                 </a>
                 <a class="icon-link" href="pricing.php">

@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tour</a>
+                        <a class="nav-link" href="info.php">Informazioni</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="courses.php">Corsi</a>

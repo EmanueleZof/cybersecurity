@@ -20,6 +20,15 @@
       </ul>
     </div>
     <div class="col-6 col-md">
+      <h5>Risorse</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary text-decoration-none" href="info.php">Informazioni</a></li>
+        <li><a class="link-secondary text-decoration-none" href="pricing.php">Prezzi</a></li>
+        <!--<li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
+        <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>-->
+      </ul>
+    </div>
+    <div class="col-6 col-md">
       <h5>Corsi più visti</h5>
       <ul class="list-unstyled text-small">
         <li>
@@ -34,15 +43,6 @@
         <li>
           <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 4</a>
         </li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary text-decoration-none" href="#">Business</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Education</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>
       </ul>
     </div>
     <div class="col-6 col-md">
