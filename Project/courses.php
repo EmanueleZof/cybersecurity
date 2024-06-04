@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <title>Video corsi - Piattaforma video corsi</title>
+    <title>Tutti corsi disponibili - Piattaforma video corsi</title>
     <?php include 'widgets/head.php'; ?>
 </head>
 <body>
