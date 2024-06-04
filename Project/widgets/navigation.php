@@ -14,7 +14,7 @@
                         </a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Tour</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.php">Corsi</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
