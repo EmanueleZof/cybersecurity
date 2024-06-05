@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+include 'functions.php';
 
 if ($pages[$_SESSION['currentPage']]['restricted'] && $_SESSION['currentPage'] != 'signin') {
     if (!isset($_SESSION['userID'])) {
@@ -9,5 +10,5 @@ if ($pages[$_SESSION['currentPage']]['restricted'] && $_SESSION['currentPage'] !
     }
 }
 
-//echo session_id();
+// echo $_SESSION['returnPage'];
 ?>

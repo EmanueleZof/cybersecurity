@@ -1,7 +1,11 @@
 <?php
 session_start();
 $_SESSION['currentPage'] = 'signin';
-include 'widgets/session.php';
+include 'session.php';
+
+$_SESSION['TESTuserID'] = getUserID();
+echo getUserID();
+echo '<br>';
 ?>
 <!DOCTYPE html>
 <html lang="it">

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['currentPage'] = 'index';
-include 'widgets/session.php';
+include 'session.php';
 ?>
 <!DOCTYPE html>
 <html lang="it">

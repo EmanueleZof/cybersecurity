@@ -2,7 +2,7 @@
 <?php
 session_start();
 $_SESSION['currentPage'] = 'pricing';
-include 'widgets/session.php';
+include 'session.php';
 ?>
 <html lang="it">
 <?php include 'widgets/head.php'; ?>
