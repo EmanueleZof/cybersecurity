@@ -1,9 +1,11 @@
+<?php
+session_start();
+$_SESSION['currentPage'] = 'course';
+include 'widgets/session.php';
+?>
 <!DOCTYPE html>
 <html lang="it">
-<?php
-$GLOBALS['pageTitle'] = 'Corso - Piattaforma di video corsi';
-include 'widgets/head.php';
-?>
+<?php include 'widgets/head.php'; ?>
 <body>
     <?php include 'widgets/navigation.php'; ?>
     <main>

@@ -1,3 +1,8 @@
+<?php
+session_start();
+$_SESSION['currentPage'] = 'signin';
+include 'widgets/session.php';
+?>
 <!DOCTYPE html>
 <html lang="it">
 <?php

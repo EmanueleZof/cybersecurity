@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
 <?php
-$GLOBALS['pageTitle'] = 'Prezzi - Piattaforma di video corsi';
-include 'widgets/head.php';
+session_start();
+$_SESSION['currentPage'] = 'pricing';
+include 'widgets/session.php';
 ?>
+<html lang="it">
+<?php include 'widgets/head.php'; ?>
 <body>
     <?php include 'widgets/navigation.php'; ?>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

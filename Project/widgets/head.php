@@ -4,8 +4,8 @@
     <meta name="description" content="Progetto esame Cybersecurity: Piattaforma video corsi">
     <meta name="author" content="Zof Emanuele">
     <title><?php 
-        if (isset($GLOBALS['pageTitle'])) {
-            echo $GLOBALS['pageTitle'];
+        if (isset($_SESSION['currentPage'])) {
+            echo $pages[$_SESSION['currentPage']]['title'];
         } else {
             echo 'Piattaforma di video corsi';
         }
