@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <title>Home page - Piattaforma video corsi</title>
-    <?php include 'widgets/head.php'; ?>
-</head>
+<?php
+$GLOBALS['pageTitle'] = 'Informazioni - Piattaforma di video corsi';
+include 'widgets/head.php';
+?>
 <body>
     <?php include 'widgets/navigation.php'; ?>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">

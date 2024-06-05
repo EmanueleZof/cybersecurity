@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <title>Corso - Piattaforma video corsi</title>
-    <?php include 'widgets/head.php'; ?>
-</head>
+<?php
+$GLOBALS['pageTitle'] = 'Corso - Piattaforma di video corsi';
+include 'widgets/head.php';
+?>
 <body>
     <?php include 'widgets/navigation.php'; ?>
     <main>

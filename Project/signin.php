@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <title>Sign in - Piattaforma video corsi</title>
-    <?php include 'widgets/head.php'; ?>
-</head>
+<?php
+$GLOBALS['pageTitle'] = 'Sign in - Piattaforma di video corsi';
+include 'widgets/head.php';
+?>
 <body>
     <?php include 'widgets/navigation.php'; ?>
     <main class="form-signin w-100 m-auto">
