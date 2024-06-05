@@ -1,9 +1,11 @@
 <?php
+include 'functions.php';
 session_start();
 $_SESSION['currentPage'] = 'signin';
+//$_SESSION['userID'] = getUserID();
 include 'session.php';
 
-$_SESSION['TESTuserID'] = getUserID();
+
 echo getUserID();
 echo '<br>';
 ?>
