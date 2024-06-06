@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['currentPage'] = 'index';
 include 'session.php';
+//session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -11,8 +12,8 @@ include 'session.php';
     <main>
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
             <div class="col-md-6 p-lg-5 mx-auto my-5">
-            <h1 class="display-3 fw-bold">Piattaforma di video corsi</h1>
-            <h3 class="fw-normal text-muted mb-3">Impara quando vuoi con i nostri tutorial</h3>
+            <h1 class="display-3 fw-bold">Rocket Learn</h1>
+            <h3 class="fw-normal text-muted mb-3">Piattaforma di video tutorial</h3>
             <div class="d-flex gap-3 justify-content-center lead fw-normal">
                 <a class="icon-link" href="courses.php">Scopri tutti i corsi</a>
                 <a class="icon-link" href="pricing.php">Prezzi</a>

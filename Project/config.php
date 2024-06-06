@@ -24,5 +24,9 @@ $pages = array(
         'restricted' => false,
         'title' => 'Sign in - Piattaforma di video corsi'
     ),
+    'register' => array(
+        'restricted' => false,
+        'title' => 'Registration - Piattaforma di video corsi'
+    ),
 );
 ?>

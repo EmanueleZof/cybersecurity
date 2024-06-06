@@ -1,0 +1,66 @@
+<?php
+include 'functions.php';
+session_start();
+$_SESSION['currentPage'] = 'register';
+include 'session.php';
+?>
+<!DOCTYPE html>
+<html lang="it">
+<?php include 'widgets/head.php'; ?>
+<body>
+    <?php include 'widgets/navigation.php'; ?>
+    <main>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <img src="assets/img/rocket.jpeg" class="full-image">
+            </div>
+            <div class="col-md-6">
+                <form class="container py-3 needs-validation" novalidate>
+                    <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+
+                    <div class="form-group">
+                        <label for="userName">Nome utente</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Nome" required>
+                        <div class="invalid-feedback">Inserire il nome utente</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail">Indirizzo email</label>
+                        <input type="email" class="form-control" id="userEmail" placeholder="name@example.com" required>
+                        <div class="invalid-feedback">L'indirizzo email inserito non è valido</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPassword">Password</label>
+                        <input type="password" class="form-control" id="userPassword" placeholder="Password" required>
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            <ul>
+                                <li>Lunga almeno 12 caratteri.</li>
+                                <li>Contenere almeno una lettera minuscola.</li>
+                                <li>Contenere almeno una lettera maiuscola.</li>
+                                <li>Contenere almeno un numero.</li>
+                                <li>Contenere almeno un carattere speciale tra .!@#$%^&*()_+-=</li>
+                                <li>Non deve contenere spazi.</li>
+                                <li>Non deve contenere emoji.</li>
+                                <li>Non deve contenere il nome utente.</li>
+                            </ul>
+                        </small>
+                        <div class="invalid-feedback">La password inserita non è valida</div>
+                        <div class="valid-feedback">Tutti i criteri di sicurezza sono rispettati</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repeatedPassword">Ripeti la password</label>
+                        <input type="password" class="form-control" id="repeatedPassword" placeholder="Password" required>
+                        <div class="invalid-feedback">La password inserita è diversa</div>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <?php include 'widgets/footer.php'; ?>
+    <script src="assets/js/registration.js"></script>
+</body>
+</html>
