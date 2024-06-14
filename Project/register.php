@@ -55,8 +55,9 @@ include 'session.php';
                         <div class="invalid-feedback">La password inserita è diversa</div>
                     </div>
 
-                    <div class="py-3">
+                    <div class="captcha form-group">
                         <altcha-widget challengeurl="utils/captchachallenge.php"></altcha-widget>
+                        <div class="invalid-feedback">Verifica il captcha</div>
                     </div>
 
                     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>

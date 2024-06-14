@@ -107,6 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.querySelector('#userPassword');
     const repeatedPassword = document.querySelector('#repeatedPassword');
 
+    const captchaPayload = document.getElementsByName('altcha');
+    const captchaError = document.querySelector('.captcha .invalid-feedback');
+
     form.addEventListener('submit', (event) => {
         /* Email */
         if (!validateEmail(email.value)) {
@@ -128,11 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             repeatedPassword.setCustomValidity('');
         }
+
+        /* Captcha */
+        if (captchaPayload.length == 0) {
+            captchaError.classList.add('d-block');
+        } else {
+            captchaError.classList.remove('d-block');
+        }
         
         /* Form */
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
+        if (!form.checkValidity() && captchaPayload.length == 0) {
+            event.preventDefault();
+            event.stopPropagation();
         }
 
         form.classList.add('was-validated');
