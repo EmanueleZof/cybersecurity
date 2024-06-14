@@ -25,6 +25,11 @@
     color: #198754 !important;
 }
 
+/* Captcha */
+.altcha {
+    border-color: #dee2e6 !important;
+}
+
 /* Images */
 
 .full-image {

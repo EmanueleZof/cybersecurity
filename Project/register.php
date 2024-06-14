@@ -55,12 +55,17 @@ include 'session.php';
                         <div class="invalid-feedback">La password inserita è diversa</div>
                     </div>
 
+                    <div class="py-3">
+                        <altcha-widget challengeurl="utils/captchachallenge.php"></altcha-widget>
+                    </div>
+
                     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
                 </form>
             </div>
         </div>
     </main>
     <?php include 'widgets/footer.php'; ?>
+    <script async defer src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" type="module"></script>
     <script src="assets/js/registration.js"></script>
 </body>
 </html>

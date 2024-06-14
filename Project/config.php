@@ -1,4 +1,6 @@
 <?php
+$hmacKey = 30911337928580013;
+
 $pages = array(
     'index' => array(
         'restricted' => false,
