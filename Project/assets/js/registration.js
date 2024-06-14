@@ -81,20 +81,18 @@ const validatePassword = (password) => {
 
     if(emojiPattern.test(password)) {
         emojiLabel.classList.add('not-checked');
-        allValid.push(true);
+        allValid.push(false);
     } else {
         emojiLabel.classList.remove('not-checked');
-        allValid.push(false);
+        allValid.push(true);
     }
 
-    if (userName != '') {
-        if(password.indexOf(userName) == -1) {
-            nameLabel.classList.remove('not-checked');
-            allValid.push(true);
-        } else {
-            nameLabel.classList.add('not-checked');
-            allValid.push(false);
-        }
+    if(password.indexOf(userName) == -1) {
+        nameLabel.classList.remove('not-checked');
+        allValid.push(true);
+    } else {
+        nameLabel.classList.add('not-checked');
+        allValid.push(false);
     }
 
     if (allValid.indexOf(false) == -1) {
