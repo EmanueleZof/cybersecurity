@@ -12,27 +12,94 @@ const validateEmail = (email) => {
 };
 
 const validatePassword = (password) => {
+    var allValid = [];
+
     const lowercasePattern = /^(?=.*[a-z]).+$/;
     const uppercasePattern = /^(?=.*[A-Z]).+$/;
     const numbersPattern = /^(?=.*[0-9]).+$/;
     const specialCharsPattern = /^(?=.*[!@#\$%\^\&*\)\(+=._-]).+$/;
-    const spacePattern = /^\s+$/;
+    const emojiPattern = /[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/u;
 
-    //if (password.length >= 12) {
-        if(lowercasePattern.test(password)) {
-            if(uppercasePattern.test(password)) {
-                if(numbersPattern.test(password)) {
-                    if(specialCharsPattern.test(password)) {
-                        console.log(spacePattern.test(password));
-                        return true;
-                        /*if(!spacePattern.test(password)) {
-                            return true;
-                        }*/
-                    }
-                }
-            }
+    const lengthLabel = document.querySelector('#pwdCheckLength');
+    const lowercaseLabel = document.querySelector('#pwdCheckLower');
+    const uppercaseLabel = document.querySelector('#pwdCheckUpper');
+    const numbersLabel = document.querySelector('#pwdCheckNumber');
+    const specialCharsLabel = document.querySelector('#pwdCheckSpecial');
+    const spaceLabel = document.querySelector('#pwdCheckSpace');
+    const emojiLabel = document.querySelector('#pwdCheckEmoji');
+    const nameLabel = document.querySelector('#pwdCheckName');
+
+    const userName = document.querySelector('#userName').value;
+
+    if (password.length >= 12) {
+        lengthLabel.classList.add('checked');
+        allValid.push(true);
+    } else {
+        lengthLabel.classList.remove('checked');
+        allValid.push(false);
+    }
+
+    if(lowercasePattern.test(password)) {
+        lowercaseLabel.classList.add('checked');
+        allValid.push(true);
+    } else {
+        lowercaseLabel.classList.remove('checked');
+        allValid.push(false);
+    }
+
+    if(uppercasePattern.test(password)) {
+        uppercaseLabel.classList.add('checked');
+        allValid.push(true);
+    } else {
+        uppercaseLabel.classList.remove('checked');
+        allValid.push(false);
+    }
+
+    if(numbersPattern.test(password)) {
+        numbersLabel.classList.add('checked');
+        allValid.push(true);
+    } else {
+        numbersLabel.classList.remove('checked');
+        allValid.push(false);
+    }
+
+    if(specialCharsPattern.test(password)) {
+        specialCharsLabel.classList.add('checked');
+        allValid.push(true);
+    } else {
+        specialCharsLabel.classList.remove('checked');
+        allValid.push(false);
+    }
+
+    if(password.indexOf(' ') == -1) {
+        spaceLabel.classList.remove('not-checked');
+        allValid.push(true);
+    } else {
+        spaceLabel.classList.add('not-checked');
+        allValid.push(false);
+    }
+
+    if(emojiPattern.test(password)) {
+        emojiLabel.classList.add('not-checked');
+        allValid.push(true);
+    } else {
+        emojiLabel.classList.remove('not-checked');
+        allValid.push(false);
+    }
+
+    if (userName != '') {
+        if(password.indexOf(userName) == -1) {
+            nameLabel.classList.remove('not-checked');
+            allValid.push(true);
+        } else {
+            nameLabel.classList.add('not-checked');
+            allValid.push(false);
         }
-    //}
+    }
+
+    if (allValid.indexOf(false) == -1) {
+        return true;
+    }
     return false;
 };
 

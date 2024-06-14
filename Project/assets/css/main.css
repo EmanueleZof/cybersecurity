@@ -1,3 +1,5 @@
+/* Forms */
+
 .form-group {
     margin-bottom: 1rem;
 }
@@ -5,6 +7,25 @@
 .form-group label {
     margin-bottom: 0.5rem;
 }
+
+.was-validated #passwordHelpBlock li,
+.was-validated #passwordHelpBlock li#pwdCheckSpace.not-checked,
+.was-validated #passwordHelpBlock li#pwdCheckEmoji.not-checked,
+.was-validated #passwordHelpBlock li#pwdCheckName.not-checked{
+    color: #dc3545;
+}
+
+.was-validated #passwordHelpBlock li#pwdCheckSpace,
+.was-validated #passwordHelpBlock li#pwdCheckEmoji,
+.was-validated #passwordHelpBlock li#pwdCheckName {
+    color: inherit;
+}
+
+#passwordHelpBlock li.checked {
+    color: #198754 !important;
+}
+
+/* Images */
 
 .full-image {
     width: 100%;

@@ -35,14 +35,14 @@ include 'session.php';
                         <input type="password" class="form-control" id="userPassword" placeholder="Password" required>
                         <small id="passwordHelpBlock" class="form-text text-muted">
                             <ul>
-                                <li>Lunga almeno 12 caratteri.</li>
-                                <li>Contenere almeno una lettera minuscola.</li>
-                                <li>Contenere almeno una lettera maiuscola.</li>
-                                <li>Contenere almeno un numero.</li>
-                                <li>Contenere almeno un carattere speciale tra .!@#$%^&*()_+-=</li>
-                                <li>Non deve contenere spazi.</li>
-                                <li>Non deve contenere emoji.</li>
-                                <li>Non deve contenere il nome utente.</li>
+                                <li id="pwdCheckLength">Lunga almeno 12 caratteri.</li>
+                                <li id="pwdCheckLower">Contenere almeno una lettera minuscola.</li>
+                                <li id="pwdCheckUpper">Contenere almeno una lettera maiuscola.</li>
+                                <li id="pwdCheckNumber">Contenere almeno un numero.</li>
+                                <li id="pwdCheckSpecial">Contenere almeno un carattere speciale tra .!@#$%^&*()_+-=</li>
+                                <li id="pwdCheckSpace">Non deve contenere spazi.</li>
+                                <li id="pwdCheckEmoji">Non deve contenere emoji.</li>
+                                <li id="pwdCheckName">Non deve contenere il nome utente.</li>
                             </ul>
                         </small>
                         <div class="invalid-feedback">La password inserita non è valida</div>
