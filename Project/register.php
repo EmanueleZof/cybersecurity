@@ -15,24 +15,24 @@ include 'session.php';
                 <img src="assets/img/rocket.jpeg" class="full-image">
             </div>
             <div class="col-md-6">
-                <form class="container py-3 needs-validation" novalidate>
+                <form action="functions/registration.php" method="POST" class="container py-3 needs-validation" novalidate>
                     <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
                     <div class="form-group">
                         <label for="userName">Nome utente</label>
-                        <input type="text" class="form-control" id="userName" placeholder="Nome" required>
+                        <input type="text" class="form-control" name="userName" id="userName" placeholder="Nome" required>
                         <div class="invalid-feedback">Inserire il nome utente</div>
                     </div>
 
                     <div class="form-group">
                         <label for="userEmail">Indirizzo email</label>
-                        <input type="email" class="form-control" id="userEmail" placeholder="name@example.com" required>
+                        <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" required>
                         <div class="invalid-feedback">L'indirizzo email inserito non è valido</div>
                     </div>
 
                     <div class="form-group">
                         <label for="userPassword">Password</label>
-                        <input type="password" class="form-control" id="userPassword" placeholder="Password" required>
+                        <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" required>
                         <small id="passwordHelpBlock" class="form-text text-muted">
                             <ul>
                                 <li id="pwdCheckLength">Lunga almeno 12 caratteri.</li>
@@ -51,12 +51,12 @@ include 'session.php';
 
                     <div class="form-group">
                         <label for="repeatedPassword">Ripeti la password</label>
-                        <input type="password" class="form-control" id="repeatedPassword" placeholder="Password" required>
+                        <input type="password" class="form-control" name="repeatedPassword" id="repeatedPassword" placeholder="Password" required>
                         <div class="invalid-feedback">La password inserita è diversa</div>
                     </div>
 
                     <div class="captcha form-group">
-                        <altcha-widget challengeurl="utils/captchachallenge.php"></altcha-widget>
+                        <altcha-widget challengeurl="functions/captchachallenge.php"></altcha-widget>
                         <div class="invalid-feedback">Verifica il captcha</div>
                     </div>
 
