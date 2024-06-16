@@ -105,7 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          if (mysqli_query($conn, $insertUser)) {
             echo "OK";
          } else {
-            echo "Error: <br>" . mysqli_error($conn);
+            error_log('registration.php - DB connection: '.mysqli_error($conn), 1, $alertAddress);
+            error();
          }
       } else {
          error('Esiste già un utente con la stesso nome od indirizzo email');
