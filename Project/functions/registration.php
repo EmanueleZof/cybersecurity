@@ -67,13 +67,15 @@ function altchaValidation($payload, $hmacKey) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    if (isset($_POST['userName']) && isset($_POST['userEmail']) && isset($_POST['userPassword']) && isset($_POST['repeatedPassword']) && isset($_POST['altcha'])) {
+      // Input sanitization
       $input['userName'] = sanitizeInput($_POST['userName']);
       $input['userEmail'] = sanitizeInput($_POST['userEmail']);
       $input['userPassword'] = sanitizeInput($_POST['userPassword']);
       $input['repeatedPassword'] = sanitizeInput($_POST['repeatedPassword']);
       $input['altcha'] = sanitizeInput($_POST['altcha']);
 
-     if ($input['userName'] == '') {
+      // Input validation
+      if ($input['userName'] == '') {
          error('Lo user name inserito non è valido');
       }
       if ($input['userEmail'] == '' || !filter_var($input['userEmail'], FILTER_VALIDATE_EMAIL)) {
@@ -86,14 +88,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          error('Il captcha non è valido');
       }
 
-      // DB check
-
-      echo 'Test:<br>';
-      print_r($_POST);
-      echo '<br>';
-      print_r($input);
-      echo '<br>';
-      passwordValidation('aB.123456789123', $input['repeatedPassword'], $input['userName']);
+      // Database operations
+      $conn = mysqli_connect($db['server'], $db['user'], $db['password'], $db['name']);
+      if (!$conn) {
+         error_log('registration.php - DB connection: '.mysqli_connect_error(), 1, $alertAddress);
+         error();
+      }
+      $searchUsers = 'SELECT user_ID FROM users WHERE user_name = "'.$input['userName'].'" OR user_email = "'.$input['userEmail'].'"';
+      $alreadyRegisteredUsers = mysqli_query($conn, $searchUsers);
+      if (mysqli_num_rows($alreadyRegisteredUsers) > 0) {
+         error('Esiste già un utente con la stesso nome od indirizzo email');
+      } else {
+         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$input['userPassword'].'", "'.$input['userEmail'].'")';
+         if (mysqli_query($conn, $insertUser)) {
+            echo "OK";
+          } else {
+            echo "Error: <br>" . mysqli_error($conn);
+          }
+      }
+      mysqli_close($conn);
    } else {
       error();
    }

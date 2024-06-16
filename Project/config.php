@@ -1,6 +1,15 @@
 <?php
 $hmacKey = 30911337928580013;
 
+$db = array(
+    'server' => 'localhost',
+    'user' => 'frontend',
+    'password' => '75)E/QCwdHIGF!8-',
+    'name' => 'video_corsi'
+);
+
+$alertAddress = 'zof.emanuele@spes.uniud.it';
+
 $pages = array(
     'index' => array(
         'restricted' => false,
