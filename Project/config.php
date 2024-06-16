@@ -1,12 +1,17 @@
 <?php
 $hmacKey = 30911337928580013;
 
+$openssl = array(
+    'cipher' => 'AES-128-CTR',
+    'key' => 'cybersecurity',
+    'iv' => '1234567891011121'
+);
+
 $db = array(
     'server' => 'localhost',
     'user' => 'frontend',
     'password' => '75)E/QCwdHIGF!8-',
-    'name' => 'video_corsi',
-    'salt' => 'cybersecurity'
+    'name' => 'video_corsi'
 );
 
 $alertAddress = 'zof.emanuele@spes.uniud.it';

@@ -95,11 +95,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          error();
       }
 
-      $searchUsers = 'SELECT user_ID FROM users WHERE user_name = "'.$input['userName'].'" OR user_email = "'.$input['userEmail'].'"';
+      $emailEncripted = openssl_encrypt($input['userEmail'], $openssl['cipher'], $openssl['key'], 0, $openssl['iv']);
+      $searchUsers = 'SELECT user_ID FROM users WHERE user_name = "'.$input['userName'].'" OR user_email = "'.$emailEncripted.'"';
+      
       $alreadyRegisteredUsers = mysqli_query($conn, $searchUsers);
       if (mysqli_num_rows($alreadyRegisteredUsers) == 0) {
          $passwordHash = password_hash($input['userPassword'], PASSWORD_BCRYPT);
-         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$passwordHash.'", "'.$input['userEmail'].'")';
+         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$passwordHash.'", "'.$emailEncripted.'")';
          if (mysqli_query($conn, $insertUser)) {
             echo "OK";
          } else {
