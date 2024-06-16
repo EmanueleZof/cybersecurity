@@ -1,5 +1,5 @@
 <?php
-include '../config.php';
+include '../config/config.php';
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

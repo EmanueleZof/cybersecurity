@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'config/config.php';
 
 if ($pages[$_SESSION['currentPage']]['restricted'] && $_SESSION['currentPage'] != 'signin') {
     if (!isset($_SESSION['userID'])) {
