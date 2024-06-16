@@ -14,6 +14,14 @@ include 'session.php';
             <div class="col-md-6">
                 <img src="assets/img/rocket.jpeg" class="full-image">
             </div>
+            <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
+            <div class="col-md-6">
+                <section class="container py-3">
+                    <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+                    <p>Ti abbiamo inviato una email all'indirizzo ??. Completa la registrazione inserendo di seguito il codice ricevuto.</p>
+                </section>
+            </div>
+            <?php } else { ?>
             <div class="col-md-6">
                 <form action="functions/registration.php" method="POST" class="container py-3 needs-validation" novalidate>
                     <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
@@ -70,6 +78,7 @@ include 'session.php';
                     <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
                 </form>
             </div>
+            <?php } ?>
         </div>
     </main>
     <?php include 'widgets/footer.php'; ?>

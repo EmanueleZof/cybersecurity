@@ -103,7 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          $passwordHash = password_hash($input['userPassword'], PASSWORD_BCRYPT);
          $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$passwordHash.'", "'.$emailEncripted.'")';
          if (mysqli_query($conn, $insertUser)) {
-            echo "OK";
+            $last_id = mysqli_insert_id($conn);
+            $_SESSION['registrationWaitConfirmation'] = $last_id;
+            header('Location: ../register.php');
          } else {
             error_log('registration.php - DB connection: '.mysqli_error($conn), 1, $alertAddress);
             error();
