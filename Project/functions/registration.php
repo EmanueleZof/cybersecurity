@@ -18,20 +18,14 @@ function error($message = 'Qualcosa è andato storto, ripeti la registrazione.')
    header('Location: ../register.php');
 }
 
-function altchaValidation($payload) {
+function altchaValidation($payload, $hmacKey) {
    $data = json_decode(base64_decode($payload), true);
-   
-   print_r($data);
-
    $challenge = hash('sha256', $data['salt'].$data['number']);
    $signature = hash_hmac('sha256', $challenge, $hmacKey);
-
-   //signature_ok = equals(data.signature, hmac_sha2_hex(data.challenge, hmac_key))
 
    if ($data['algorithm'] == 'SHA-256') {
       if($data['challenge'] == $challenge) {
          if ($data['signature'] == $signature) {
-            print_r($signature);
             return true;
          }
       }
@@ -47,25 +41,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $input['repeatedPassword'] = sanitizeInput($_POST['repeatedPassword']);
       $input['altcha'] = sanitizeInput($_POST['altcha']);
 
-      /*if ($input['userName'] == '') {
+      if ($input['userName'] == '') {
          error('Lo user name inserito non è valido');
       }
-      if ($input['userEmail'] == '') {
+      if ($input['userEmail'] == '' || !filter_var($input['userEmail'], FILTER_VALIDATE_EMAIL)) {
          error('L\'email inserita non è valida');
       }
-      if ($input['userPassword'] != $input['repeatedPassword']) {
+      /*if ($input['userPassword'] != $input['repeatedPassword']) {
          error('La password inserita è diversa');
-      }
-      if ($input['altcha'] == '' || !altchaValidation($input['altcha'])) {
-         error('Il captcha non è valido');
       }*/
+      if ($input['altcha'] == '' || !altchaValidation($input['altcha'], $hmacKey)) {
+         error('Il captcha non è valido');
+      }
 
       echo 'Test:<br>';
       print_r($_POST);
       echo '<br>';
       print_r($input);
       echo '<br>';
-      altchaValidation($input['altcha']);
    } else {
       error();
    }
