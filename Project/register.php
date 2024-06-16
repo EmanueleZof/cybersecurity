@@ -18,6 +18,13 @@ include 'session.php';
                 <form action="functions/registration.php" method="POST" class="container py-3 needs-validation" novalidate>
                     <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
+                    <?php
+                    if (isset($_SESSION['registrationError'])) {
+                        echo '<div class="alert alert-danger" role="alert">'.$_SESSION['registrationError'].'</div>';
+                        unset($_SESSION['registrationError']);
+                    }
+                    ?>
+
                     <div class="form-group">
                         <label for="userName">Nome utente</label>
                         <input type="text" class="form-control" name="userName" id="userName" placeholder="Nome" required>
