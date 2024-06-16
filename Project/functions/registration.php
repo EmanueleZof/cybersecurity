@@ -94,18 +94,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          error_log('registration.php - DB connection: '.mysqli_connect_error(), 1, $alertAddress);
          error();
       }
+
       $searchUsers = 'SELECT user_ID FROM users WHERE user_name = "'.$input['userName'].'" OR user_email = "'.$input['userEmail'].'"';
       $alreadyRegisteredUsers = mysqli_query($conn, $searchUsers);
-      if (mysqli_num_rows($alreadyRegisteredUsers) > 0) {
-         error('Esiste già un utente con la stesso nome od indirizzo email');
-      } else {
-         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$input['userPassword'].'", "'.$input['userEmail'].'")';
+      if (mysqli_num_rows($alreadyRegisteredUsers) == 0) {
+         $passwordHash = password_hash($input['userPassword'], PASSWORD_BCRYPT);
+         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$passwordHash.'", "'.$input['userEmail'].'")';
          if (mysqli_query($conn, $insertUser)) {
             echo "OK";
-          } else {
+         } else {
             echo "Error: <br>" . mysqli_error($conn);
-          }
+         }
+      } else {
+         error('Esiste già un utente con la stesso nome od indirizzo email');
       }
+
       mysqli_close($conn);
    } else {
       error();

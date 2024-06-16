@@ -5,7 +5,8 @@ $db = array(
     'server' => 'localhost',
     'user' => 'frontend',
     'password' => '75)E/QCwdHIGF!8-',
-    'name' => 'video_corsi'
+    'name' => 'video_corsi',
+    'salt' => 'cybersecurity'
 );
 
 $alertAddress = 'zof.emanuele@spes.uniud.it';
