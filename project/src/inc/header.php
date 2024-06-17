@@ -1,10 +1,29 @@
 <?php
-$fullView = true;
-
-if ($_SESSION['currentPage'] == 'signin' || $_SESSION['currentPage'] == 'register') {
-    $fullView = false;
+if ($page['restricted'] && $page['name'] != 'signin') {
+    if (!isset($_SESSION['userID'])) {
+      $_SESSION['returnPage'] = $page['name'];
+      header('Location: signin.php');
+      exit();
+    } 
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Progetto esame Cybersecurity: Piattaforma video corsi">
+    <meta name="author" content="Zof Emanuele">
+
+    <title><?= $page['title'] ?? 'Piattaforma di video corsi' ?></title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/product.css" rel="stylesheet">
+</head>
+<body>
+
 <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme=dark>
     <div class="container">
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
@@ -20,7 +39,7 @@ if ($_SESSION['currentPage'] == 'signin' || $_SESSION['currentPage'] == 'registe
                             </svg>
                         </a>
                     </li>
-                    <?php if ($fullView) { ?>
+                    <?php //if ($fullView) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="info.php">Informazioni</a>
                         </li>
@@ -48,9 +67,11 @@ if ($_SESSION['currentPage'] == 'signin' || $_SESSION['currentPage'] == 'registe
                                 </svg>-->
                             </a>
                         </li>
-                    <?php } ?>
+                    <?php //} ?>
                 </ul>
             </div>
         </div>
     </div>
 </nav>
+
+<main>

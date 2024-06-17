@@ -1,52 +1,37 @@
 <?php
-$hmacKey = 30911337928580013;
-
-$openssl = array(
-    'cipher' => 'AES-128-CTR',
-    'key' => 'cybersecurity',
-    'iv' => '1234567891011121'
-);
-
-$db = array(
-    'server' => 'localhost',
-    'user' => 'frontend',
-    'password' => '75)E/QCwdHIGF!8-',
-    'name' => 'video_corsi'
-);
-
-$alertAddress = 'zof.emanuele@spes.uniud.it';
-
-$app = array(
-    'url' => 'http://localhost',
-    'senderEmail' => 'zof.emanuele@spes.uniud.it'
-);
-
-$pages = array(
+$PAGES = array(
     'index' => array(
+        'name' => 'index',
         'restricted' => false,
         'title' => 'Home page - Piattaforma di video corsi'
     ),
     'courses' => array(
+        'name' => 'courses',
         'restricted' => true,
         'title' => 'Tutti corsi disponibili - Piattaforma di video corsi'
     ),
     'course' => array(
+        'name' => 'course',
         'restricted' => true,
         'title' => 'Corso - Piattaforma di video corsi'
     ),
     'info' => array(
+        'name' => 'info',
         'restricted' => false,
         'title' => 'Informazioni - Piattaforma di video corsi'
     ),
     'pricing' => array(
+        'name' => 'pricing',
         'restricted' => false,
         'title' => 'Prezzi - Piattaforma di video corsi'
     ),
     'signin' => array(
+        'name' => 'signin',
         'restricted' => false,
         'title' => 'Sign in - Piattaforma di video corsi'
     ),
     'register' => array(
+        'name' => 'register',
         'restricted' => false,
         'title' => 'Registration - Piattaforma di video corsi'
     ),
