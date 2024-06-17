@@ -8,6 +8,7 @@ require __DIR__ . '/../src/bootstrap.php';
     <div class="col-md-6">
         <img src="img/rocket.jpeg" class="full-image">
     </div>
+
     <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
     <div class="col-md-6">
         <section class="container py-3">
@@ -65,7 +66,7 @@ require __DIR__ . '/../src/bootstrap.php';
             </div>
 
             <div class="captcha form-group">
-                <altcha-widget challengeurl="functions/captchachallenge.php"></altcha-widget>
+                <altcha-widget challengeurl="captchachallenge.php"></altcha-widget>
                 <div class="invalid-feedback">Verifica il captcha</div>
             </div>
 
@@ -73,6 +74,7 @@ require __DIR__ . '/../src/bootstrap.php';
         </form>
     </div>
     <?php } ?>
+
 </div>
 
 <?php view('footer', ['registrationScripts' => true]) ?>
