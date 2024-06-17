@@ -16,6 +16,11 @@ $db = array(
 
 $alertAddress = 'zof.emanuele@spes.uniud.it';
 
+$app = array(
+    'url' => 'http://localhost',
+    'senderEmail' => 'zof.emanuele@spes.uniud.it'
+);
+
 $pages = array(
     'index' => array(
         'restricted' => false,

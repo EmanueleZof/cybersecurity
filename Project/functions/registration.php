@@ -65,6 +65,22 @@ function altchaValidation($payload, $hmacKey) {
    return false;
 }
 
+function generateActivationCode() {
+    return bin2hex(random_bytes(16));
+}
+
+function sendActivationEmail($email, $activationCode) {
+   $link = $app['url'].'/activate.php?email='.$email.'&activation_code='.$activation_code;
+   $subject = 'Attiva il tuo account di Rocket Learn';
+   $message = 'Seguil il seguente link per attivare il tuo account di Rocket learn: <br>'.$link;
+   $header = 'From:'.$app['senderEmail'];
+
+   mail($email, $subject, $message, $header);
+}
+
+$test = sendActivationEmail($alertAddress, '0123');
+echo $test;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    if (isset($_POST['userName']) && isset($_POST['userEmail']) && isset($_POST['userPassword']) && isset($_POST['repeatedPassword']) && isset($_POST['altcha'])) {
       // Input sanitization
@@ -101,8 +117,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $alreadyRegisteredUsers = mysqli_query($conn, $searchUsers);
       if (mysqli_num_rows($alreadyRegisteredUsers) == 0) {
          $passwordHash = password_hash($input['userPassword'], PASSWORD_BCRYPT);
-         $insertUser = 'INSERT INTO users (user_name, user_password, user_email) VALUES ("'.$input['userName'].'", "'.$passwordHash.'", "'.$emailEncripted.'")';
+         $activationCode = generateActivationCode();
+         $expiry = 1 * 24  * 60 * 60;
+         $insertUser = 'INSERT INTO users (user_name, user_password, user_email, activation_code, activation_expiry) VALUES ("'.$input['userName'].'", "'.password_hash($activationCode, PASSWORD_DEFAULT).'", "'.$emailEncripted.'", "'.$activationCode.'", "'.date('Y-m-d H:i:s',  time() + $expiry).'")';
          if (mysqli_query($conn, $insertUser)) {
+            sendActivationEmail($alertAddress, $activation_code);
             $last_id = mysqli_insert_id($conn);
             $_SESSION['registrationWaitConfirmation'] = $last_id;
             header('Location: ../register.php');
