@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         /* Form */
-        if (!form.checkValidity() && captchaPayload.length == 0) {
+        if (!form.checkValidity() || captchaPayload.length == 0) {
             event.preventDefault();
             event.stopPropagation();
         }
