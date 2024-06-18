@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../src/register.php';
 ?>
 
 <?php view('header', ['page' => $PAGES['register']]) ?>
@@ -18,7 +19,7 @@ require __DIR__ . '/../src/bootstrap.php';
     </div>
     <?php } else { ?>
     <div class="col-md-6">
-        <form action="functions/registration.php" method="POST" class="container py-3 needs-validation" novalidate>
+        <form action="register.php" method="POST" class="container py-3 needs-validation" novalidate>
             <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
             <?php
