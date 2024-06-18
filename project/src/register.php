@@ -76,16 +76,15 @@ if (isPostRequest()) {
     }
 
     // Database operations
-    $conn = db();
+    $conn = connectDB();
     if (!$conn) {
         $errors['database'] = 'Qualcosa è andato storto, riprova più tardi';
     }
 
-    if (count($errors) == 0) {
-        print_r($inputs);
-        echo '<br>';
-        print_r($errors);
+    if (count($errors) == 0 && !isAlreadyRegistered($conn, $inputs['userName'], $inputs['userEmail'])) {
+        echo 'Register user';
     }
-    
+
+    disconnectDB($conn);
 }
 ?>
