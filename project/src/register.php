@@ -80,9 +80,13 @@ if (isPostRequest()) {
     if (!$conn) {
         $errors['database'] = 'Qualcosa è andato storto, riprova più tardi';
     }
+    if (isAlreadyRegistered($conn, $inputs)) {
+        $errors['user'] = 'Esiste già un utente con la stesso nome o indirizzo email';
+    }
 
-    if (count($errors) == 0 && !isAlreadyRegistered($conn, $inputs['userName'], $inputs['userEmail'])) {
-        echo 'Register user';
+    if (count($errors) == 0) {
+        $user = registerUser($conn, $inputs);
+        var_dump($user);
     }
 
     disconnectDB($conn);
