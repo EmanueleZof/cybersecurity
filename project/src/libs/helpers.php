@@ -21,4 +21,13 @@ function isPostRequest() {
 function isGetRequest() {
     return strtoupper($_SERVER['REQUEST_METHOD']) == 'GET';
 }
+
+function displayErrors($errors) {
+    echo '<div class="alert alert-danger" role="alert"><ul class="m-0">';
+    foreach($errors as $error) {
+        echo '<li>'.$error.'</li>';
+    }
+    echo '</ul></div>';
+
+}
 ?>

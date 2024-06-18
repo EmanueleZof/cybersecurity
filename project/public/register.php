@@ -23,27 +23,26 @@ require __DIR__ . '/../src/register.php';
             <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
             <?php
-            if (isset($_SESSION['registrationError'])) {
-                echo '<div class="alert alert-danger" role="alert">'.$_SESSION['registrationError'].'</div>';
-                unset($_SESSION['registrationError']);
+            if ($errors) {
+                displayErrors($errors);
             }
             ?>
 
             <div class="form-group">
                 <label for="userName">Nome utente</label>
-                <input type="text" class="form-control" name="userName" id="userName" placeholder="Nome" required>
+                <input type="text" class="form-control" name="userName" id="userName" placeholder="Nome" value="<?= $inputs['userName'] ?? '' ?>" required>
                 <div class="invalid-feedback">Inserire il nome utente</div>
             </div>
 
             <div class="form-group">
                 <label for="userEmail">Indirizzo email</label>
-                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" required>
+                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" value="<?= $inputs['userEmail'] ?? '' ?>" required>
                 <div class="invalid-feedback">L'indirizzo email inserito non è valido</div>
             </div>
 
             <div class="form-group">
                 <label for="userPassword">Password</label>
-                <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" required>
+                <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" value="<?= $inputs['userPassword'] ?? '' ?>" required>
                 <small id="passwordHelpBlock" class="form-text text-muted">
                     <ul>
                         <li id="pwdCheckLength">Lunga almeno 12 caratteri.</li>
@@ -62,7 +61,7 @@ require __DIR__ . '/../src/register.php';
 
             <div class="form-group">
                 <label for="repeatedPassword">Ripeti la password</label>
-                <input type="password" class="form-control" name="repeatedPassword" id="repeatedPassword" placeholder="Password" required>
+                <input type="password" class="form-control" name="repeatedPassword" id="repeatedPassword" placeholder="Password" value="<?= $inputs['repeatedPassword'] ?? '' ?>" required>
                 <div class="invalid-feedback">La password inserita è diversa</div>
             </div>
 

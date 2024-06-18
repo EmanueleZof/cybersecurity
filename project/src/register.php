@@ -5,7 +5,7 @@ const USEREMAIL_REQUIRED = 'Inserire un indirizzo email';
 const USERPASSWORD_INVALID = 'La password inserita non rispetta i criteri';
 const USERPASSWORD_REQUIRED = 'Inserire una password';
 const REPEATPASSWORD_INVALID = 'La password inserita è diversa';
-const REPEATPASSWORD_REQUIRED = 'Ripetere la password';
+const REPEATPASSWORD_REQUIRED = 'Inserire nuovamente la password';
 const ALTCHA_INVALID = 'Probabilmente sei un robot';
 const ALTCHA_REQUIRED = 'Verifica il captcha';
 
@@ -24,7 +24,6 @@ if (isPostRequest()) {
     $inputs['userEmail'] = $userEmail;
     $inputs['userPassword'] = $userPassword;
     $inputs['repeatedPassword'] = $repeatedPassword;
-    $inputs['altcha'] = $altcha;
 
     // Input validation
     if ($userName) {
@@ -47,9 +46,11 @@ if (isPostRequest()) {
 
     if ($userPassword) {
         $userPassword = filter_var($userPassword, FILTER_VALIDATE_REGEXP, array(
-            'options' => array('regexp' => '#[a-z]+#')
+            'options' => array(
+                'regexp' => '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()+=._-])(?!.*\s)(?!.*([0-9#][\x{20E3}])|[\x{00ae}\x{00a9}\x{203C}\x{2047}\x{2048}\x{2049}\x{3030}\x{303D}\x{2139}\x{2122}\x{3297}\x{3299}][\x{FE00}-\x{FEFF}]?|[\x{2190}-\x{21FF}][\x{FE00}-\x{FEFF}]?|[\x{2300}-\x{23FF}][\x{FE00}-\x{FEFF}]?|[\x{2460}-\x{24FF}][\x{FE00}-\x{FEFF}]?|[\x{25A0}-\x{25FF}][\x{FE00}-\x{FEFF}]?|[\x{2600}-\x{27BF}][\x{FE00}-\x{FEFF}]?|[\x{2900}-\x{297F}][\x{FE00}-\x{FEFF}]?|[\x{2B00}-\x{2BF0}][\x{FE00}-\x{FEFF}]?)/u',
+            )
         ));
-        if ($userPassword == false) {
+        if ($userPassword == false || strlen($userPassword) < 12 || strpos($userPassword, $userName) != false) {
             $errors['userPassword'] = USERPASSWORD_INVALID;
         }
     } else {
@@ -59,22 +60,23 @@ if (isPostRequest()) {
     if ($repeatedPassword) {
         $repeatedPassword = trim($repeatedPassword);
         if ($userPassword != $repeatedPassword) {
-            $errors['userPassword'] = REPEATPASSWORD_INVALID;
+            $errors['repeatedPassword'] = REPEATPASSWORD_INVALID;
         }
     } else {
-        $errors['userPassword'] = REPEATPASSWORD_REQUIRED;
+        $errors['repeatedPassword'] = REPEATPASSWORD_REQUIRED;
     }
 
     if ($altcha) {
         $altcha = trim($altcha);
-        if ($altcha == '') {
+        if (!altchaValidation($altcha, HMAC_KEY)) {
             $errors['altcha'] = ALTCHA_INVALID;
         }
     } else {
         $errors['altcha'] = ALTCHA_REQUIRED;
     }
 
-    print_r($inputs);
-    print_r($errors);
+    //print_r($inputs);
+    //echo '<br>';
+    //print_r($errors);
 }
 ?>
