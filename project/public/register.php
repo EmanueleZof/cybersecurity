@@ -9,16 +9,13 @@ require __DIR__ . '/../src/register.php';
     <div class="col-md-6">
         <img src="img/rocket.jpeg" class="full-image">
     </div>
-
-    <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
-        <div class="col-md-6">
+    <div class="col-md-6">
+        <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
             <section class="container py-3">
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
                 <p>Ti abbiamo inviato una email all'indirizzo ??. Completa la registrazione inserendo di seguito il codice ricevuto.</p>
             </section>
-        </div>
-    <?php } else { ?>
-        <div class="col-md-6">
+        <?php } else { ?>
             <form action="register.php" method="POST" class="container py-3 needs-validation" novalidate>
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
@@ -74,9 +71,8 @@ require __DIR__ . '/../src/register.php';
 
                 <div class="my-3">Sei già registrato? <a href="signin.php">Entra</a></div>
             </form>
-        </div>
-    <?php } ?>
-
+        <?php } ?>
+    </div>
 </div>
 
 <?php view('footer', ['registrationScripts' => true]) ?>
