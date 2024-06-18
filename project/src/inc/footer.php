@@ -62,7 +62,7 @@
 
 <?php if ($registrationScripts ?? false) { ?>
 <script async defer src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" type="module"></script>
-<!--<script src="js/registration.js"></script>-->
+<!--TODO: enable script <script src="js/registration.js"></script>-->
 <?php } ?>
 
 </body>

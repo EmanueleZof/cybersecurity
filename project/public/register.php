@@ -72,7 +72,7 @@ require __DIR__ . '/../src/register.php';
 
             <button class="btn btn-primary w-100 py-2" type="submit">Registrati</button>
 
-            <div class="my-3">Sei già registrato? <a href="signin.php">Fai il sign in</a></div>
+            <div class="my-3">Sei già registrato? <a href="signin.php">Entra</a></div>
         </form>
     </div>
     <?php } ?>
