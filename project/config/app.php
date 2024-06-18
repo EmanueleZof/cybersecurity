@@ -1,4 +1,6 @@
 <?php
+const ADMIN_EMAIL = 'zof.emanuele@spes.uniud.it';
+
 $PAGES = array(
     'index' => array(
         'name' => 'index',

@@ -75,8 +75,17 @@ if (isPostRequest()) {
         $errors['altcha'] = ALTCHA_REQUIRED;
     }
 
-    //print_r($inputs);
-    //echo '<br>';
-    //print_r($errors);
+    // Database operations
+    $conn = db();
+    if (!$conn) {
+        $errors['database'] = 'Qualcosa è andato storto, riprova più tardi';
+    }
+
+    if (count($errors) == 0) {
+        print_r($inputs);
+        echo '<br>';
+        print_r($errors);
+    }
+    
 }
 ?>
