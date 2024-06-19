@@ -1,4 +1,5 @@
 <?php
+const GENERIC = 'Qualcosa è andato storto, riprova più tardi';
 const USERNAME_REQUIRED = 'Inserire un nome utente';
 const USEREMAIL_INVALID = 'L\'email inserita non è valida';
 const USEREMAIL_REQUIRED = 'Inserire un indirizzo email';
@@ -78,7 +79,7 @@ if (isPostRequest()) {
     // Database operations
     $conn = connectDB();
     if (!$conn) {
-        $errors['database'] = 'Qualcosa è andato storto, riprova più tardi';
+        $errors['generic'] = GENERIC;
     }
     if (isAlreadyRegistered($conn, $inputs)) {
         $errors['user'] = 'Esiste già un utente con la stesso nome o indirizzo email';
@@ -86,7 +87,12 @@ if (isPostRequest()) {
 
     if (count($errors) == 0) {
         $user = registerUser($conn, $inputs);
-        var_dump($user);
+        if ($user) {
+            $_SESSION['registrationWaitConfirmation'] = $inputs['userEmail'];
+        } else {
+            unset($_SESSION['registrationWaitConfirmation']);
+            $errors['generic'] = GENERIC;
+        }
     }
 
     disconnectDB($conn);

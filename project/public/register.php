@@ -13,7 +13,8 @@ require __DIR__ . '/../src/register.php';
         <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
             <section class="container py-3">
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
-                <p>Ti abbiamo inviato una email all'indirizzo ??. Completa la registrazione inserendo di seguito il codice ricevuto.</p>
+                <p>Ti abbiamo inviato una email all'indirizzo <?= htmlspecialchars($_SESSION['registrationWaitConfirmation']) ?>.</p> 
+                <p>Completa la registrazione cliccando sul link ricevuto.</p>
             </section>
         <?php } else { ?>
             <form action="register.php" method="POST" class="container py-3 needs-validation" novalidate>
