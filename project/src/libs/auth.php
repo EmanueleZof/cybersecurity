@@ -41,4 +41,36 @@ function sendActivationEmail($email, $activationCode, $activationExpiry) {
     $mail = sendEmail($email, $subject, $bodyHtml);
     return $mail;
 }
+
+function deleteUserByID($db, $id, $active = 0) {
+    $sql = 'DELETE FROM users
+            WHERE user_ID ='.$id.' and active='.$active;
+    
+    $query = mysqli_query($db, $sql);
+
+    if ($query) {
+        return true;
+    }
+    return false;
+}
+
+function findUnverifiedUser($db, $email, $activation_code) {
+    $sql = 'SELECT user_ID, activation_code, activation_expiry < now() as expired
+            FROM users
+            WHERE active = 0 AND user_email="'.$email.'"';
+    
+    $query = mysqli_query($db, $sql);
+
+    if ($query && mysqli_num_rows($query) == 1) {
+        $user = mysqli_fetch_assoc($query);
+        if ($user['expired'] == 1) {
+            deleteUserByID($db, $user['user_ID']);
+            return null;
+        }
+        if (password_verify($activation_code, $user['activation_code'])) {
+            return $user;
+        }
+    }
+    return null;
+}
 ?>

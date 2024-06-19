@@ -100,5 +100,10 @@ if (isPostRequest()) {
     disconnectDB($conn);
 }
 
-//sendActivationEmail(SMTP_USER, generateActivationCode(), date('Y-m-d H:i:s',  time() + 1 * 24  * 60 * 60)); //TODO: only for testing purposes
+//TODO: only for testing purposes
+//sendActivationEmail(SMTP_USER, generateActivationCode(), date('Y-m-d H:i:s',  time() + 1 * 24  * 60 * 60));
+//$conn = connectDB();
+//findUnverifiedUser($conn, 'test@test.com', '$2y$10$ch7YQu5gC284Qh0N9pWEf.Si6V9wC/fOPf0MixEhRTby0bwuG3iTq');
+//disconnectDB($conn);
+
 ?>
