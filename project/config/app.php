@@ -1,4 +1,6 @@
 <?php
+const APP_URL = 'http://localhost:8888/project/public'; //TODO
+const SENDER_EMAIL_ADDRESS = 'no-reply@rocketlearn.com';
 const ADMIN_EMAIL = 'zof.emanuele@spes.uniud.it';
 
 $PAGES = array(

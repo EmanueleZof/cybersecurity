@@ -7,10 +7,13 @@ function isAlreadyRegistered($db, $inputs) {
     return mysqli_num_rows($query) == 0 ? false : true;
 }
 
-function registerUser($db, $inputs) {
+function generateActivationCode() {
+    return bin2hex(random_bytes(16));
+}
+
+function registerUser($db, $inputs, $activationCode) {
     $passwordHash = password_hash($inputs['userPassword'], PASSWORD_BCRYPT);
-    $generateCode = bin2hex(random_bytes(16));
-    $activationCode = password_hash($generateCode, PASSWORD_DEFAULT);
+    $activationCode = password_hash($activationCode, PASSWORD_DEFAULT);
     $expiry = 1 * 24  * 60 * 60;
     $activationExpiry = date('Y-m-d H:i:s',  time() + $expiry);
     
@@ -24,5 +27,9 @@ function registerUser($db, $inputs) {
     }
 
     return false;
+}
+
+function sendActivationEmail($email, $activationCode) {
+    echo $email.$activationCode;
 }
 ?>

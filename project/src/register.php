@@ -86,9 +86,11 @@ if (isPostRequest()) {
     }
 
     if (count($errors) == 0) {
-        $user = registerUser($conn, $inputs);
+        $activationCode = generateActivationCode();
+        $user = registerUser($conn, $inputs, $activationCode);
         if ($user) {
             $_SESSION['registrationWaitConfirmation'] = $inputs['userEmail'];
+            sendActivationEmail($inputs['userEmail'], $activationCode);
         } else {
             unset($_SESSION['registrationWaitConfirmation']);
             $errors['generic'] = GENERIC;
