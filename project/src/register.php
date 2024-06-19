@@ -99,4 +99,6 @@ if (isPostRequest()) {
 
     disconnectDB($conn);
 }
+
+//sendActivationEmail(ADMIN_EMAIL, generateActivationCode()); //TODO: only for testing purposes
 ?>

@@ -30,6 +30,6 @@ function registerUser($db, $inputs, $activationCode) {
 }
 
 function sendActivationEmail($email, $activationCode) {
-    echo $email.$activationCode;
+    sendEmail($email, 'Rocket learn registration', $activationCode);
 }
 ?>
