@@ -87,10 +87,10 @@ if (isPostRequest()) {
 
     if (count($errors) == 0) {
         $activationCode = generateActivationCode();
-        $user = registerUser($conn, $inputs, $activationCode);
+        [$user, $activationExpiry] = registerUser($conn, $inputs, $activationCode);
         if ($user) {
             $_SESSION['registrationWaitConfirmation'] = $inputs['userEmail'];
-            sendActivationEmail($inputs['userEmail'], $activationCode);
+            sendActivationEmail($inputs['userEmail'], $activationCode, $activationExpiry);
         } else {
             unset($_SESSION['registrationWaitConfirmation']);
             $errors['generic'] = GENERIC;
@@ -100,5 +100,5 @@ if (isPostRequest()) {
     disconnectDB($conn);
 }
 
-//sendActivationEmail(ADMIN_EMAIL, generateActivationCode()); //TODO: only for testing purposes
+//sendActivationEmail(SMTP_USER, generateActivationCode(), date('Y-m-d H:i:s',  time() + 1 * 24  * 60 * 60)); //TODO: only for testing purposes
 ?>

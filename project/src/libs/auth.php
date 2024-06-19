@@ -23,13 +23,22 @@ function registerUser($db, $inputs, $activationCode) {
     $query = mysqli_query($db, $sql);
 
     if ($query) {
-        return true;
+        return [true, $activationExpiry];
     }
 
-    return false;
+    return [false, ''];
 }
 
-function sendActivationEmail($email, $activationCode) {
-    sendEmail($email, 'Rocket learn registration', $activationCode);
+function sendActivationEmail($email, $activationCode, $activationExpiry) {
+    $activationLink = APP_URL.'/activate.php?email='.$email.'&activation_code='.$activationCode;
+
+    $subject = 'Rocket Learn - Attiva il tuo account';
+
+    $bodyHtml = '<p>Clicca sul seguente link per attivare il tuo account:</p>';
+    $bodyHtml .= '<p><a href="'.$activationLink.'">Attiva il tuo account</a></p>';
+    $bodyHtml .= '<p><b>Puoi attivare il tuo account fino al: '.$activationExpiry.'</b> altrimenti dovrai ripetere la registrazione.</p>';
+
+    $mail = sendEmail($email, $subject, $bodyHtml);
+    return $mail;
 }
 ?>
