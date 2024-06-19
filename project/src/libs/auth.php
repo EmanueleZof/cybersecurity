@@ -73,4 +73,18 @@ function findUnverifiedUser($db, $email, $activation_code) {
     }
     return null;
 }
+
+function activateUser($db, $user_id) {
+    $sql = 'UPDATE users
+            SET active = 1,
+                activated_at = CURRENT_TIMESTAMP
+            WHERE id='.$user_id;
+
+    $query = mysqli_query($db, $sql);
+
+    if ($query) {
+        return true;
+    }
+    return false;
+}
 ?>
