@@ -9,7 +9,8 @@ function isAlreadyRegistered($db, $inputs) {
 
 function registerUser($db, $inputs) {
     $passwordHash = password_hash($inputs['userPassword'], PASSWORD_BCRYPT);
-    $activationCode = bin2hex(random_bytes(16));
+    $generateCode = bin2hex(random_bytes(16));
+    $activationCode = password_hash($generateCode, PASSWORD_DEFAULT);
     $expiry = 1 * 24  * 60 * 60;
     $activationExpiry = date('Y-m-d H:i:s',  time() + $expiry);
     
