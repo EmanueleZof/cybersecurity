@@ -2,6 +2,9 @@
 const APP_URL = 'http://localhost:8888/project/public'; //TODO
 const ADMIN_EMAIL = '';
 
+// Sessions
+const REGISTRATION = 'registration';
+
 $PAGES = array(
     'index' => array(
         'name' => 'index',
