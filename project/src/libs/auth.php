@@ -30,7 +30,7 @@ function registerUser($db, $inputs, $activationCode) {
 }
 
 function sendActivationEmail($email, $activationCode, $activationExpiry) {
-    $activationLink = APP_URL.'/activate.php?email='.$email.'&activation_code='.$activationCode;
+    $activationLink = APP_URL.'/activate.php?userEmail='.$email.'&activationCode='.$activationCode;
 
     $subject = 'Rocket Learn - Attiva il tuo account';
 
@@ -54,7 +54,7 @@ function deleteUserByID($db, $id, $active = 0) {
     return false;
 }
 
-function findUnverifiedUser($db, $email, $activation_code) {
+function findUnverifiedUser($db, $email, $activationCode) {
     $sql = 'SELECT user_ID, activation_code, activation_expiry < now() as expired
             FROM users
             WHERE active = 0 AND user_email="'.$email.'"';
@@ -67,18 +67,18 @@ function findUnverifiedUser($db, $email, $activation_code) {
             deleteUserByID($db, $user['user_ID']);
             return null;
         }
-        if (password_verify($activation_code, $user['activation_code'])) {
+        if (password_verify($activationCode, $user['activation_code'])) {
             return $user;
         }
     }
     return null;
 }
 
-function activateUser($db, $user_id) {
+function activateUser($db, $userID) {
     $sql = 'UPDATE users
             SET active = 1,
                 activated_at = CURRENT_TIMESTAMP
-            WHERE id='.$user_id;
+            WHERE id='.$userID;
 
     $query = mysqli_query($db, $sql);
 
