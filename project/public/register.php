@@ -10,7 +10,13 @@ require __DIR__ . '/../src/register.php';
         <img src="img/rocket.jpeg" class="full-image">
     </div>
     <div class="col-md-6">
-        <?php if (isset($_SESSION['registrationWaitConfirmation'])) { ?>
+        <?php if(isset($_SESSION['registrationCompleted'])) { ?>
+            <section class="container py-3">
+                <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+                <div class="alert alert-success" role="alert">La tua registrazione è completata con successo.</div>
+                <p><a href="courses.php">Inizia a guardare i nostri video tutorial</a></p>
+            </section>
+        <?php } elseif (isset($_SESSION['registrationWaitConfirmation'])) { ?>
             <section class="container py-3">
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
                 <p>Ti abbiamo inviato una email all'indirizzo <?= htmlspecialchars($_SESSION['registrationWaitConfirmation']) ?>.</p> 

@@ -7,6 +7,7 @@ function view($filename, $data = []) {
     require_once __DIR__ . '/../inc/' . $filename . '.php';
 }
 
+// TODO: to remove
 function sanitizeInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
@@ -29,5 +30,10 @@ function displayErrors($errors) {
     }
     echo '</ul></div>';
 
+}
+
+function redirectTo($url) {
+    header('Location:' . $url);
+    exit;
 }
 ?>

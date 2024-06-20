@@ -45,13 +45,16 @@ if (isGetRequest()) {
     if (count($errors) == 0) {
         $user = findUnverifiedUser($conn, $inputs['userEmail'], $inputs['activationCode']);
         if ($user && activateUser($conn, $user['user_id'])) {
-            echo 'SUCCESS'; //TODO redirect
+            unset($_SESSION['registrationWaitConfirmation']);
+            $_SESSION['registrationCompleted'] = $inputs['userEmail'];
+            $_SESSION['userID'] = $user['user_id'];
         } else {
             $errors['generic'] = EXPIRED;
         }
     }
 
     disconnectDB($conn);
-    print_r($errors);
 }
+
+redirectTo('register.php'); //TODO: error case
 ?>
