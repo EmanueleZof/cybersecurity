@@ -107,8 +107,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.querySelector('#userPassword');
     const repeatedPassword = document.querySelector('#repeatedPassword');
 
+    const captchaWidget = document.querySelector('#altcha');
     const captchaPayload = document.getElementsByName('altcha');
     const captchaError = document.querySelector('.captcha .invalid-feedback');
+
+    email.addEventListener('focusout', (event) => {
+        if (!validateEmail(email.value)) {
+            email.setCustomValidity('error');
+        } else {
+            email.setCustomValidity('');
+        }
+    });
+
+    password.addEventListener('focusout', (event) => {
+        if (!validatePassword(password.value)) {
+            password.setCustomValidity('error');
+        } else {
+            password.setCustomValidity('');
+        }
+    });
+
+    repeatedPassword.addEventListener('focusout', (event) => {
+        if (password.value != repeatedPassword.value) {
+            repeatedPassword.setCustomValidity('error');
+        } else {
+            repeatedPassword.setCustomValidity('');
+        }
+    });
+
+    /*captchaWidget.addEventListener('statechange', (event) => {
+        console.log(event);
+        if (event.detail.state !== 'verified') {
+            captchaError.classList.add('d-block');
+        } else {
+            captchaError.classList.remove('d-block');
+        }
+    });*/
 
     form.addEventListener('submit', (event) => {
         /* Email */
@@ -146,6 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         form.classList.add('was-validated');
-      }, false);
+    }, false);
 
 });

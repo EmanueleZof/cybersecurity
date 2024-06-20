@@ -14,7 +14,7 @@ require __DIR__ . '/../src/register.php';
             <section class="container py-3">
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
                 <div class="alert alert-success" role="alert">La tua registrazione è completata con successo.</div>
-                <p><a href="courses.php">Inizia a guardare i nostri video tutorial</a></p>
+                <p><a class="btn btn-primary my-2" href="courses.php">Inizia a guardare i nostri video tutorial</a></p>
             </section>
         <?php } elseif (isset($_SESSION[REGISTRATION]['verification'])) { ?>
             <section class="container py-3">
@@ -72,7 +72,7 @@ require __DIR__ . '/../src/register.php';
                 </div>
 
                 <div class="captcha form-group">
-                    <altcha-widget challengeurl="captchachallenge.php"></altcha-widget>
+                    <altcha-widget id="altcha" challengeurl="captchachallenge.php"></altcha-widget>
                     <div class="invalid-feedback">Verifica il captcha</div>
                 </div>
 
