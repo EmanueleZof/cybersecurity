@@ -14,10 +14,10 @@ $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth   = true;
 $mail->Username   = SMTP_USER;
 $mail->Password   = SMTP_PASSWORD;
-$mail->setFrom(SMTP_USER, 'FromEmail');
 $mail->isHTML(true);
 
 function sendEmail($toEmail, $subject, $body, $altBody = '') {
+    $GLOBALS['mail']->setFrom(SMTP_USER, 'FromEmail');
     $GLOBALS['mail']->addAddress($toEmail, 'ToEmail');
     
     $GLOBALS['mail']->Subject = $subject;
