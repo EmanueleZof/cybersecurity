@@ -48,6 +48,7 @@ if (isGetRequest()) {
             unset($_SESSION['registrationWaitConfirmation']);
             $_SESSION['registrationCompleted'] = $inputs['userEmail'];
             $_SESSION['userID'] = $user['user_id'];
+            redirectTo('register.php');
         } else {
             $errors['generic'] = EXPIRED;
         }
@@ -56,5 +57,8 @@ if (isGetRequest()) {
     disconnectDB($conn);
 }
 
-redirectTo('register.php'); //TODO: error case
+unset($_SESSION['registrationWaitConfirmation']);
+unset($_SESSION['registrationCompleted']);
+unset($_SESSION['userID']);
+redirectWithMessage('register.php', end($errors), $type='danger');
 ?>

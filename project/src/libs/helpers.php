@@ -36,4 +36,9 @@ function redirectTo($url) {
     header('Location:' . $url);
     exit;
 }
+
+function redirectWithMessage($url, $message, $type='success') {
+    flashMessage('flash_'.uniqid(), $message, $type);
+    redirectTo($url);
+}
 ?>

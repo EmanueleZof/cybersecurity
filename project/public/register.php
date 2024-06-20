@@ -29,6 +29,8 @@ require __DIR__ . '/../src/register.php';
                 <?php
                 if ($errors) {
                     displayErrors($errors);
+                } elseif(isset($_SESSION[FLASH])) {
+                    displayAllFlashMessages();
                 }
                 ?>
 

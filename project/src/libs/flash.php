@@ -13,10 +13,24 @@ function displayFlashMessage($name) {
         return;
     }
 
-    $flash_message = $_SESSION[FLASH][$name];
+    $flashMessage = $_SESSION[FLASH][$name];
 
     unset($_SESSION[FLASH][$name]);
 
-    echo '<div class="alert alert-'.$type.'" role="alert">'.$flash_message.'</div>';
+    echo '<div class="alert alert-'.$flashMessage['type'].'" role="alert">'.$flashMessage['message'].'</div>';
+}
+
+function displayAllFlashMessages() {
+    if (!isset($_SESSION[FLASH])) {
+        return;
+    }
+
+    $flashMessages = $_SESSION[FLASH];
+
+    unset($_SESSION[FLASH]);
+
+    foreach ($flashMessages as $flashMessage) {
+        echo '<div class="alert alert-'.$flashMessage['type'].'" role="alert">'.$flashMessage['message'].'</div>';
+    }
 }
 ?>
