@@ -44,10 +44,10 @@ if (isGetRequest()) {
 
     if (count($errors) == 0) {
         $user = findUnverifiedUser($conn, $inputs['userEmail'], $inputs['activationCode']);
-        if ($user && activateUser($conn, $user['user_id'])) {
+        if ($user && activateUser($conn, $user['user_ID'])) {
             unset($_SESSION[REGISTRATION]['verification']);
             $_SESSION[REGISTRATION]['completed'] = $inputs['userEmail'];
-            $_SESSION['userID'] = $user['user_id'];
+            $_SESSION['userID'] = $user['user_ID'];
             redirectTo('register.php');
         } else {
             $errors['generic'] = EXPIRED;

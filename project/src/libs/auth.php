@@ -78,7 +78,7 @@ function activateUser($db, $userID) {
     $sql = 'UPDATE users
             SET active = 1,
                 activated_at = CURRENT_TIMESTAMP
-            WHERE id='.$userID;
+            WHERE user_ID='.$userID;
 
     $query = mysqli_query($db, $sql);
 
