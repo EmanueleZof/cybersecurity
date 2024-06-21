@@ -2,7 +2,7 @@
 require __DIR__ . '/../src/bootstrap.php';
 ?>
 
-<?php view('header', ['page' => $PAGES['pricing']]); ?>
+<?php view('header', ['page' => $PAGES['index']]); ?>
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary">
     <div class="col-md-6 p-lg-5 mx-auto my-5">

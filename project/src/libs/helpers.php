@@ -4,7 +4,7 @@ function view($filename, $data = []) {
         $$key = $value;
     }
 
-    require_once __DIR__ . '/../inc/' . $filename . '.php';
+    require __DIR__ . '/../inc/' . $filename . '.php';
 }
 
 // TODO: to remove
