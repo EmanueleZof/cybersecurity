@@ -101,7 +101,7 @@ const validatePassword = (password) => {
     return false;
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('load', () => {
     const form = document.querySelector('.needs-validation');
     const email = document.querySelector('#userEmail');
     const password = document.querySelector('#userPassword');
@@ -135,14 +135,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /*captchaWidget.addEventListener('statechange', (event) => {
-        console.log(event);
+    captchaWidget.addEventListener('statechange', (event) => {
         if (event.detail.state !== 'verified') {
             captchaError.classList.add('d-block');
         } else {
             captchaError.classList.remove('d-block');
         }
-    });*/
+    });
 
     form.addEventListener('submit', (event) => {
         /* Email */
