@@ -34,16 +34,16 @@
       <h5>Corsi più visti</h5>
       <ul class="list-unstyled text-small">
         <li>
-          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 1</a>
+          <a class="link-secondary text-decoration-none" href="course.php?id=1">Tutorial 1</a>
         </li>
         <li>
-          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 2</a>
+          <a class="link-secondary text-decoration-none" href="course.php?id=2">Tutorial 2</a>
         </li>
         <li>
-          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 3</a>
+          <a class="link-secondary text-decoration-none" href="course.php?id=3">Tutorial 3</a>
         </li>
         <li>
-          <a class="link-secondary text-decoration-none" href="course.php?id=001">Tutorial 4</a>
+          <a class="link-secondary text-decoration-none" href="course.php?id=4">Tutorial 4</a>
         </li>
       </ul>
     </div>

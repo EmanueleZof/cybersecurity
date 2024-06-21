@@ -26,4 +26,17 @@ function getPopularCourses($db) {
     }
     return null;
 }
+
+function getCourseById($db, $courseID) {
+    $sql = 'SELECT *
+            FROM courses
+            WHERE course_id='.$courseID;
+    
+    $query = mysqli_query($db, $sql);
+
+    if ($query) {
+        return mysqli_fetch_assoc($query);
+    }
+    return null;
+}
 ?>
