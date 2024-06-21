@@ -59,10 +59,15 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="js/helpers.js"></script>
 
 <?php if ($registrationScripts ?? false) { ?>
-<script async defer src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" type="module"></script>
-<script src="js/registration.js"></script>
+  <script async defer src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" type="module"></script>
+  <script src="js/registration.js"></script>
+<?php } ?>
+
+<?php if ($signinScripts ?? false) { ?>
+  <script src="js/signin.js"></script>
 <?php } ?>
 
 </body>

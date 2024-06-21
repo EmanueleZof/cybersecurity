@@ -1,16 +1,3 @@
-const validateEmail = (email) => {
-    const result = String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-    
-    if (result != null) {
-        return true;
-    }
-    return false;
-};
-
 const validatePassword = (password) => {
     var allValid = [];
 
@@ -111,6 +98,7 @@ window.addEventListener('load', () => {
     const captchaPayload = document.getElementsByName('altcha');
     const captchaError = document.querySelector('.captcha .invalid-feedback');
 
+    /* Email */
     email.addEventListener('focusout', (event) => {
         if (!validateEmail(email.value)) {
             email.setCustomValidity('error');
@@ -119,6 +107,7 @@ window.addEventListener('load', () => {
         }
     });
 
+    /* Password */
     password.addEventListener('focusout', (event) => {
         if (!validatePassword(password.value)) {
             password.setCustomValidity('error');
@@ -127,6 +116,7 @@ window.addEventListener('load', () => {
         }
     });
 
+    /* Repeated password */
     repeatedPassword.addEventListener('focusout', (event) => {
         if (password.value != repeatedPassword.value) {
             repeatedPassword.setCustomValidity('error');
@@ -135,6 +125,7 @@ window.addEventListener('load', () => {
         }
     });
 
+    /* Captcha */
     captchaWidget.addEventListener('statechange', (event) => {
         if (captchaError.classList.contains('d-block') && event.detail.state !== 'verified') {
             captchaError.classList.add('d-block');

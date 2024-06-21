@@ -33,4 +33,4 @@ require __DIR__ . '/../src/signin.php';
     </div>
 </div>
 
-<?php view('footer') ?>
+<?php view('footer', ['signinScripts' => true]) ?>
