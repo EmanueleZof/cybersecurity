@@ -1,5 +1,6 @@
 <?php
 const GENERIC = 'Qualcosa è andato storto, riprova più tardi';
+const NOTFOUND = 'L\'email o la password non sono corretti';
 const USEREMAIL_INVALID = 'L\'email inserita non è valida';
 const USEREMAIL_REQUIRED = 'Inserire un indirizzo email';
 const USERPASSWORD_INVALID = 'La password inserita non rispetta i criteri';
@@ -51,7 +52,11 @@ if (isPostRequest()) {
     }
 
     if (count($errors) == 0) {
-
+        $login = signInUser($conn, $inputs['userEmail'], $inputs['userPassword']);
+        if ($login) {
+            redirectTo('courses.php');
+        }
+        $errors['generic'] = NOTFOUND;
     }
 
     disconnectDB($conn);

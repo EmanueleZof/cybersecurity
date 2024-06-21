@@ -88,10 +88,10 @@ function activateUser($db, $userID) {
     return false;
 }
 
-function findUserByEmail($db, $userEmail) {
-    $sql = 'SELECT user_email, user_password
+function findUserByEmail($db, $email) {
+    $sql = 'SELECT *
             FROM users
-            WHERE user_email='.$userEmail;
+            WHERE user_email="'.$email.'"';
 
     $query = mysqli_query($db, $sql);
 
@@ -105,11 +105,11 @@ function findUserByEmail($db, $userEmail) {
 function signInUser($db, $userEmail, $userPassword) {
     $user = findUserByEmail($db, $userEmail);
 
-    if ($user && password_verify($userPassword, $user['userPassword'])) {
-        sessionRegenerateID();
+    if ($user && password_verify($userPassword, $user['user_password'])) {
+        session_regenerate_id();
 
-        $_SESSION[USER]['username'] = $user['username'];
-        $_SESSION[USER]['userID']  = $user['id'];
+        $_SESSION[USER]['username'] = $user['user_name'];
+        $_SESSION[USER]['userID']  = $user['user_ID'];
 
         return true;
     }
