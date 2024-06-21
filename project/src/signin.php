@@ -22,7 +22,7 @@ if (isPostRequest()) {
         // flashMessage('flash_CSFR', GENERIC);
         blockConnection();
     } else {
-        deleteCSRFToken();
+        //deleteCSRFToken();
     }
 
     // Input validation
@@ -55,8 +55,5 @@ if (isPostRequest()) {
     }
 
     disconnectDB($conn);
-
-    print_r($inputs);
-    print_r($errors);
 }
 ?>

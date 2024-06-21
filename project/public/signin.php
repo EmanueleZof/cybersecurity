@@ -24,13 +24,13 @@ require __DIR__ . '/../src/signin.php';
 
             <div class="form-group">
                 <label for="userEmail">Indirizzo email</label>
-                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" required>
+                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" value="<?= $inputs['userEmail'] ?? '' ?>" required>
                 <div class="invalid-feedback">L'indirizzo email inserito non è valido</div>
             </div>
 
             <div class="form-group">
                 <label for="userPassword">Password</label>
-                <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" required>
+                <input type="password" class="form-control" name="userPassword" id="userPassword" placeholder="Password" value="<?= $inputs['userPassword'] ?? '' ?>" required>
                 <div class="invalid-feedback">La password inserita non è valida</div>
             </div>
 

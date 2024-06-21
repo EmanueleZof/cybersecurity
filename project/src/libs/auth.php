@@ -87,4 +87,18 @@ function activateUser($db, $userID) {
     }
     return false;
 }
+
+function findUserByEmail($db, $userEmail) {
+    $sql = 'SELECT user_email, user_password
+            FROM users
+            WHERE user_email='.$userEmail;
+
+    $query = mysqli_query($db, $sql);
+
+    if ($query) {
+        $user = mysqli_fetch_assoc($query);
+        return $user;
+    }
+    return null;
+}
 ?>
