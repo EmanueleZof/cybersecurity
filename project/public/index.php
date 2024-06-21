@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../src/index.php';
 ?>
 
 <?php view('header', ['page' => $PAGES['index']]); ?>
@@ -18,53 +19,21 @@ require __DIR__ . '/../src/bootstrap.php';
 </div>
 
 <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <a href="course.php?id=001" class="product-link">
-            <div class="my-3 p-3">
-                <h2 class="display-5">Tutorial 1</h2>
-                <p class="lead">Come rendere sicuro un sito web.</p>
-            </div>
-            <div class="bg-body shadow-sm mx-auto product-thumbnail">
-                <img src="img/tutorial_1.jpeg">
-            </div>
-        </a>
-    </div>
-    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <a href="course.php?id=002" class="product-link">
-            <div class="my-3 py-3">
-                <h2 class="display-5">Tutorial 2</h2>
-                <p class="lead">Come creare un podcast.</p>
-            </div>
-            <div class="bg-body shadow-sm mx-auto product-thumbnail">
-                <img src="img/tutorial_2.png">
-            </div>
-        </a>
-    </div>
+    <?php
+        if ($courses) {
+            view('box', ['data' => $courses[0]]);
+            view('box', ['data' => $courses[1]]);
+        }
+    ?>
 </div>
 
 <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <a href="course.php?id=003" class="product-link">
-            <div class="my-3 p-3">
-                <h2 class="display-5">Tutorial 3</h2>
-                <p class="lead">Come fare delle riprese con il telefono.</p>
-            </div>
-            <div class="bg-body shadow-sm mx-auto product-thumbnail">
-                <img src="img/tutorial_3.jpeg">
-            </div>
-        </a>
-    </div>
-    <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <a href="course.php?id=004" class="product-link">
-            <div class="my-3 py-3">
-                <h2 class="display-5">Tutorial 4</h2>
-                <p class="lead">Come fare un video tutorial.</p>
-            </div>
-            <div class="bg-body shadow-sm mx-auto product-thumbnail">
-                <img src="img/tutorial_4.jpeg">
-            </div>
-        </a>
-    </div>
+    <?php
+        if ($courses) {
+            view('box', ['data' => $courses[2]]);
+            view('box', ['data' => $courses[3]]);
+        }
+    ?>
 </div>
 
 <?php view('footer'); ?>
