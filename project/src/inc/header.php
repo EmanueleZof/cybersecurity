@@ -1,11 +1,5 @@
 <?php
-if ($page['restricted'] && $page['name'] != 'signin') {
-    if (!isset($_SESSION['userID'])) {
-      $_SESSION['returnPage'] = $page['name'];
-      header('Location: signin.php');
-      exit();
-    } 
-}
+requireLogin($page);
 ?>
 
 <!DOCTYPE html>

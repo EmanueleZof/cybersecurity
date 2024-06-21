@@ -101,4 +101,32 @@ function findUserByEmail($db, $userEmail) {
     }
     return null;
 }
+
+function signInUser($db, $userEmail, $userPassword) {
+    $user = findUserByEmail($db, $userEmail);
+
+    if ($user && password_verify($userPassword, $user['userPassword'])) {
+        sessionRegenerateID();
+
+        $_SESSION[USER]['username'] = $user['username'];
+        $_SESSION[USER]['userID']  = $user['id'];
+
+        return true;
+    }
+
+    return false;
+}
+
+function isUserLoggedIn() {
+    return isset($_SESSION[USER]['username']);
+}
+
+function requireLogin($page) {
+    if ($page['restricted'] && $page['name'] != 'signin') {
+        if (!isUserLoggedIn()) {
+          $_SESSION[NAVIGATION]['returnPage'] = $page['name'];
+          redirectTo('signin.php');
+        } 
+    }
+}
 ?>
