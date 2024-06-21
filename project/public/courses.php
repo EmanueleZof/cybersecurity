@@ -16,7 +16,7 @@ if (isset($_SESSION[FLASH])) {
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Bentornato <?= curentUser(); ?></h1>
+            <h1 class="fw-light">Ciao <?= curentUser(); ?></h1>
             <p class="lead text-body-secondary">Ecco tutti i video tutorial a tua disposizione.</p>
         </div>
     </div>
