@@ -11,4 +11,5 @@ require_once __DIR__ . '/libs/altcha.php';
 require_once __DIR__ . '/libs/database.php';
 require_once __DIR__ . '/libs/auth.php';
 require_once __DIR__ . '/libs/email.php';
+require_once __DIR__ . '/libs/csrf.php';
 ?>

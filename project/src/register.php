@@ -20,11 +20,17 @@ if (isPostRequest()) {
     $userPassword = filter_input(INPUT_POST, 'userPassword', FILTER_UNSAFE_RAW);
     $repeatedPassword = filter_input(INPUT_POST, 'repeatedPassword', FILTER_UNSAFE_RAW);
     $altcha = filter_input(INPUT_POST, 'altcha', FILTER_UNSAFE_RAW);
+    $csfrToken = filter_input(INPUT_POST, 'csfrToken', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     $inputs['userName'] = $userName;
     $inputs['userEmail'] = $userEmail;
     $inputs['userPassword'] = $userPassword;
     $inputs['repeatedPassword'] = $repeatedPassword;
+
+    //CSFR check
+    if (!$csfrToken || $csfrToken !== $_SESSION[CSRF]['token']) {
+        $errors['generic'] = GENERIC;
+    }
 
     // Input validation
     if ($userName) {

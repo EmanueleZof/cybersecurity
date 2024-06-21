@@ -4,6 +4,7 @@ const ADMIN_EMAIL = '';
 
 // Sessions
 const REGISTRATION = 'registration';
+const CSRF = 'CSRF';
 
 $PAGES = array(
     'index' => array(
