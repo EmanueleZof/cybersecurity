@@ -29,7 +29,8 @@ if (isPostRequest()) {
 
     //CSFR check
     if (!$csfrToken || $csfrToken !== $_SESSION[CSRF]['token']) {
-        $errors['generic'] = GENERIC;
+        //$errors['generic'] = GENERIC;
+        blockConnection();
     } else {
         deleteCSRFToken();
     }

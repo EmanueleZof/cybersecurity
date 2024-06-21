@@ -27,10 +27,10 @@ require __DIR__ . '/../src/register.php';
                 <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
 
                 <?php
-                if ($errors) {
-                    displayErrors($errors);
-                } elseif(isset($_SESSION[FLASH])) {
+                if (isset($_SESSION[FLASH])) {
                     displayAllFlashMessages();
+                } elseif($errors) {
+                    displayErrors($errors);
                 }
                 ?>
 

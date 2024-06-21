@@ -14,6 +14,14 @@ require __DIR__ . '/../src/signin.php';
         <form action="signin.php" method="POST" class="container py-3 needs-validation" novalidate>
             <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
+            <?php
+            if (isset($_SESSION[FLASH])) {
+                displayAllFlashMessages();
+            } elseif($errors) {
+                displayErrors($errors);
+            }
+            ?>
+
             <div class="form-group">
                 <label for="userEmail">Indirizzo email</label>
                 <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="name@example.com" required>
@@ -35,4 +43,4 @@ require __DIR__ . '/../src/signin.php';
     </div>
 </div>
 
-<?php view('footer', ['signinScripts' => true]) ?>
+<?php view('footer') //TODO ['signinScripts' => true] ?>

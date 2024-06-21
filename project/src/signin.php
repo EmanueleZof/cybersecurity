@@ -1,44 +1,61 @@
 <?php
-const EMAIL_REQUIRED = 'Please enter your email';
-const EMAIL_INVALID = 'Please enter a valid email';
-const PASSWORD_REQUIRED = 'Please enter your pasword';
+const GENERIC = 'Qualcosa è andato storto, riprova più tardi';
+const USEREMAIL_INVALID = 'L\'email inserita non è valida';
+const USEREMAIL_REQUIRED = 'Inserire un indirizzo email';
+const USERPASSWORD_INVALID = 'La password inserita non rispetta i criteri';
+const USERPASSWORD_REQUIRED = 'Inserire una password';
 
 $inputs = [];
 $errors = [];
 
 if (isPostRequest()) {
     // Input sanitization
-    $email = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL);
+    $userEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL);
     $userPassword = filter_input(INPUT_POST, 'userPassword', FILTER_UNSAFE_RAW);
+    $csfrToken = filter_input(INPUT_POST, 'csfrToken', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $inputs['email'] = $email;
+    $inputs['userEmail'] = $userEmail;
     $inputs['userPassword'] = $userPassword;
 
     //CSFR check
     if (!$csfrToken || $csfrToken !== $_SESSION[CSRF]['token']) {
-        $errors['generic'] = GENERIC;
+        //$errors['generic'] = GENERIC;
+        //flashMessage('flash_CSFR', GENERIC);
+        blockConnection();
     } else {
-        unset($_SESSION[CSRF]['token']);
+        deleteCSRFToken();
     }
 
     // Input validation
-    if ($email) {
-        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-        if (!$email) {
-            $errors['email'] = EMAIL_INVALID;
+    if ($userEmail) {
+        $userEmail = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
+        if ($userEmail == false) {
+            $errors['userEmail'] = USEREMAIL_INVALID;
         }
     } else {
-        $errors['email'] = EMAIL_REQUIRED;
+        $errors['userEmail'] = USEREMAIL_REQUIRED;
     }
 
-    // Password
-    if ($password) {
-        //$email = hash();
+    if ($userPassword) {
+        $userPassword = trim($userPassword);
+        if ($userPassword == '') {
+            $errors['userPassword'] = USERPASSWORD_REQUIRED;
+        }
     } else {
-        $errors['password'] = PASSWORD_REQUIRED;
+        $errors['userPassword'] = USERPASSWORD_REQUIRED;
     }
 
-    // Check on DB
+    // Database operations
+    $conn = connectDB();
+    if (!$conn) {
+        $errors['generic'] = GENERIC;
+    }
+
+    if (count($errors) == 0) {
+
+    }
+
+    disconnectDB($conn);
 
     print_r($inputs);
     print_r($errors);

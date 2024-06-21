@@ -1,7 +1,7 @@
 <?php
 const FLASH = 'FLASH_MESSAGES';
 
-function flashMessage($name, $message, $type) {
+function flashMessage($name, $message, $type='danger') {
     if (isset($_SESSION[FLASH][$name])) {
         unset($_SESSION[FLASH][$name]);
     }
