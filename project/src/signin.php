@@ -54,7 +54,7 @@ if (isPostRequest()) {
     if (count($errors) == 0) {
         $login = signInUser($conn, $inputs['userEmail'], $inputs['userPassword']);
         if ($login) {
-            redirectTo('courses.php');
+            redirectTo($_SESSION[NAVIGATION]['returnPage'] ?? 'courses.php');
         }
         $errors['generic'] = NOTFOUND;
     }
