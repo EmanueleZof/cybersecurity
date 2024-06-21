@@ -16,7 +16,7 @@ function getAllCourses($db) {
 function getPopularCourses($db) {
     $sql = 'SELECT *
             FROM courses
-            WHERE course_id = 1 OR course_id = 5 OR course_id = 2 OR course_id = 4';
+            WHERE course_active = 1 AND course_id = 1 OR course_id = 5 OR course_id = 2 OR course_id = 4';
     
     $query = mysqli_query($db, $sql);
 
@@ -30,7 +30,7 @@ function getPopularCourses($db) {
 function getCourseById($db, $courseID) {
     $sql = 'SELECT *
             FROM courses
-            WHERE course_id='.$courseID;
+            WHERE course_active = 1 AND course_id='.$courseID;
     
     $query = mysqli_query($db, $sql);
 
