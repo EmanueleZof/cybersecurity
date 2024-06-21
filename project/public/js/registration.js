@@ -136,7 +136,7 @@ window.addEventListener('load', () => {
     });
 
     captchaWidget.addEventListener('statechange', (event) => {
-        if (event.detail.state !== 'verified') {
+        if (captchaError.classList.contains('d-block') && event.detail.state !== 'verified') {
             captchaError.classList.add('d-block');
         } else {
             captchaError.classList.remove('d-block');
