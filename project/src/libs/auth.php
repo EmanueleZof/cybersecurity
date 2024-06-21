@@ -129,4 +129,19 @@ function requireLogin($page) {
         } 
     }
 }
+
+function signOutUser() {
+    if (isUserLoggedIn()) {
+        unset($_SESSION[USER]);
+        session_destroy();
+        redirectTo('signin.php');
+    }
+}
+
+function curentUser() {
+    if (isUserLoggedIn()) {
+        return $_SESSION[USER]['username'];
+    }
+    return null;
+}
 ?>
