@@ -76,7 +76,7 @@ require __DIR__ . '/../src/register.php';
                     <div class="invalid-feedback">Verifica il captcha</div>
                 </div>
 
-                <input type="hidden" name="csfrToken" value="<?= createToken() ?>">
+                <input type="hidden" name="csfrToken" value="<?= createCSRFToken() ?>">
 
                 <button class="btn btn-primary w-100 py-2" type="submit">Registrati</button>
 

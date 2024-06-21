@@ -26,6 +26,8 @@ require __DIR__ . '/../src/signin.php';
                 <div class="invalid-feedback">La password inserita non è valida</div>
             </div>
 
+            <input type="hidden" name="csfrToken" value="<?= createCSRFToken() ?>">
+
             <button class="btn btn-primary w-100 py-2" type="submit">Entra</button>
 
             <div class="my-3">Non sei già registrato? <a href="register.php">Registrati</a></div>

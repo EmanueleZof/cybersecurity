@@ -7,9 +7,21 @@ $inputs = [];
 $errors = [];
 
 if (isPostRequest()) {
-    // User Email
+    // Input sanitization
     $email = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL);
+    $userPassword = filter_input(INPUT_POST, 'userPassword', FILTER_UNSAFE_RAW);
+
     $inputs['email'] = $email;
+    $inputs['userPassword'] = $userPassword;
+
+    //CSFR check
+    if (!$csfrToken || $csfrToken !== $_SESSION[CSRF]['token']) {
+        $errors['generic'] = GENERIC;
+    } else {
+        unset($_SESSION[CSRF]['token']);
+    }
+
+    // Input validation
     if ($email) {
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
         if (!$email) {
@@ -20,8 +32,6 @@ if (isPostRequest()) {
     }
 
     // Password
-    $password = $_POST['userPassword'];
-    $inputs['password'] = $password;
     if ($password) {
         //$email = hash();
     } else {
