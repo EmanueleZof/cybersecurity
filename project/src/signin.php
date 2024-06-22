@@ -9,6 +9,10 @@ const USERPASSWORD_REQUIRED = 'Inserire una password';
 $inputs = [];
 $errors = [];
 
+if (isUserLoggedIn()) {
+    redirectTo('courses.php');
+}
+
 if (isPostRequest()) {
     // Input sanitization
     $userEmail = filter_input(INPUT_POST, 'userEmail', FILTER_SANITIZE_EMAIL);

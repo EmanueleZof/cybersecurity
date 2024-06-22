@@ -33,35 +33,26 @@ requireLogin($page);
                             </svg>
                         </a>
                     </li>
-                    <?php //if ($fullView) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="info.php">Informazioni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="courses.php">Corsi</a>
-                        </li>
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Enterprise</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Support</a>
-                        </li>-->
-                        <li class="nav-item">
-                            <a class="nav-link" href="pricing.php">Prezzi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="signin.php">
-                                Sign in
-                                <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                                </svg>-->
-                            </a>
-                        </li>
-                    <?php //} ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="info.php">Informazioni</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.php">Corsi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.php">Prezzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <?php if (isUserLoggedIn()) { ?>
+                            <a class="nav-link" href="signout.php">Sign out</a>
+                        <?php } else { ?>
+                            <a class="nav-link" href="signin.php">Sign in</a>
+                        <?php } ?>
+                        <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>-->
+                    </li>
                 </ul>
             </div>
         </div>

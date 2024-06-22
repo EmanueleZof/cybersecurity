@@ -13,6 +13,10 @@ const ALTCHA_REQUIRED = 'Verifica il captcha';
 $inputs = [];
 $errors = [];
 
+if (isUserLoggedIn()) {
+    redirectTo('courses.php');
+}
+
 if (isPostRequest()) {
     // Input sanitization
     $userName = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
