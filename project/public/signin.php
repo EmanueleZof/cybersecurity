@@ -38,7 +38,6 @@ require __DIR__ . '/../src/signin.php';
 
             <button class="btn btn-primary w-100 py-2" type="submit">Entra</button>
 
-            <div class="my-3"><a href="genqrcode.php">Imposta Google Authenticator</a> per la verifica a due fattori</div>
             <div class="my-3">Non sei già registrato? <a href="register.php">Registrati</a></div>
         </form>
     </div>

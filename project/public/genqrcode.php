@@ -12,7 +12,7 @@ require __DIR__ . '/../src/bootstrap.php';
     <div>
         <p>Google Authenticator introduce un ulteriore livello di sicurezza per i tuoi account online aggiungendo un secondo passaggio di verifica quando accedi.</p>
         <p>Questo significa che, oltre alla password, dovrai inserire anche un codice generato dall'app Google Authenticator sul telefono.</p>
-        <p>Il codice di verifica può essere generato dall'app Google Authenticator sul telefono, anche se non hai una rete o una rete cellular</p>
+        <p>Il codice di verifica può essere generato dall'app Google Authenticator sul telefono, anche se non hai una rete o una rete cellulare.</p>
     </div>
     <div class="mt-5">
         <h2>Passo 1</h2>
@@ -29,7 +29,7 @@ require __DIR__ . '/../src/bootstrap.php';
     <div class="mt-5">
         <h2>Passo 2</h2>
         <p>Inquadra il seguente QR code</p>
-        <?= getQRCode(); ?>
+        <?= getQRCode($_SESSION[USER]['username']); ?>
     </div>
 </section>
 

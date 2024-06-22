@@ -48,7 +48,8 @@ if (isGetRequest()) {
             unset($_SESSION[REGISTRATION]['verification']);
             $_SESSION[REGISTRATION]['completed'] = $inputs['userEmail'];
             $_SESSION[USER]['userID'] = $user['user_ID'];
-            redirectTo('register.php');
+            //redirectTo('register.php');
+            redirectTo('genqrcode.php');
         } else {
             $errors['generic'] = EXPIRED;
         }

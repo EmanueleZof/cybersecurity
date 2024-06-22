@@ -13,8 +13,8 @@ function genereateGASecret() {
     return $GLOBALS['g']->generateSecret();
 }
 
-function getQRCode() {
+function getQRCode($userName) {
     $secret = 'XVQ2UIGO75XRUKJO';
-    echo '<img src="'.$GLOBALS['g']->getURL('userName', 'localhost', $secret).'" />';
+    echo '<img src="'.$GLOBALS['g']->getURL($userName, 'localhost', $secret).'" />';
 }
 ?>
