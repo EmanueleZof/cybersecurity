@@ -18,14 +18,17 @@ require __DIR__ . '/../src/course.php';
         <div class="p-5 mb-4 bg-body-tertiary rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold"><?= $inputs['courseData']['course_title'] ?></h1>
-                <p class="col-md-8 fs-4"><?= $inputs['courseData']['course_description'] ?></p>
+                <p class="col-md-8 fs-4"><?= $inputs['courseData']['course_lead'] ?></p>
+                <p class="col-md-8"><?= $inputs['courseData']['course_description'] ?></p>
+                <p class="col-md-8">Durata: <?= $inputs['courseData']['course_time'] ?> min</p>
             </div>
         </div>
         
         
         <div class="h-100 p-5 text-bg-dark rounded-3 video">
-            <video controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            <video poster="<?= $inputs['courseData']['course_thumbnail'] ?>" controls>
+                <source src="<?= $inputs['courseData']['course_video'].'.mp4' ?>" type="video/mp4">
+                <source src="<?= $inputs['courseData']['course_video'].'.ogm' ?>" type="video/ogg">
             </video>
 
             <?php if (isset($inputs['courseData']['course_trascription'])) { ?>
