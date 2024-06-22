@@ -32,7 +32,7 @@ require __DIR__ . '/../src/course.php';
                 preload="auto"
                 poster="<?= $inputs['courseData']['course_thumbnail'] ?>">
 
-                <source src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" type="application/x-mpegURL"/>
+                <source src="<?= $inputs['courseData']['course_video'].'.m3u8' ?>" type="application/x-mpegURL"/>
                 <p class="vjs-no-js">Il tuo browser non supporta questo tipo di video, usa un altro browser.</p>
             </video>
 
