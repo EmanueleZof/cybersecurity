@@ -52,7 +52,6 @@
       <ul class="list-unstyled text-small">
         <li><a class="link-secondary text-decoration-none" href="signin.php">Sign in</a></li>
         <li><a class="link-secondary text-decoration-none" href="register.php">Registrati</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Area personale</a></li>
       </ul>
     </div>
   </div>
