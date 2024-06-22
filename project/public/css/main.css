@@ -38,10 +38,15 @@
 }
 
 /* Video */
+video{
+    width: 100% !important;
+    height: 100% !important;
+}
+
 video, .video-js {
     position: relative !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
 }
 
 .video .accordion-button:not(.collapsed) {
