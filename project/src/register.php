@@ -100,7 +100,8 @@ if (isPostRequest()) {
 
     if (count($errors) == 0) {
         $activationCode = generateActivationCode();
-        [$user, $activationExpiry] = registerUser($conn, $inputs, $activationCode);
+        $gaSecret = genereateGASecret();
+        [$user, $activationExpiry] = registerUser($conn, $inputs, $activationCode, $gaSecret);
         if ($user) {
             $_SESSION[REGISTRATION]['verification'] = $inputs['userEmail'];
             sendActivationEmail($inputs['userEmail'], $activationCode, $activationExpiry);

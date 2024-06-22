@@ -11,14 +11,14 @@ function generateActivationCode() {
     return bin2hex(random_bytes(16));
 }
 
-function registerUser($db, $inputs, $activationCode) {
+function registerUser($db, $inputs, $activationCode, $gaSecret) {
     $passwordHash = password_hash($inputs['userPassword'], PASSWORD_BCRYPT);
     $activationCode = password_hash($activationCode, PASSWORD_DEFAULT);
     $expiry = 1 * 24  * 60 * 60;
     $activationExpiry = date('Y-m-d H:i:s',  time() + $expiry);
     
-    $sql = 'INSERT INTO users (user_name, user_password, user_email, activation_code, activation_expiry) 
-            VALUES ("'.$inputs['userName'].'", "'.$passwordHash.'", "'.$inputs['userEmail'].'", "'.$activationCode.'", "'.$activationExpiry.'")';
+    $sql = 'INSERT INTO users (user_name, user_password, user_email, activation_code, activation_expiry, user_ga_secret) 
+            VALUES ("'.$inputs['userName'].'", "'.$passwordHash.'", "'.$inputs['userEmail'].'", "'.$activationCode.'", "'.$activationExpiry.'", "'.$gaSecret.'")';
     
     $query = mysqli_query($db, $sql);
 

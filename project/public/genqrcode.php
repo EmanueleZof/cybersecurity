@@ -29,7 +29,11 @@ require __DIR__ . '/../src/bootstrap.php';
     <div class="mt-5">
         <h2>Passo 2</h2>
         <p>Inquadra il seguente QR code</p>
-        <?= getQRCode($_SESSION[USER]['username']); ?>
+        <?= getQRCode($_SESSION[USER]['username'], $_SESSION[USER]['gaSecret']); ?>
+    </div>
+    <div class="mt-5">
+        <h2>Passo 3</h2>
+        <p><a class="btn btn-primary my-2" href="courses.php">Inizia a guardare i nostri video tutorial</a></p>
     </div>
 </section>
 
