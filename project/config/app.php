@@ -44,5 +44,10 @@ $PAGES = array(
         'restricted' => false,
         'title' => 'Registration - Piattaforma di video corsi'
     ),
+    'genqrcode' => array(
+        'name' => 'genqrcode',
+        'restricted' => true,
+        'title' => 'Impostazione Google Authenticator - Piattaforma di video corsi'
+    ),
 );
 ?>

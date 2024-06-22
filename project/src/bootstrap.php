@@ -13,4 +13,5 @@ require_once __DIR__ . '/libs/auth.php';
 require_once __DIR__ . '/libs/email.php';
 require_once __DIR__ . '/libs/csrf.php';
 require_once __DIR__ . '/libs/courses.php';
+require_once __DIR__ . '/libs/genqrcode.php';
 ?>

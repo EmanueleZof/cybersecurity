@@ -52,6 +52,7 @@
       <ul class="list-unstyled text-small">
         <li><a class="link-secondary text-decoration-none" href="signin.php">Sign in</a></li>
         <li><a class="link-secondary text-decoration-none" href="register.php">Registrati</a></li>
+        <li><a class="link-secondary text-decoration-none" href="genqrcode.php">Imposta Google Authenticator</a></li>
       </ul>
     </div>
   </div>
