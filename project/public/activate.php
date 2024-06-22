@@ -47,7 +47,7 @@ if (isGetRequest()) {
         if ($user && activateUser($conn, $user['user_ID'])) {
             unset($_SESSION[REGISTRATION]['verification']);
             $_SESSION[REGISTRATION]['completed'] = $inputs['userEmail'];
-            $_SESSION['userID'] = $user['user_ID'];
+            $_SESSION[USER]['userID'] = $user['user_ID'];
             redirectTo('register.php');
         } else {
             $errors['generic'] = EXPIRED;
@@ -58,6 +58,5 @@ if (isGetRequest()) {
 }
 
 unset($_SESSION[REGISTRATION]);
-unset($_SESSION['userID']);
 redirectWithMessage('register.php', end($errors), $type='danger');
 ?>

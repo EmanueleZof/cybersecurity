@@ -118,7 +118,7 @@ function signInUser($db, $userEmail, $userPassword) {
 }
 
 function isUserLoggedIn() {
-    return isset($_SESSION[USER]['username']);
+    return isset($_SESSION[USER]['userID']);
 }
 
 function requireLogin($page) {
