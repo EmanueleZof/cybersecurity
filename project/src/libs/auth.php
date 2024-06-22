@@ -124,7 +124,7 @@ function isUserLoggedIn() {
 function requireLogin($page) {
     if ($page['restricted'] && $page['name'] != 'signin') {
         if (!isUserLoggedIn()) {
-          $_SESSION[NAVIGATION]['returnPage'] = $page['name'];
+          $_SESSION[NAVIGATION]['returnPage'] = $page['name'].'.php';
           redirectTo('signin.php');
         } 
     }
