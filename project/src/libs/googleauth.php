@@ -16,4 +16,11 @@ function genereateGASecret() {
 function getQRCode($userName, $userSecret) {
     echo '<img src="'.$GLOBALS['g']->getURL($userName, 'localhost', $userSecret).'" />';
 }
+
+function validateGACode($userSecret, $code) {
+    if ($GLOBALS['g']->checkCode($userSecret, $code)) {
+        return true;
+    } 
+    return false;
+}
 ?>
