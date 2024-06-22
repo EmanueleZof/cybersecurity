@@ -56,11 +56,14 @@ if (isPostRequest()) {
     }
 
     if (count($errors) == 0) {
-        $login = signInUser($conn, $inputs['userEmail'], $inputs['userPassword']);
-        if ($login) {
-            redirectTo('courses.php');
+        $user = verifyUser($conn, $inputs['userEmail'], $inputs['userPassword']);
+        if ($user) {
+            $_SESSION[USER]['username'] = $user['user_name'];
+            $_SESSION[USER]['secret'] = $user['user_ga_secret'];
+            $_SESSION[LOGIN]['verification'] = true;
+        } else {
+            $errors['generic'] = NOTFOUND;
         }
-        $errors['generic'] = NOTFOUND;
     }
 
     disconnectDB($conn);
