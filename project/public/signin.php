@@ -12,7 +12,7 @@ require __DIR__ . '/../src/signin.php';
 
     <div class="col-md-6">
         <?php if (isset($_SESSION[LOGIN]['verification'])) { ?>
-            <form action="signin2.php" method="POST" class="container py-3 needs-validation" novalidate>
+            <form action="signin2.php" id="loginStep2" method="POST" class="container py-3 needs-validation" novalidate>
                 <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
                 <?php
@@ -34,7 +34,7 @@ require __DIR__ . '/../src/signin.php';
                 <button class="btn btn-primary w-100 py-2" type="submit">Verifica</button>
             </form>
         <?php } else { ?>
-            <form action="signin.php" method="POST" class="container py-3 needs-validation" novalidate>
+            <form action="signin.php" id="loginStep1" method="POST" class="container py-3 needs-validation" novalidate>
                 <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
                 <?php

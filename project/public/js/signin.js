@@ -1,47 +1,73 @@
 window.addEventListener('load', () => {
-    const form = document.querySelector('.needs-validation');
+    /* STEP 1 */
+    const formStep1 = document.querySelector('#loginStep1');
     const email = document.querySelector('#userEmail');
     const password = document.querySelector('#userPassword');
 
-    /* Email */
-    email.addEventListener('focusout', (event) => {
-        if (!validateEmail(email.value)) {
-            email.setCustomValidity('error');
-        } else {
-            email.setCustomValidity('');
-        }
-    });
-
-    /* Password */
-    password.addEventListener('focusout', (event) => {
-        if (password.value == '') {
-            password.setCustomValidity('error');
-        } else {
-            password.setCustomValidity('');
-        }
-    });
-
-    form.addEventListener('submit', (event) => {
+    if (formStep1) {
         /* Email */
-        if (!validateEmail(email.value)) {
-            email.setCustomValidity('error');
-        } else {
-            email.setCustomValidity('');
-        }
+        email.addEventListener('focusout', (event) => {
+            if (!validateEmail(email.value)) {
+                email.setCustomValidity('error');
+            } else {
+                email.setCustomValidity('');
+            }
+        });
 
         /* Password */
-        if (password.value == '') {
-            password.setCustomValidity('error');
-        } else {
-            password.setCustomValidity('');
-        }
+        password.addEventListener('focusout', (event) => {
+            if (password.value == '') {
+                password.setCustomValidity('error');
+            } else {
+                password.setCustomValidity('');
+            }
+        });
 
-        /* Form */
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        formStep1.addEventListener('submit', (event) => {
+            /* Email */
+            if (!validateEmail(email.value)) {
+                email.setCustomValidity('error');
+            } else {
+                email.setCustomValidity('');
+            }
 
-        form.classList.add('was-validated');
-    }, false);
+            /* Password */
+            if (password.value == '') {
+                password.setCustomValidity('error');
+            } else {
+                password.setCustomValidity('');
+            }
+
+            /* Form 1 */
+            if (!formStep1.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            formStep1.classList.add('was-validated');
+        }, false);
+    }
+
+    /* STEP 2 */
+    const formStep2 = document.querySelector('#loginStep2');
+    const code = document.querySelector('#userCode');
+
+    if (formStep2) {
+        formStep2.addEventListener('submit', (event) => {
+            /* Code */
+            if (!validateCode(code.value)) {
+                code.setCustomValidity('error');
+            } else {
+                code.setCustomValidity('');
+            }
+            
+            /* Form 2 */
+            if (!formStep2.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+    
+            formStep2.classList.add('was-validated');
+        }, false);
+    }
 });

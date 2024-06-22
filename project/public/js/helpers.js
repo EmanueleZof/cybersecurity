@@ -10,3 +10,12 @@ const validateEmail = (email) => {
     }
     return false;
 };
+
+const validateCode = (code) => {
+    const result = code.match(/\d{6}/);
+    console.log(result);
+    if (result != null) {
+        return true;
+    }
+    return false;
+};
