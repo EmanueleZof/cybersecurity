@@ -102,10 +102,13 @@ function findUserByEmail($db, $email) {
     return null;
 }
 
-function signInUser() {
-    session_regenerate_id();
-    $_SESSION[USER]['username'] = $user['user_name'];
-    $_SESSION[USER]['userID']  = $user['user_ID'];
+function signInUser($db, $userEmail) {
+    $user = findUserByEmail($db, $userEmail);
+    
+    if ($user) {
+        session_regenerate_id();
+        $_SESSION[USER]['userID']  = $user['user_ID'];
+    }
 }
 
 function verifyUser($db, $userEmail, $userPassword) {

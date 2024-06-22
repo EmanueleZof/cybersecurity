@@ -18,6 +18,7 @@ function getQRCode($userName, $userSecret) {
 }
 
 function validateGACode($userSecret, $code) {
+    $code = strval($code);
     if ($GLOBALS['g']->checkCode($userSecret, $code)) {
         return true;
     } 

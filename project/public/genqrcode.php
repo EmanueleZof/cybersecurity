@@ -35,12 +35,6 @@ require __DIR__ . '/../src/bootstrap.php';
         <h2>Passo 3</h2>
         <p><a class="btn btn-primary my-2" href="courses.php">Inizia a guardare i nostri video tutorial</a></p>
     </div>
-
-    <?php 
-        //TODO: only for test purposes
-        $code = '277329';
-        var_dump(validateGACode($_SESSION[USER]['gaSecret'], $code));         
-    ?>
 </section>
 
 <?php view('footer') ?>
