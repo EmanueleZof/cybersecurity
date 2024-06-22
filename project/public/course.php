@@ -29,7 +29,7 @@ require __DIR__ . '/../src/course.php';
             <video id="videoPlayer"
                 class="video-js"
                 controls
-                preload="auto"
+                preload="none"
                 poster="<?= $inputs['courseData']['course_thumbnail'] ?>">
 
                 <source src="<?= $inputs['courseData']['course_video'].'.m3u8' ?>" type="application/x-mpegURL"/>
