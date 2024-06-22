@@ -70,5 +70,11 @@
   <script src="js/signin.js"></script>
 <?php } ?>
 
+<?php if ($courseScripts ?? false) { ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+  <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+  <script src="js/course.js"></script>
+<?php } ?>
+
 </body>
 </html>

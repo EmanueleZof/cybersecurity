@@ -26,9 +26,14 @@ require __DIR__ . '/../src/course.php';
         
         
         <div class="h-100 p-5 text-bg-dark rounded-3 video">
-            <video poster="<?= $inputs['courseData']['course_thumbnail'] ?>" controls>
-                <source src="<?= $inputs['courseData']['course_video'].'.mp4' ?>" type="video/mp4">
-                <source src="<?= $inputs['courseData']['course_video'].'.ogm' ?>" type="video/ogg">
+            <video id="videoPlayer"
+                class="video-js"
+                controls
+                preload="auto"
+                poster="<?= $inputs['courseData']['course_thumbnail'] ?>">
+
+                <source src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" type="application/x-mpegURL"/>
+                <p class="vjs-no-js">Il tuo browser non supporta questo tipo di video, usa un altro browser.</p>
             </video>
 
             <?php if (isset($inputs['courseData']['course_trascription'])) { ?>
@@ -51,4 +56,4 @@ require __DIR__ . '/../src/course.php';
     <?php } ?>
 </div>
 
-<?php view('footer') ?>
+<?php view('footer', ['courseScripts' => true]) ?>
