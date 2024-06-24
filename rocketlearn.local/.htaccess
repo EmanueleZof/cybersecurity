@@ -16,5 +16,5 @@
     # Handle index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ public/index.php [L]
+    RewriteRule ^(.*)$ http://rocketlearn.local:8888/index.php [L]
 </IfModule>
