@@ -1,5 +1,20 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteRule ^$ public/ [L]
-    RewriteRule (.*) public/$1 [L]
+    RewriteEngine On
+
+    # Exclude /src/video from rewrites
+    RewriteCond %{REQUEST_URI} ^/src/video/ [NC]
+    RewriteRule ^ - [L]
+
+    # Exclude /src/hls from rewrites
+    RewriteCond %{REQUEST_URI} ^/src/hls/ [NC]
+    RewriteRule ^ - [L]
+
+    # Redirect all other requests to the public folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Handle index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ public/index.php [L]
 </IfModule>
