@@ -1,0 +1,9 @@
+<FilesMatch ^>
+    SetEnvIf Referer "^http(s)?://(www\.)?rocketlearn\.local:8888/" APP_ACCESS
+</FilesMatch>
+
+<FilesMatch ^>
+    Order Deny,Allow
+    Deny from all
+    Allow from env=APP_ACCESS
+</FilesMatch>
