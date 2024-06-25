@@ -36,12 +36,6 @@ require __DIR__ . '/../src/course.php';
                 <p class="vjs-no-js">Il tuo browser non supporta questo tipo di video, usa un altro browser.</p>
             </video>
 
-            <!-- TODO -->
-            <!--<video poster="<?= $inputs['courseData']['course_thumbnail'] ?>" controls>
-                <source src="<?= $inputs['courseData']['course_video'].'.mp4' ?>" type="video/mp4">
-                <source src="<?= $inputs['courseData']['course_video'].'.ogm' ?>" type="video/ogg">
-            </video>-->
-
             <?php if (isset($inputs['courseData']['course_trascription'])) { ?>
                 <div class="accordion pt-3" id="videoTranscription">
                     <div class="accordion-item">
