@@ -26,8 +26,6 @@
       <ul class="list-unstyled text-small">
         <li><a class="link-secondary text-decoration-none" href="info.php">Informazioni</a></li>
         <li><a class="link-secondary text-decoration-none" href="pricing.php">Prezzi</a></li>
-        <!--<li><a class="link-secondary text-decoration-none" href="#">Government</a></li>
-        <li><a class="link-secondary text-decoration-none" href="#">Gaming</a></li>-->
       </ul>
     </div>
     <div class="col-6 col-md">
