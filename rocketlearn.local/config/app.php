@@ -1,8 +1,8 @@
 <?php
-const APP_URL = 'http://localhost:8888/project/public'; //TODO
+const APP_URL = 'http://rocketlearn.local:8888';
 const ADMIN_EMAIL = '';
 
-// Sessions
+/* Sessions */
 const REGISTRATION = 'registration';
 const LOGIN = 'login';
 const CSRF = 'CSRF';
