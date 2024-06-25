@@ -36,7 +36,7 @@ if (isPostRequest()) {
         // flashMessage('flash_CSFR', GENERIC);
         blockConnection();
     } else {
-        deleteCSRFToken();
+        // deleteCSRFToken();
     }
 
     // Input validation
