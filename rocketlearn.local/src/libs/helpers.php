@@ -7,7 +7,6 @@ function view($filename, $data = []) {
     require __DIR__ . '/../inc/' . $filename . '.php';
 }
 
-// TODO: to remove
 function sanitizeInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
