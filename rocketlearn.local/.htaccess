@@ -9,6 +9,8 @@
     RewriteCond %{REQUEST_URI} ^/src/hls/ [NC]
     RewriteRule ^ - [L]
 
+    ## Comment below if localhost is used
+
     # Redirect all other requests to the public folder
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]

@@ -3,7 +3,13 @@
 #EXT-X-TARGETDURATION:10
 #EXT-X-MEDIA-SEQUENCE:0
 #EXT-X-PLAYLIST-TYPE:VOD
+
+## Uncomment if vHost https://rocketlearn.local is setup
 #EXT-X-KEY:METHOD=AES-128,URI="http://rocketlearn.local:8888/hls.php",IV=0x9d3752d1707b0fe182c0a9ea52d9a8ed
+
+## Uncomment if localhost is used
+##EXT-X-KEY:METHOD=AES-128,URI="http://localhost:8888/rocketlearn.local/public/hls.php",IV=0x9d3752d1707b0fe182c0a9ea52d9a8ed
+
 #EXTINF:10.000000,
 example_video0.ts
 #EXT-X-ENDLIST

@@ -1,5 +1,9 @@
 <FilesMatch ^>
+    # Uncomment if vHost https://rocketlearn.local is setup
     SetEnvIf Referer "^http(s)?://(www\.)?rocketlearn\.local:8888/" APP_ACCESS
+    
+    # Uncomment if localhost is used
+    # SetEnvIf Referer "^http(s)?://(www\.)?localhost:8888/rocketlearn.local" APP_ACCESS
 </FilesMatch>
 
 <FilesMatch ^>

@@ -1,5 +1,10 @@
 <?php
+// Uncomment if vHost https://rocketlearn.local is setup
 const APP_URL = 'http://rocketlearn.local:8888';
+
+// Uncomment if localhost is used
+//const APP_URL = 'http://localhost:8888/rocketlearn.local/public';
+
 const ADMIN_EMAIL = '';
 
 /* Sessions */
