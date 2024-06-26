@@ -59,7 +59,7 @@ if (isPostRequest()) {
         $user = verifyUser($conn, $inputs['userEmail'], $inputs['userPassword']);
         if ($user) {
             $_SESSION[USER]['username'] = $user['user_name'];
-            $_SESSION[USER]['secret'] = $user['user_ga_secret'];
+            $_SESSION[USER]['gaSecret'] = $user['user_ga_secret'];
             $_SESSION[USER]['email'] = $user['user_email'];
             $_SESSION[LOGIN]['verification'] = true;
         } else {

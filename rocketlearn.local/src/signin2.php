@@ -46,7 +46,7 @@ if (isPostRequest()) {
         $errors['generic'] = GENERIC;
     }
 
-    if (validateGACode($_SESSION[USER]['secret'], $inputs['userCode'])) {
+    if (validateGACode($_SESSION[USER]['gaSecret'], $inputs['userCode'])) {
         signInUser($conn, $_SESSION[USER]['email']);
         unset($_SESSION[LOGIN]);
         redirectTo('courses.php');
