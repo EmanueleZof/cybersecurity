@@ -101,7 +101,7 @@ function deleteUserByID($db, $id, $active = 0) {
  * @return array|null Ritorna un array con le informazioni dell'utente se trovato e non scaduto, altrimenti null.
  */
 function findUnverifiedUser($db, $email, $activationCode) {
-    $sql = 'SELECT user_ID, activation_code, activation_expiry < now() as expired
+    $sql = 'SELECT user_ID, activation_code, user_name, user_ga_secret, activation_expiry < now() as expired
             FROM users
             WHERE active = 0 AND user_email="'.$email.'"';
     

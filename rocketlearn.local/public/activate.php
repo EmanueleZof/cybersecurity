@@ -49,6 +49,7 @@ if (isGetRequest()) {
             $_SESSION[REGISTRATION]['completed'] = $inputs['userEmail'];
             $_SESSION[USER]['userID'] = $user['user_ID'];
             $_SESSION[USER]['gaSecret'] = $user['user_ga_secret'];
+            $_SESSION[USER]['username'] = $user['user_name'];
             //redirectTo('register.php');
             redirectTo('genqrcode.php');
         } else {
